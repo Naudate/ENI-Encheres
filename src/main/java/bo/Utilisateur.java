@@ -1,7 +1,7 @@
 package bo;
 
 public class Utilisateur {
-	
+
 	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
@@ -14,8 +14,12 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
-	
-	//CONSTRUCTEUR ALL ATRIBUTS
+
+	public Utilisateur() {
+
+	}
+
+	// CONSTRUCTEUR ALL ATRIBUTS
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String code_postal, String ville, String motDePasse, int credit, boolean administrateur) {
 		super();
@@ -33,9 +37,7 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 
-	
-	
-	//GETTER //SETTER
+	// GETTER //SETTER
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
@@ -131,7 +133,5 @@ public class Utilisateur {
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
-	
-	
-	
+
 }
