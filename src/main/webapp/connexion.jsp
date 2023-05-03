@@ -33,7 +33,9 @@
                         <label for="password">Mot de passe :</label>
                         <input type="password" id="password" name="password" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                    </div>
                 </form>
             </div>
         </div>
