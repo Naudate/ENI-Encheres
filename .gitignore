@@ -25,3 +25,4 @@ replay_pid*
 /build/
 
 .project
+src/main/webapp/META/INF/context.xml
