@@ -36,13 +36,13 @@ public class ConnexionServlet extends HttpServlet {
 				
 		if(util != null) {
 			request.getSession().setAttribute("connected", util);
+			response.sendRedirect("accueil");
 		}else {
 			request.getSession().setAttribute("connected", null);
 			request.getSession().setAttribute("pseudo", pseudo);
 			request.setAttribute("message", "Pseudo ou mot de passe incorrect");
-		}
-		
-		request.getRequestDispatcher("/connexion.jsp").forward(request, response);
+			request.getRequestDispatcher("/connexion.jsp").forward(request, response);
+		}				
 	}
 
 }
