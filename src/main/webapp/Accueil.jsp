@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,7 +7,16 @@
         <title>Accueil</title>
     </head>
     <body>
-        <%@ include file="./WEB-INF/fragments/header.jsp" %>
+        <header>
+            <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/ENI-Encheres/accueil">ENI-Encheres</a>
+                    <form class="d-flex" role="search">
+                      <button class="btn btn-outline-dark" type="submit">S'inscrire - Se connecter</button>
+                    </form>
+                </div>
+            </nav>
+        </header>
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
