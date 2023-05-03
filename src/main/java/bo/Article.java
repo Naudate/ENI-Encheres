@@ -7,27 +7,26 @@ public class Article {
 	private int noArticle; // article
 	private String nomArticle;
 	private String description;
-	private Date datDebutEnchere;
+	private Date dateDebutEnchere;
 	private Date dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
 	private Utilisateur noUtilisateur;
 	private Categorie noCategorie;
-	private char etatVente;
+	private String etatVente;
 	private String image;
 
 	public Article() {
 	}
 
 	// CONSTRUCTEUR AVEC TOUT LES ATTRIBUTS
-	public Article(int noArticle, String nomArticle, String description, Date datDebutEnchere, Date dateFinEnchere,
-			int prixInitial, int prixVente, Utilisateur noUtilisateur, Categorie noCategorie, char etatVente,
+	public Article(String nomArticle, String description, Date dateDebutEnchere, Date dateFinEnchere,
+			int prixInitial, int prixVente, Utilisateur noUtilisateur, Categorie noCategorie, String etatVente,
 			String image) {
 		super();
-		this.setNoArticle(noArticle);
 		this.nomArticle = nomArticle;
 		this.description = description;
-		this.datDebutEnchere = datDebutEnchere;
+		this.dateDebutEnchere = dateDebutEnchere;
 		this.dateFinEnchere = dateFinEnchere;
 		this.prixInitial = prixInitial;
 		this.prixVente = prixVente;
@@ -62,12 +61,12 @@ public class Article {
 		this.description = description;
 	}
 
-	public Date getDatDebutEnchere() {
-		return datDebutEnchere;
+	public Date getdateDebutEnchere() {
+		return dateDebutEnchere;
 	}
 
-	public void setDatDebutEnchere(Date datDebutEnchere) {
-		this.datDebutEnchere = datDebutEnchere;
+	public void setdateDebutEnchere(Date dateDebutEnchere) {
+		this.dateDebutEnchere = dateDebutEnchere;
 	}
 
 	public Date getDateFinEnchere() {
@@ -110,11 +109,11 @@ public class Article {
 		this.noCategorie = noCategorie;
 	}
 
-	public char getEtatVente() {
+	public String getEtatVente() {
 		return etatVente;
 	}
 
-	public void setEtatVente(char etatVente) {
+	public void setEtatVente(String etatVente) {
 		this.etatVente = etatVente;
 	}
 
@@ -125,5 +124,14 @@ public class Article {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	@Override
+	public String toString() {
+		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
+				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
+				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + noUtilisateur + ", noCategorie="
+				+ noCategorie + ", etatVente=" + etatVente + ", image=" + image + "]";
+	}
+	
 
 }
