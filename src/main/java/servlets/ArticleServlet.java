@@ -28,7 +28,7 @@ public class ArticleServlet extends HttpServlet {
 		List<Article> allArticle = articleBll.selectAll();
 		Article allArticle2 = null;
 		try {
-			allArticle2 = articleBll.insert();
+			allArticle2 = articleBll.insert(allArticle2);
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
