@@ -8,7 +8,7 @@
 		
 		url="jdbc:sqlserver://localhost;databasename=ENCHERES_BDD"
 		username="sa"
-		password="aze123"
+		password="Pa$$w0rd"
 		
 		maxTotal="100"
 		maxIdle="30"

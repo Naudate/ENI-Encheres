@@ -1,4 +1,4 @@
-package servlet;
+package servlets;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,7 +30,7 @@ public class HomeServlet extends HttpServlet {
 		
 		request.setAttribute("listePanier", allEnchere);
 		
-		request.getRequestDispatcher("/WEB-INF/listes.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/encheresRAF.jsp").forward(request, response);
 	}
 
 }
