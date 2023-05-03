@@ -18,6 +18,9 @@ import bo.Article;
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	private static final String SELECTUSER = "select * from utilisateurs where (pseudo = ? and mot_de_passe = ?) OR (email = ? and mot_de_passe = ?);";
+	private static final String SELECTBYPSEUDO = "select * from utilisateurs where pseudo = ?;";
+	private static final String SELECTBYEMAIL = "select * from utilisateurs where email = ?;";
+	private static final String INSERT = "insert into utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	
 	@Override
 	public Utilisateur verifCompte(String pseudo, String password) {
@@ -32,7 +35,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			
 			ResultSet rs = ps.executeQuery();	
 			
-			while(rs.next())
+			if(rs.next())
 			{
 				int noUtilisateur = rs.getInt("no_utilisateur") ;
 				String nom = rs.getString("nom");
@@ -53,10 +56,73 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return util;
 	}
+	
+	@Override
+	public boolean checkEmail(String email) {
+		boolean exist = false;
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement ps = cnx.prepareStatement(SELECTBYEMAIL);			
+			ps.setString(1, email);			
+			ResultSet rs = ps.executeQuery();	
+			
+			if(rs.next())
+			{
+				exist = true;
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return exist;
+	}
 
 	@Override
-	public void insert(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+	public boolean checkPseudo(String pseudo) {
+		boolean exist = false;
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement ps = cnx.prepareStatement(SELECTBYPSEUDO);			
+			ps.setString(1, pseudo);			
+			ResultSet rs = ps.executeQuery();	
+			
+			if(rs.next())
+			{
+				exist = true;
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return exist;
+	}
+
+	@Override
+	public Utilisateur insert(Utilisateur utilisateur) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement ps = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setString(1, utilisateur.getPseudo());
+			ps.setString(2, utilisateur.getNom());
+			ps.setString(3, utilisateur.getPrenom());
+			ps.setString(4, utilisateur.getEmail());
+			ps.setString(5, utilisateur.getTelephone());
+			ps.setString(6, utilisateur.getRue());
+			ps.setString(7, utilisateur.getCode_postal());
+			ps.setString(8, utilisateur.getVille());
+			ps.setString(9, utilisateur.getMotDePasse());
+			ps.setInt(10, utilisateur.getCredit());
+			ps.setBoolean(11, utilisateur.isAdministrateur());
+			
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			if(rs.next())
+			{
+				utilisateur.setNoUtilisateur(rs.getInt(1));
+			}
+			rs.close();
+			ps.close();
+			
+			cnx.commit();	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return utilisateur;
 		
 	}
 

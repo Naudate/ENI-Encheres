@@ -34,7 +34,9 @@
                         <input type="password" id="password" name="password" class="form-control" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Se connecter</button>
+                    <a class="btn btn-info" href="inscription">S'inscrire</a>
                 </form>
+                
             </div>
         </div>
     </div>

@@ -11,7 +11,11 @@ public interface UtilisateurDAO {
 	
 	Utilisateur verifCompte(String pseudo, String pasword);
 	
-	void insert(Utilisateur utilisateur);
+	boolean checkEmail(String email);
+	
+	boolean checkPseudo(String pseudo);
+	
+	Utilisateur insert(Utilisateur utilisateur);
 
     Utilisateur selectById(int id);
 
