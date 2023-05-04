@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,15 +36,18 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
             	String nomArticle = rs.getString("nom_article");
             	String description =rs.getString("description");
             	Date dateDebutEnchere = rs.getDate("date_debut_enchere");
-                Date dateFinEnchere = rs.getDate("date_fin_enchere");
+            	Date dateFinEnchere = rs.getDate("date_fin_enchere");
                 int prixInitial = rs.getInt("prix_initial");
                 int prixVente = rs.getInt("prix_vente");
                 Utilisateur utilisateur = new Utilisateur();
                 Categorie categorie = new Categorie();
                 String etatVente = rs.getString("etat_vente");
                 String image = rs.getString("image");
-
-                Article article = new Article(nomArticle,description,dateDebutEnchere,dateFinEnchere,prixInitial,prixVente,utilisateur,categorie,etatVente,image);
+                
+                LocalDate date1 = dateDebutEnchere.toLocalDate();
+                
+                LocalDate date2 = dateFinEnchere.toLocalDate();
+                Article article = new Article(nomArticle,description,date1,date2,prixInitial,prixVente,utilisateur,categorie,etatVente,image);
 
                 listeArticles.add(article);
 
@@ -77,22 +82,27 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		/// TODO Auto-generated method stub
 		List<Article> listeArticles= new ArrayList<Article>();
 		 try (Connection cnx = ConnectionProvider.getConnection();) { 
-			  PreparedStatement ps = cnx.prepareStatement(INSERT);
+			  PreparedStatement ps = cnx.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			  ps.setString(1,article.getNomArticle());
 			  ps.setString(2,article.getDescription());
-			  ps.setDate(3, article.getdateDebutEnchere());
-			  ps.setDate(4, article.getDateFinEnchere());
+			  ps.setDate(3, Date.valueOf(article.getdateDebutEnchere()));
+			  ps.setDate(4, Date.valueOf(article.getDateFinEnchere()));
 			  ps.setInt(5, article.getPrixInitial());
 			  ps.setInt(6, article.getPrixVente());
-			  ps.setInt(7,article.getNoUtilisateur().getNoUtilisateur());
-			  ps.setInt(8, article.getNoCategorie().getNoCategorie());
+			  ps.setInt(7,/*article.getNoUtilisateur().getNoUtilisateur()*/1);
+			  ps.setInt(8, /*article.getNoCategorie().getNoCategorie()*/1);
 			  ps.setString(9,article.getEtatVente());
 			  ps.setString(10, article.getImage());
 			  
-			  ResultSet rs = ps.executeQuery();
+			  ps.executeUpdate();
+			  ResultSet keys = ps.getGeneratedKeys();
+			  if(keys.next()) {
+				  int idArticle = keys.getInt(1);
+				  article.setNoArticle(idArticle);
+			  }
 	    }
 	    catch(Exception e){ 
-	      System.out.println(e);
+	      e.printStackTrace();
 	    }
 		return null;
 	}

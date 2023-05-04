@@ -1,14 +1,14 @@
 package bo;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Article {
 
 	private int noArticle; // article
 	private String nomArticle;
 	private String description;
-	private Date dateDebutEnchere;
-	private Date dateFinEnchere;
+	private LocalDate dateDebutEnchere;
+	private LocalDate dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
 	private Utilisateur noUtilisateur;
@@ -20,7 +20,7 @@ public class Article {
 	}
 
 	// CONSTRUCTEUR AVEC TOUT LES ATTRIBUTS
-	public Article(String nomArticle, String description, Date dateDebutEnchere, Date dateFinEnchere,
+	public Article(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
 			int prixInitial, int prixVente, Utilisateur noUtilisateur, Categorie noCategorie, String etatVente,
 			String image) {
 		super();
@@ -61,19 +61,19 @@ public class Article {
 		this.description = description;
 	}
 
-	public Date getdateDebutEnchere() {
+	public LocalDate getdateDebutEnchere() {
 		return dateDebutEnchere;
 	}
 
-	public void setdateDebutEnchere(Date dateDebutEnchere) {
+	public void setdateDebutEnchere(LocalDate dateDebutEnchere) {
 		this.dateDebutEnchere = dateDebutEnchere;
 	}
 
-	public Date getDateFinEnchere() {
+	public LocalDate getDateFinEnchere() {
 		return dateFinEnchere;
 	}
 
-	public void setDateFinEnchere(Date dateFinEnchere) {
+	public void setDateFinEnchere(LocalDate dateFinEnchere) {
 		this.dateFinEnchere = dateFinEnchere;
 	}
 
