@@ -34,21 +34,22 @@ public class ArticleBLL {
         return dao.selectById(idArticle);
     }
     
-    public boolean checkProposition(Article article, int proposition, Utilisateur util) throws DetailArticleException {
-    	boolean valid = false;
-    	
+    public void checkProposition(Article article, int proposition, Utilisateur util) throws DetailArticleException {
+   	
     	Enchere enchere = daoEnchere.getEnchereByArticle(article);
     	    	
     	if(enchere == null) {
     		daoEnchere.createEnchere(article, util,proposition);
     	}else {
+    		if(proposition > util.getCredit()) {
+    			String messageErreur = String.format("Il n'est pas possible de faire une proposition supérieur à votre nombre de crédit qui est de %d", util.getCredit());
+    			throw new DetailArticleException(messageErreur);
+    		}
     		if(proposition > enchere.getMontant()) {
     			daoEnchere.updateEnchere(article, util, proposition);
     		}else {
     			throw new DetailArticleException("Il n'est pas possible de faire une proposition inférieur à la meilleure offre");
     		}
     	}
-    	
-    	return valid;
     }    
 }
