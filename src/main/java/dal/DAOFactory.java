@@ -4,27 +4,35 @@ package dal;
  * Role : donner un accès aux instances des DAO
  */
 public abstract class DAOFactory {
-    private ArticleDAO articleDAO;    
-    private UtilisateurDAO utilisateurDAO;
-    private EnchereArticleDAO enchereArticleDAO;
+    private static ArticleDAO articleDAO;    
+    private static UtilisateurDAO utilisateurDAO;
+    private static EnchereArticleDAO enchereArticleDAO;
+    private static EnchereDAO enchereDAO;
 
-	public ArticleDAO getArticleDAO() {
+	public static ArticleDAO getArticleDAO() {
 		if (articleDAO == null) {
         	articleDAO = new ArticleDAOJdbcImpl();
         }
         return articleDAO;
 	}       
-    public UtilisateurDAO getUtilisateurDAO() {
+    public static UtilisateurDAO getUtilisateurDAO() {
         if (utilisateurDAO == null) {
         	utilisateurDAO = new UtilisateurDAOJdbcImpl();
         }
         return utilisateurDAO;
     }
     
-    public EnchereArticleDAO getEnchereArticleDAO() {
+    public static EnchereArticleDAO getEnchereArticleDAO() {
 		if (enchereArticleDAO == null) {
 			enchereArticleDAO = new EnchereArticleDAOJdbcImpl();
 		}
     	return enchereArticleDAO;
+    }
+    
+    public static EnchereDAO getEnchereDAO() {
+		if (enchereDAO == null) {
+			enchereDAO = new EnchereDAOJdbcImpl();
+		}
+    	return enchereDAO;
     }
 }
