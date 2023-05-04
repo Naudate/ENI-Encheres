@@ -24,7 +24,6 @@ public class AccueilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<EnchereArticle> listeEnchereArticle = enchereArticleBLL.selectJoin();
-		System.out.println(listeEnchereArticle.toString());
 		request.setAttribute("listeEnchereArticle", listeEnchereArticle);
 		request.getRequestDispatcher("accueil.jsp").forward(request, response);
 	}

@@ -3,6 +3,7 @@ package bo;
 import java.sql.Date;
 
 public class EnchereArticle {
+	private Integer no_article;
 	private String nom_article;
 	private Integer prix_initial;
 	private Date date_fin_enchere;
@@ -14,9 +15,9 @@ public class EnchereArticle {
 		
 	}
 
-	public EnchereArticle(String nom_article, Integer prix_initial, Date date_fin_enchere, String etat_vente,
+	public EnchereArticle(Integer no_article,String nom_article, Integer prix_initial, Date date_fin_enchere, String etat_vente,
 			String pseudo, Integer montant_enchere) {
-		super();
+		this.setNo_article(no_article);
 		this.nom_article = nom_article;
 		this.prix_initial = prix_initial;
 		this.date_fin_enchere = date_fin_enchere;
@@ -71,6 +72,14 @@ public class EnchereArticle {
 
 	public void setMontant_enchere(Integer montant_enchere) {
 		this.montant_enchere = montant_enchere;
+	}
+
+	public Integer getNo_article() {
+		return no_article;
+	}
+
+	public void setNo_article(Integer no_article) {
+		this.no_article = no_article;
 	}
 	
 	
