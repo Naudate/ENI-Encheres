@@ -48,7 +48,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				int credit = rs.getInt("credit");
 				boolean administrateur = rs.getBoolean("administrateur");
 
-				util = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, password, credit, administrateur);
+				util = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, null, credit, administrateur);
 			}
 			
 		}catch (SQLException e) {

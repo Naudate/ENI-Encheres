@@ -11,18 +11,39 @@ public class Article {
 	private LocalDate dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
-	private Utilisateur noUtilisateur;
-	private Categorie noCategorie;
+	private Utilisateur utilisateur;
+	private Categorie categorie;
 	private String etatVente;
 	private String image;
+	private Retraits retrait;
+	//Mettre List quand passage en mode historique
+	private Enchere enchere;
 
 	public Article() {
 	}
 
 	// CONSTRUCTEUR AVEC TOUT LES ATTRIBUTS
+	public Article(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
+			int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie, String etatVente,
+			String image, Retraits retrait, Enchere enchere) {
+		super();
+		this.setNoArticle(noArticle);
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+		this.etatVente = etatVente;
+		this.image = image;
+		this.retrait = retrait;
+		this.enchere = enchere;
+	}
 	public Article(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int prixVente, Utilisateur noUtilisateur, Categorie noCategorie, String etatVente,
-			String image) {
+			int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie, String etatVente,
+			String image, Retraits retrait, Enchere enchere) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -30,10 +51,12 @@ public class Article {
 		this.dateFinEnchere = dateFinEnchere;
 		this.prixInitial = prixInitial;
 		this.prixVente = prixVente;
-		this.noUtilisateur = noUtilisateur;
-		this.noCategorie = noCategorie;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
 		this.etatVente = etatVente;
 		this.image = image;
+		this.retrait = retrait;
+		this.enchere = enchere;
 	}
 
 	// GETTERs/SETTERs
@@ -93,20 +116,20 @@ public class Article {
 		this.prixVente = prixVente;
 	}
 
-	public Utilisateur getNoUtilisateur() {
-		return noUtilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setNoUtilisateur(Utilisateur noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
-	public Categorie getNoCategorie() {
-		return noCategorie;
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
-	public void setNoCategorie(Categorie noCategorie) {
-		this.noCategorie = noCategorie;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 	public String getEtatVente() {
@@ -125,13 +148,29 @@ public class Article {
 		this.image = image;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
-				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + noUtilisateur + ", noCategorie="
-				+ noCategorie + ", etatVente=" + etatVente + ", image=" + image + "]";
+				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + utilisateur + ", noCategorie="
+				+ categorie + ", etatVente=" + etatVente + ", image=" + image + "]";
 	}
 	
 
+	public Retraits getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retraits retrait) {
+		this.retrait = retrait;
+	}
+
+	public Enchere getEnchere() {
+		return enchere;
+	}
+
+	public void setEnchere(Enchere enchere) {
+		this.enchere = enchere;
+	}
 }

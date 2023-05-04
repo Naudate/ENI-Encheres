@@ -62,7 +62,7 @@ public class ArticleServlet extends HttpServlet {
 			  int prixInt = Integer.parseInt(prixInitial);
 			  int prixVent = Integer.parseInt(prixVente);
 			
-	    	 Article articleInsert = new Article(nomArticle, description, date1, date2, prixInt, prixVent, utilisateur, categorie, etatVente,"0");
+	    	 Article articleInsert = new Article(nomArticle, description, date1, date2, prixInt, prixVent, utilisateur, categorie, etatVente,null,null,null);
 				Article article = ArticleBLL.insert(articleInsert);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

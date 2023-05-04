@@ -17,7 +17,7 @@ public class ArticleBLL {
 
     public ArticleBLL() {
 		dao = DAOFactory.getArticleDAO();
-	}
+    }
 
     public List<Article> selectAll() {
         return dao.selectAll();
@@ -25,6 +25,8 @@ public class ArticleBLL {
     public static Article insert(Article article) throws DALException, ParseException {
     	return dao.insert(article);   
     }
-
-
+    public Article selectById(int idArticle) {
+        return dao.selectById(idArticle);
+    }
+    
 }

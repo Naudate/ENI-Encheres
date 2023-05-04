@@ -12,14 +12,6 @@
     	<%@ include file="./WEB-INF/fragments/header.jsp" %>
        
         <div class="container mt-5">       
-        
-         <c:choose>
-	   		<c:when test="${message!=null}">
-	   			 <div class="alert alert-danger" role="alert">
-					<%=request.getAttribute("message")%>
-				</div>
-	   		</c:when> 
-	     </c:choose>
 	             
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -33,10 +25,11 @@
                         <label for="password">Mot de passe :</label>
                         <input type="password" id="password" name="password" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Se connecter</button>
-                    <a class="btn btn-info" href="inscription">S'inscrire</a>
+                    <div class="d-grid mt-3 gap-2">
+                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                        <a class="btn btn-primary" href="inscription">S'inscrire</a>
+                    </div>
                 </form>
-                
             </div>
         </div>
     </div>

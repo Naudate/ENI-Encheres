@@ -40,7 +40,7 @@ public class ConnexionServlet extends HttpServlet {
 		}else {
 			request.getSession().setAttribute("connected", null);
 			request.getSession().setAttribute("pseudo", pseudo);
-			request.setAttribute("message", "Pseudo ou mot de passe incorrect");
+			request.setAttribute("messageError", "Pseudo ou mot de passe incorrect");
 			request.getRequestDispatcher("/connexion.jsp").forward(request, response);
 		}				
 	}
