@@ -13,6 +13,11 @@ public class Categorie {
 	}
 
 	
+	public Categorie() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	//GETTER //SETTER
 	public int getNoCategorie() {
 		return noCategorie;

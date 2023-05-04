@@ -1,14 +1,14 @@
 package bo;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Article {
 
 	private int noArticle; // article
 	private String nomArticle;
 	private String description;
-	private Date datDebutEnchere;
-	private Date dateFinEnchere;
+	private LocalDate dateDebutEnchere;
+	private LocalDate dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
 	private Utilisateur utilisateur;
@@ -23,14 +23,31 @@ public class Article {
 	}
 
 	// CONSTRUCTEUR AVEC TOUT LES ATTRIBUTS
-	public Article(int noArticle, String nomArticle, String description, Date datDebutEnchere, Date dateFinEnchere,
+	public Article(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
 			int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie, String etatVente,
 			String image, Retraits retrait, Enchere enchere) {
 		super();
 		this.setNoArticle(noArticle);
 		this.nomArticle = nomArticle;
 		this.description = description;
-		this.datDebutEnchere = datDebutEnchere;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+		this.etatVente = etatVente;
+		this.image = image;
+		this.retrait = retrait;
+		this.enchere = enchere;
+	}
+	public Article(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
+			int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie, String etatVente,
+			String image, Retraits retrait, Enchere enchere) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
 		this.dateFinEnchere = dateFinEnchere;
 		this.prixInitial = prixInitial;
 		this.prixVente = prixVente;
@@ -67,19 +84,19 @@ public class Article {
 		this.description = description;
 	}
 
-	public Date getDatDebutEnchere() {
-		return datDebutEnchere;
+	public LocalDate getdateDebutEnchere() {
+		return dateDebutEnchere;
 	}
 
-	public void setDatDebutEnchere(Date datDebutEnchere) {
-		this.datDebutEnchere = datDebutEnchere;
+	public void setdateDebutEnchere(LocalDate dateDebutEnchere) {
+		this.dateDebutEnchere = dateDebutEnchere;
 	}
 
-	public Date getDateFinEnchere() {
+	public LocalDate getDateFinEnchere() {
 		return dateFinEnchere;
 	}
 
-	public void setDateFinEnchere(Date dateFinEnchere) {
+	public void setDateFinEnchere(LocalDate dateFinEnchere) {
 		this.dateFinEnchere = dateFinEnchere;
 	}
 
@@ -131,6 +148,16 @@ public class Article {
 		this.image = image;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
+				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
+				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + utilisateur + ", noCategorie="
+				+ categorie + ", etatVente=" + etatVente + ", image=" + image + "]";
+	}
+	
+
 	public Retraits getRetrait() {
 		return retrait;
 	}
@@ -146,5 +173,4 @@ public class Article {
 	public void setEnchere(Enchere enchere) {
 		this.enchere = enchere;
 	}
-	
 }
