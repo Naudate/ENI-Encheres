@@ -11,18 +11,19 @@ public class Article {
 	private Date dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
-	private Utilisateur noUtilisateur;
-	private Categorie noCategorie;
-	private char etatVente;
+	private Utilisateur utilisateur;
+	private Categorie categorie;
+	private String etatVente;
 	private String image;
+	private Retraits retrait;
 
 	public Article() {
 	}
 
 	// CONSTRUCTEUR AVEC TOUT LES ATTRIBUTS
 	public Article(int noArticle, String nomArticle, String description, Date datDebutEnchere, Date dateFinEnchere,
-			int prixInitial, int prixVente, Utilisateur noUtilisateur, Categorie noCategorie, char etatVente,
-			String image) {
+			int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie, String etatVente,
+			String image, Retraits retrait) {
 		super();
 		this.setNoArticle(noArticle);
 		this.nomArticle = nomArticle;
@@ -31,10 +32,11 @@ public class Article {
 		this.dateFinEnchere = dateFinEnchere;
 		this.prixInitial = prixInitial;
 		this.prixVente = prixVente;
-		this.noUtilisateur = noUtilisateur;
-		this.noCategorie = noCategorie;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
 		this.etatVente = etatVente;
 		this.image = image;
+		this.retrait = retrait;
 	}
 
 	// GETTERs/SETTERs
@@ -94,27 +96,27 @@ public class Article {
 		this.prixVente = prixVente;
 	}
 
-	public Utilisateur getNoUtilisateur() {
-		return noUtilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setNoUtilisateur(Utilisateur noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
-	public Categorie getNoCategorie() {
-		return noCategorie;
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
-	public void setNoCategorie(Categorie noCategorie) {
-		this.noCategorie = noCategorie;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
-	public char getEtatVente() {
+	public String getEtatVente() {
 		return etatVente;
 	}
 
-	public void setEtatVente(char etatVente) {
+	public void setEtatVente(String etatVente) {
 		this.etatVente = etatVente;
 	}
 
@@ -126,4 +128,12 @@ public class Article {
 		this.image = image;
 	}
 
+	public Retraits getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retraits retrait) {
+		this.retrait = retrait;
+	}
+	
 }

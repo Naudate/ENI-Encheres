@@ -2,29 +2,30 @@ package bo;
 
 public class Retraits {
 
-	private Article noArticle;
+	private Article article;
 	private String rue;
 	private String codePostal;
 	private String ville;
 	
 	//CONSTRUCTEUR
-	public Retraits(Article noArticle, String rue, String codePostal, String ville) {
+	public Retraits(Article article, String rue, String codePostal, String ville) {
 		super();
-		this.noArticle = noArticle;
+		this.article = article;
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
 	}
-
 	
+	public Retraits() {
+	}
 	
 	//GETTER //SETTER
-	public Article getNoArticle() {
-		return noArticle;
+	public Article getarticle() {
+		return article;
 	}
 
-	public void setNoArticle(Article noArticle) {
-		this.noArticle = noArticle;
+	public void setarticle(Article noArticle) {
+		this.article = noArticle;
 	}
 
 	public String getRue() {

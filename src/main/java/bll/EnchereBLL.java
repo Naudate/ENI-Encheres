@@ -16,6 +16,9 @@ public class EnchereBLL {
     public List<Enchere> selectAll() {
         return dao.selectAll();
     }
-
-
+    
+    public Enchere selectById(int idArticle) {
+        return dao.selectById(idArticle);
+    }
+    
 }
