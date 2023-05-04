@@ -26,3 +26,4 @@ replay_pid*
 
 .project
 src/main/webapp/META/INF/context.xml
+/bin/

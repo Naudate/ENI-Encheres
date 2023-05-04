@@ -7,7 +7,7 @@
 <%@page import="bo.Categorie"%>
 <%@page import="bo.Retraits"%>
 <%
-Enchere enchere = (Enchere) request.getAttribute("enchere");
+Article enchere = (Article) request.getAttribute("article");
 %>
 <!DOCTYPE html>
 <html>
@@ -25,15 +25,15 @@ Enchere enchere = (Enchere) request.getAttribute("enchere");
 					class="img-fluid">
 			</div>
 			<div class="col-md-8">
-				<h1>${enchere.article.nomArticle}</h1>
-				<p>Description : ${enchere.article.description}</p>
-				<p>Catégorie : ${enchere.article.categorie.libelle}</p>
-				<p>Meilleure offre : ${enchere.montant} pts par ${enchere.utilisateur.pseudo}</p>
-				<p>Mise à prix : ${enchere.article.prixInitial} points</p>
-				<p>Fin de l'enchère : ${enchere.article.dateFinEnchere}</p>
-				<p>Retrait : ${enchere.article.retrait.rue} <br/> 
-				${enchere.article.retrait.codePostal} ${enchere.article.retrait.ville}</p>
-				<p>Vendeur : ${enchere.article.utilisateur.pseudo}</p>				
+				<h1>${article.nomArticle}</h1>
+				<p>Description : ${article.description}</p>
+				<p>Catégorie : ${article.categorie.libelle}</p>
+				<p>Meilleure offre : ${article.enchere.montant} pts par ${article.enchere.utilisateur.pseudo}</p>
+				<p>Mise à prix : ${article.prixInitial} points</p>
+				<p>Fin de l'enchère : ${article.dateFinEnchere}</p>
+				<p>Retrait : ${article.retrait.rue} <br/> 
+				${article.retrait.codePostal} ${article.retrait.ville}</p>
+				<p>Vendeur : ${article.utilisateur.pseudo}</p>				
 			</div>
 		</div>
 	</div>

@@ -16,6 +16,8 @@ public class Article {
 	private String etatVente;
 	private String image;
 	private Retraits retrait;
+	//Mettre List quand passage en mode historique
+	private Enchere enchere;
 
 	public Article() {
 	}
@@ -23,7 +25,7 @@ public class Article {
 	// CONSTRUCTEUR AVEC TOUT LES ATTRIBUTS
 	public Article(int noArticle, String nomArticle, String description, Date datDebutEnchere, Date dateFinEnchere,
 			int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie, String etatVente,
-			String image, Retraits retrait) {
+			String image, Retraits retrait, Enchere enchere) {
 		super();
 		this.setNoArticle(noArticle);
 		this.nomArticle = nomArticle;
@@ -37,6 +39,7 @@ public class Article {
 		this.etatVente = etatVente;
 		this.image = image;
 		this.retrait = retrait;
+		this.enchere = enchere;
 	}
 
 	// GETTERs/SETTERs
@@ -134,6 +137,14 @@ public class Article {
 
 	public void setRetrait(Retraits retrait) {
 		this.retrait = retrait;
+	}
+
+	public Enchere getEnchere() {
+		return enchere;
+	}
+
+	public void setEnchere(Enchere enchere) {
+		this.enchere = enchere;
 	}
 	
 }

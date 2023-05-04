@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Exception.DetailEnchereException;
-import bll.EnchereBLL;
-import bo.Enchere;
-import services.ConvertionService;
+import Exception.DetailArticleException;
+import bll.ArticleBLL;
+import bo.Article;
 
 
-@WebServlet("/detailEnchere/*")
-public class DetailEnchereServlet extends HttpServlet {
+@WebServlet("/detailArticle/*")
+public class DetailArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	EnchereBLL enchereBLL;
+	ArticleBLL articleBLL;
 	
 	@Override
 	public void init() throws ServletException {
-		enchereBLL = new EnchereBLL();
+		articleBLL = new ArticleBLL();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,22 +32,22 @@ public class DetailEnchereServlet extends HttpServlet {
 			String pathInfo = request.getPathInfo();		
 			String[] pathParts = pathInfo.split("/");
 			String idArticle = pathParts[1]; // {value}		
-			Enchere enchere = enchereBLL.selectById(Integer.parseInt(idArticle));		
-			if(enchere == null) {
-				throw new DetailEnchereException("Cet article n'existe pas");
+			Article article = articleBLL.selectById(Integer.parseInt(idArticle));		
+			if(article == null) {
+				throw new DetailArticleException("Cet article n'existe pas");
 			}
-			request.setAttribute("enchere", enchere);			
-			request.getRequestDispatcher("/detailEnchere.jsp").forward(request, response);	
+			request.setAttribute("article", article);			
+			request.getRequestDispatcher("/detailArticle.jsp").forward(request, response);	
 			
 		}catch(NumberFormatException nbEx) {
-			request.setAttribute("message", "L'id dans l'url n'est pas un nombre. Veuillez ne pas jouer avec l'url");
+			request.setAttribute("messageError", "L'id dans l'url n'est pas un nombre. Veuillez ne pas jouer avec l'url");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
 			dispatcher.forward(request, response);
 			
-		}catch(DetailEnchereException dee) {
-			request.setAttribute("message", dee.getMessage());
+		}catch(DetailArticleException dee) {
+			request.setAttribute("messageError", dee.getMessage());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
-			dispatcher.forward(request, response);;			
+			dispatcher.forward(request, response);		
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
