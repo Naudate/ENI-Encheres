@@ -6,6 +6,7 @@ package dal;
 public abstract class DAOFactory {
     private static EnchereDAO enchereDAO;    
     private static UtilisateurDAO utilisateurDAO;
+    private static EnchereArticleDAO enchereArticleDAO;
 
     public static EnchereDAO getEnchereDAO() {
         if (enchereDAO == null) {
@@ -19,6 +20,13 @@ public abstract class DAOFactory {
         	utilisateurDAO = new UtilisateurDAOJdbcImpl();
         }
         return utilisateurDAO;
+    }
+    
+    public static EnchereArticleDAO getEnchereArticleDAO() {
+		if (enchereArticleDAO == null) {
+			enchereArticleDAO = new EnchereArticleDAOJdbcImpl();
+		}
+    	return enchereArticleDAO;
     }
 
 }
