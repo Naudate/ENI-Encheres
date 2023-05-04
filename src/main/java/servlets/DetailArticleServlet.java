@@ -74,12 +74,7 @@ public class DetailArticleServlet extends HttpServlet {
 			
 			articleBLL.checkProposition(article, proposition, util);	
 			request.getRequestDispatcher("/accueil").forward(request, response);
-			
-			
-		/*	
-			request.setAttribute("article", article);			
-			request.getRequestDispatcher("/detailArticle.jsp").forward(request, response);	*/
-			
+
 		}catch(NumberFormatException nbEx) {
 			request.setAttribute("messageError", "L'id dans l'url n'est pas un nombre. Veuillez ne pas jouer avec l'url");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
