@@ -48,7 +48,7 @@
                     <c:when test="${listeEnchereArticle.size() > 0}">
 						<c:forEach var="EA" items="${listeEnchereArticle}">
 							<div class="col-3 mt-3">
-			                    <a class="card text-decoration-none" href="/detailEnchere/${EA.no_article}">
+			                    <a class="card text-decoration-none" href="<%=request.getContextPath()%>/detailArticle/${EA.no_article}">
 			                        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/></svg>
 			                        <!--<img src="..." class="card-img-top" alt="...">-->
 			                        <div class="card-body">

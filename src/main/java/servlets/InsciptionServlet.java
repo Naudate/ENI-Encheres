@@ -57,7 +57,7 @@ public class InsciptionServlet extends HttpServlet {
 			request.setAttribute("rue", rue);
 			request.setAttribute("codePostal", codePostal);
 			request.setAttribute("ville", ville);			
-			request.setAttribute("message", e.getMessage());
+			request.setAttribute("messageError", e.getMessage());
 			request.getRequestDispatcher("/inscription.jsp").forward(request, response);
 		}
 

@@ -12,14 +12,6 @@
     	<%@ include file="./WEB-INF/fragments/header.jsp" %>
        
         <div class="container mt-5">       
-        
-         <c:choose>
-	   		<c:when test="${message!=null}">
-	   			 <div class="alert alert-danger" role="alert">
-					<%=request.getAttribute("message")%>
-				</div>
-	   		</c:when> 
-	     </c:choose>
 	             
         <div class="row justify-content-center">
             <div class="col-md-6">
