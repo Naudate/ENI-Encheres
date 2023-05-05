@@ -51,6 +51,12 @@ public class Retraits {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
+
+	@Override
+	public String toString() {
+		return "Retraits [article=" + article + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville
+				+ "]";
+	}
 	
 	
 }

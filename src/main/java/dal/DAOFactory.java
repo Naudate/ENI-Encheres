@@ -35,6 +35,7 @@ public abstract class DAOFactory {
 			categorieDAO = new CategorieJdbcImpl();
 		}
     	return categorieDAO;
+    }
     
     public static EnchereDAO getEnchereDAO() {
 		if (enchereDAO == null) {
