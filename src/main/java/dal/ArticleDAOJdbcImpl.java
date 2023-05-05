@@ -32,7 +32,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     		+ "inner join utilisateurs u on u.no_utilisateur = av.no_utilisateur\r\n"
     		+ "left join encheres en on av.no_article = en.no_article\r\n"
     		+ "where av.no_article = ?;";
-
+    public int idArticle;
     @Override
     public List<Article> selectAll() {
         List<Article> listeArticles= new ArrayList<Article>();
@@ -166,12 +166,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			  ps.setInt(8, article.getCategorie().getNoCategorie());
 			  ps.setString(9,"CR");
 			  ps.setString(10, article.getImage());
-			  System.out.println(article.getCategorie().getNoCategorie());
 			  
 			  ps.executeUpdate();
 			  ResultSet keys = ps.getGeneratedKeys();
 			  if(keys.next()) {
-				  int idArticle = keys.getInt(1);
+				  idArticle = keys.getInt(1);
 				  article.setNoArticle(idArticle);
 			  }
 	    }

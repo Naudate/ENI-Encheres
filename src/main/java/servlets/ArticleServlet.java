@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import Exception.InscriptionException;
 import bll.ArticleBLL;
 import bll.CategorieBLL;
+import bll.RetraitsBLL;
 import bo.Article;
 import bo.Categorie;
+import bo.Retraits;
 import bo.Utilisateur;
 import dal.DALException;
 
@@ -27,12 +29,14 @@ import dal.DALException;
 public class ArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ArticleBLL articleBll;
+	RetraitsBLL retraitBll;
 	CategorieBLL categorieBll;
 	
 	@Override
 	public void init() throws ServletException {
 		articleBll = new ArticleBLL();
 		categorieBll = new CategorieBLL();
+		retraitBll = new RetraitsBLL();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +53,7 @@ public class ArticleServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Récupération de tous les champs
+		//Récupération de tous les champs Articles
 		String nomArticle = request.getParameter("nom_article");
     	String description = request.getParameter("description");
     	String dateDebutEnchere = request.getParameter("date_debut_enchere");
@@ -58,16 +62,24 @@ public class ArticleServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("connected");
         Categorie categorie =  new Categorie(Integer.parseInt(request.getParameter("listCategorie")),null);
         //String image = request.getParameter("image");
-        System.out.println(request.getParameter("listCategorie"));
-        System.out.println(nomArticle +"  "+ description +"  "+  dateDebutEnchere +"  "+ dateFinEnchere+"  "+ prixInitial+"  "+ "CR" +"  "+ utilisateur +"  "+ categorie);
-		try {
+        //Récupération de tous les champs Retraits
+        String rue = request.getParameter("rue");
+    	String codePostal = request.getParameter("code_postal");
+    	String ville = request.getParameter("ville");
+        
+        
+        try {
 			  //convert String to LocalDate
 			  LocalDate date1 = LocalDate.parse(dateDebutEnchere);
 			  LocalDate date2 = LocalDate.parse(dateFinEnchere);
 			  int prixInt = Integer.parseInt(prixInitial);
-	    	 Article articleInsert = new Article(nomArticle, description, date1, date2, prixInt, 0, utilisateur, categorie, "CR",null,null,null);
-				Article article = articleBll.insert(articleInsert);
-        
+			  
+			  //Insertion Article
+			  Article articleInsert = new Article(nomArticle, description, date1, date2, prixInt, 0, utilisateur, categorie, "CR",null,null,null);
+			  Article article = articleBll.insert(articleInsert);
+			  //Insertion Retraits
+			  Retraits retraitsInsert = new Retraits(article,rue,codePostal,ville);
+			  Retraits retraits = retraitBll.insert(retraitsInsert);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
