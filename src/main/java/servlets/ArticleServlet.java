@@ -64,8 +64,7 @@ public class ArticleServlet extends HttpServlet {
 			  LocalDate date1 = LocalDate.parse(dateDebutEnchere);
 			  LocalDate date2 = LocalDate.parse(dateFinEnchere);
 			  int prixInt = Integer.parseInt(prixInitial);
-			
-	    	 Article articleInsert = new Article(nomArticle, description, date1, date2, prixInt, null, utilisateur, categorie, etatVente,null,null,null);
+	    	 Article articleInsert = new Article(nomArticle, description, date1, date2, prixInt, 0, utilisateur, categorie, "CR",null,null,null);
 				Article article = articleBll.insert(articleInsert);
         
 				} catch (Exception e) {
