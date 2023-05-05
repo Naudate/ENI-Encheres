@@ -55,9 +55,10 @@ public class ArticleServlet extends HttpServlet {
     	String dateDebutEnchere = request.getParameter("date_debut_enchere");
         String dateFinEnchere = request.getParameter("date_fin_enchere");
         String prixInitial = request.getParameter("prix_initial");
-        Utilisateur utilisateur = new Utilisateur();
-        Categorie categorie = new Categorie();
+        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("connected");
+        Categorie categorie =  new Categorie(Integer.parseInt(request.getParameter("listCategorie")),null);
         //String image = request.getParameter("image");
+        System.out.println(request.getParameter("listCategorie"));
         System.out.println(nomArticle +"  "+ description +"  "+  dateDebutEnchere +"  "+ dateFinEnchere+"  "+ prixInitial+"  "+ "CR" +"  "+ utilisateur +"  "+ categorie);
 		try {
 			  //convert String to LocalDate

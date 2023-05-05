@@ -34,7 +34,7 @@
 	
 						<select name="listCategorie" id="listCategorie">
 						 <c:forEach var="value" items="${listCategorie}">  
-						  <option value="${value.libelle}" id="listCategorie">${value.libelle}</option>
+						  <option value="${value.noCategorie}" id="listCategorie">${value.libelle}</option>
 						</c:forEach>
 						 </select><br>
 						<!-- TODO UPLOAD IMAGE 
