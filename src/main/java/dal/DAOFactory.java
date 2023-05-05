@@ -7,6 +7,7 @@ public abstract class DAOFactory {
     private static ArticleDAO articleDAO;    
     private static UtilisateurDAO utilisateurDAO;
     private static EnchereArticleDAO enchereArticleDAO;
+    private static CategorieDAO categorieDAO;
 
 
 	public static ArticleDAO getArticleDAO() {
@@ -28,4 +29,11 @@ public abstract class DAOFactory {
 		}
     	return enchereArticleDAO;
     }
+    public static CategorieDAO getCategorieDAO() {
+		if (categorieDAO == null) {
+			categorieDAO = new CategorieJdbcImpl();
+		}
+    	return categorieDAO;
+    }
 }
+
