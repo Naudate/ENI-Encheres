@@ -45,7 +45,7 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 												+ "from ARTICLES_VENDUS a "
 													+ "left join ENCHERES e on a.no_article = e.no_article "
 													+ "inner join UTILISATEURS u on a.no_utilisateur = u.no_utilisateur "
-												+ "WHERE a.etat_vente = 'EC' AND a.nom_article like '%?%'";
+												+ "WHERE a.etat_vente = 'EC' AND a.nom_article like ?";
 	private static final String SELECTJOINCATLIKE = "select c.libelle,"
 														+ "a.no_article,"
 														+ "a.nom_article,"
@@ -58,7 +58,7 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 														+ "left join ENCHERES e on a.no_article = e.no_article "
 														+ "inner join UTILISATEURS u on a.no_utilisateur = u.no_utilisateur "
 														+ "inner join CATEGORIES c on a.no_categorie=c.no_categorie "
-													+ "WHERE a.etat_vente = 'EC' and c.libelle = ? AND a.nom_article like '%?%'";
+													+ "WHERE a.etat_vente = 'EC' and c.libelle = ? AND a.nom_article like ? ";
 
 	
 	@Override
@@ -127,7 +127,7 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 			PreparedStatement ps;
 			
 			ps = cnx.prepareStatement(SELECTJOINLIKE);
-			ps.setString(1, nom_articlelike);
+			ps.setString(1, "%" + nom_articlelike + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Integer no_article = rs.getInt("no_article");
@@ -157,7 +157,9 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 
 			ps = cnx.prepareStatement(SELECTJOINCATLIKE);
 			ps.setString(1, categoriesql);
-			ps.setString(2, nom_articlelike);
+			System.out.println(categoriesql);
+			System.out.println(nom_articlelike);
+			ps.setString(2, "%" + nom_articlelike + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String categorie = rs.getString("libelle");

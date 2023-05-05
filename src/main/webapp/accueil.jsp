@@ -33,6 +33,7 @@
 										<c:choose>
 											<c:when test="${categorie != null }">
 												<option value="${categorie}" selected>${categorie}</option>
+												<option value="" >Cat&eacute;gorie</option>
 											</c:when>
 											<c:otherwise>
 												<option selected disabled>Cat&eacute;gorie</option>
@@ -46,9 +47,9 @@
 									</select>
 									<div class="mt-3">
 										<c:choose>
-											<c:when test="${textArticle != null}">
+											<c:when test="${textArticle.isBlank() == false}">
 												<input type="text" class="form-control" id="textArticle"
-													name="textArticle" placeholder="${textArticle }">
+													name="textArticle" value="${textArticle }">
 											</c:when>
 											<c:otherwise>
 												<input type="text" class="form-control" id="textArticle"

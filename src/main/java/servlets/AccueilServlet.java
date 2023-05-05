@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -29,26 +30,26 @@ public class AccueilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<EnchereArticle> listeEnchereArticle;
-		String select = (String) request.getParameter("selectCategory");
-		System.out.println(select);
+		String categorie = (String) request.getParameter("selectCategory");
+		System.out.println(categorie);
 		String textArticle = (String) request.getParameter("textArticle");
-		System.out.println(textArticle);
-		if(select != null || textArticle != null) {
-			if(select == "") {
+		System.out.println("'" + textArticle+ "'");
+		if(categorie != null || textArticle != null) {
+			if(categorie == "" || categorie == null) {
 				listeEnchereArticle = enchereArticleBLL.selectJoinLike(textArticle);
 				System.out.println("like" + listeEnchereArticle);
 				request.setAttribute("textArticle", textArticle);
 			}
-			if(textArticle == "") {
-				listeEnchereArticle = enchereArticleBLL.selectJoinCat(select);
+			else if(textArticle == "" || textArticle == null) {
+				listeEnchereArticle = enchereArticleBLL.selectJoinCat(categorie);
 				System.out.println("cat" + listeEnchereArticle);
-				request.setAttribute("categorie", select);
+				request.setAttribute("categorie", categorie);
 			}
 			else {
-				listeEnchereArticle = enchereArticleBLL.selectJoinCatLike(select, textArticle);
+				listeEnchereArticle = enchereArticleBLL.selectJoinCatLike(categorie, textArticle);
 				System.out.println("catlike" + listeEnchereArticle);
 				request.setAttribute("textArticle", textArticle);
-				request.setAttribute("categorie", select);
+				request.setAttribute("categorie", categorie);
 			}
 		}
 		else {
