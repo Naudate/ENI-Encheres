@@ -75,7 +75,7 @@
 					<div class="col-4 mt-3">
 						<div class="input-group">
 							<span class="input-group-text" id="motDePasse"><i class="bi bi-key-fill"></i></span>
-							<input type="password" class="form-control" name="motDePasse" aria-label="motDePasse" aria-describedby="motDePasse" value="${motDePasse}" placeholder="Mot de passe" onchange="checkpassword" required>
+							<input type="password" class="form-control" name="motDePasse" aria-label="motDePasse" aria-describedby="motDePasse" value="${motDePasse}" placeholder="Mot de passe" required>
 						</div>
 					</div>
 					<div class="col-4 mt-3">
@@ -102,17 +102,5 @@
 		</div>
 	</div>
 	<%@ include file="./WEB-INF/fragments/importjs.html"%>
-	<script>
-		function checkpassword(){
-			const passwordInput = document.getElementsByName("motDePasse");
-			const confirmInput = document.getElementsByName("confirmation");
-			const submit = document.getElementById("submit");
-			if (passwordInput.value !== confirmInput.value) {
-				submit.ariaDisabled = true;
-			} else {
-				submit.ariaDisabled = false
-			}
-		}
-	</script>
 </body>
 </html>

@@ -58,15 +58,14 @@ public class ArticleServlet extends HttpServlet {
         Utilisateur utilisateur = new Utilisateur();
         Categorie categorie = new Categorie();
         //String image = request.getParameter("image");
-        System.out.println(nomArticle +"  "+ description +"  "+  dateDebutEnchere +"  "+ dateFinEnchere+"  "+ prixInitial+"  "+ "EC" +"  "+ utilisateur +"  "+ categorie);
+        System.out.println(nomArticle +"  "+ description +"  "+  dateDebutEnchere +"  "+ dateFinEnchere+"  "+ prixInitial+"  "+ "CR" +"  "+ utilisateur +"  "+ categorie);
 		try {
 			  //convert String to LocalDate
 			  LocalDate date1 = LocalDate.parse(dateDebutEnchere);
 			  LocalDate date2 = LocalDate.parse(dateFinEnchere);
 			  int prixInt = Integer.parseInt(prixInitial);
-			  int prixVent = Integer.parseInt(prixVente);
 			
-	    	 Article articleInsert = new Article(nomArticle, description, date1, date2, prixInt, prixVent, utilisateur, categorie, etatVente,null,null,null);
+	    	 Article articleInsert = new Article(nomArticle, description, date1, date2, prixInt, null, utilisateur, categorie, etatVente,null,null,null);
 				Article article = articleBll.insert(articleInsert);
         
 				} catch (Exception e) {

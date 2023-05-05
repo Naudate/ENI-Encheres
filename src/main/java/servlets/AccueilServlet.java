@@ -16,7 +16,6 @@ import bo.EnchereArticle;
 public class AccueilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	EnchereArticleBLL enchereArticleBLL;
-	List<EnchereArticle> listeEnchereArticle;
 	
 	@Override
 	public void init() throws ServletException {
@@ -24,7 +23,7 @@ public class AccueilServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		listeEnchereArticle = enchereArticleBLL.selectJoin();
+		List<EnchereArticle> listeEnchereArticle = enchereArticleBLL.selectJoin();
 		request.setAttribute("listeEnchereArticle", listeEnchereArticle);
 		request.getRequestDispatcher("accueil.jsp").forward(request, response);
 	}
