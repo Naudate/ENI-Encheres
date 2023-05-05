@@ -8,53 +8,95 @@
 <title>Inscription</title>
 </head>
 <body>
-
 	<%@ include file="./WEB-INF/fragments/header.jsp"%>
-
 	<div class="container mt-5">
-
 		<div class="row justify-content-center">
-			<div class="col-md-6">
-				<h1 class="mb-4">Inscription</h1>
+			<div class="col-12 text-center">
+				<h1>Inscription</h1>
+			</div>
+			<form action="inscription" method="post">
+				<div class="row justify-content-center">
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="pseudo"><i class="bi bi-person-circle"></i></span>
+							<input type="text" class="form-control" aria-label="Pseudo" aria-describedby="Pseudo" value="${pseudo}" placeholder="Pseudo" required>
+						</div>	
+					</div>
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="nom"><i class="bi bi-person-fill"></i></span>
+							<input type="text" class="form-control" aria-label="nom" aria-describedby="nom" value="${nom}" placeholder="Nom" required>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="prenom"><i class="bi bi-person-fill"></i></span>
+							<input type="text" class="form-control" aria-label="prenom" aria-describedby="prenom" value="${prenom}" placeholder="Prénom" required>
+						</div>	
+					</div>
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="email"><i class="bi bi-envelope-at-fill"></i></span>
+							<input type="email" class="form-control" aria-label="email" aria-describedby="email" value="${email}" placeholder="Email"required>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="telephone"><i class="bi bi-telephone-fill"></i></span>
+							<input type="tel" class="form-control" aria-label="telephone" aria-describedby="telephone" value="${telephone}" minlength="10" maxlength="10" placeholder="Numéro de téléphone" required>
+						</div>	
+					</div>
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="rue"><i class="bi bi-house-fill"></i></span>
+							<input type="text" class="form-control" aria-label="rue" aria-describedby="rue" value="${rue}" placeholder="Adresse" required>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="codePostal"><i class="bi bi-building-fill"></i></span>
+							<input type="number" class="form-control" aria-label="codePostal" aria-describedby="codePostal" value="${codePostal}" minlength="5" maxlength="5" placeholder="Code postal" required>
+						</div>	
+					</div>
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="ville"><i class="bi bi-building-fill"></i></span>
+							<input type="text" class="form-control" aria-label="ville" aria-describedby="ville" value="${ville}" placeholder="Ville" required>
+						</div>
+					</div>
+				</div>				
+				<div class="row justify-content-center">
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="motDePasse"><i class="bi bi-key-fill"></i></span>
+							<input type="password" class="form-control" name="motDePasse" aria-label="motDePasse" aria-describedby="motDePasse" value="${motDePasse}" placeholder="Mot de passe" required>
+						</div>
+					</div>
+					<div class="col-4 mt-3">
+						<div class="input-group">
+							<span class="input-group-text" id="confirmation"><i class="bi bi-check2-all"></i></span>
+							<input type="text" class="form-control" name="confirmation" aria-label="confirmation" aria-describedby="confirmation" value="${confirmation}" placeholder="Confirmation du mot de passe" required>
+						</div>	
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-3 d-grid mt-3">
+						<input class="btn btn-primary" type="submit" value="Créer" id="submit"> 
+					</div>
+					<div class="col-3 d-grid mt-3">
+						<a class="btn btn-primary"  href="accueil">Annuler</a>
+					</div>
+				</div>
+			</form>
 				<form action="inscription" method="post">
-					<div style="float: left; width: 50%;">
-						<label for="pseudo">Pseudo:</label> 
-						<input type="text" name="pseudo" id="pseudo" required value="${pseudo}"><br> 
-						
-						<label for="prenom">Prénom:</label>						
-						<input type="text" name="prenom" id="prenom" required value="${prenom}"><br> 
-						
-						<label for="telephone">Téléphone:</label> 						
-						<input type="tel" name="telephone" id="telephone" required minlength="10" maxlength="10"  value="${telephone}"><br> 
-						
-						<label for="codePostal">Code Postal:</label> 
-						<input type="number" name="codePostal" id="codePostal" required minlength="5" maxlength="5" value="${codePostal}"><br> 
-						
-						<label for="motDePasse">Mot de passe:</label> 
-						<input type="password" name="motDePasse" id="motDePasse" required><br>
-					</div>
 
-					<div style="float: right; width: 50%;">
-						<label for="nom">Nom:</label> 
-						<input type="text" name="nom" id="nom" required value="${nom}"><br> 
-						
-						<label for="email">Email:</label> 
-						<input type="email" name="email" id="email" required value="${email}"><br> 
-						
-						<label for="rue">Rue:</label> 
-						<input type="text" name="rue" id="rue" required value="${rue}"><br>
-						
-						<label for="ville">Ville:</label> 
-						<input type="text" name="ville"	id="ville" required value="${ville}"><br> 
-						
-						<label for="motDePasseConfirme">Confirmation:</label> 
-						<input type="password" name="motDePasseConfirme" id="motDePasseConfirme" required><br>
-					</div>
 
-					<div style="clear: both;"></div>
-
-					<input class="btn btn-outline-dark" type="submit" value="Créer"> 
-					<a class="btn btn-outline-dark"  href="accueil">Annuler</a>
 				</form>
 			</div>
 		</div>

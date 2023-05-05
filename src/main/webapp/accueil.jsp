@@ -25,14 +25,21 @@
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFiltres">
                                 <div class="accordion-body">
-                                    <form>
+                                    <form action="accueil" method="post" id="filtre">
                                         <div>
-                                            <select class="form-select" name="selectCategory" id="selectCategory" aria-label="Selection de catégories">
+                                            <select class="form-select" name="selectCategory" id="selectCategory" aria-label="Selection de catégories" form="filtre">
                                                 <option selected disabled>Cat&eacute;gorie</option>
                                                 <!--entrer les catégories en utilisant la database-->
                                             </select>
                                             <div class="mt-3">
-                                                <input type="text" class="form-control" id="textArticle" placeholder="Rechercher article....">
+                                            <c:choose>
+                                            	<c:when test="${textArticle != null}">
+                                     				<input type="text" class="form-control" id="textArticle" name="textArticle" placeholder="${textArticle }">
+                                               	</c:when>
+                                               	<c:otherwise>
+                                               		<input type="text" class="form-control" id="textArticle" name="textArticle" placeholder="Rechercher article....">
+                                               	</c:otherwise>
+                                            </c:choose>
                                             </div>
                                             <div class="d-grid mt-3">
                                                 <button class="btn btn-primary" type="submit">Rechercher</button>
