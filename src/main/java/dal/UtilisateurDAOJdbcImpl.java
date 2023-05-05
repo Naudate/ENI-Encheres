@@ -25,6 +25,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String DELETE = "delete from utilisateurs where no_utilisateur = ?;";
 	private static final String UPDATECREDIT = "update utilisateurs set credit = ? where no_utilisateur = ?;";
 	private static final String UPDATE = "update UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? where no_utilisateur = ?;";
+	private static final String UPDATEWITHOUTPASSWORD = "update UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ? where no_utilisateur = ?;";
 	
 	@Override
 	public Utilisateur verifCompte(String pseudo, String password) {
@@ -249,5 +250,29 @@ try (Connection cnx = ConnectionProvider.getConnection();) {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void updateWithoutPassword(Utilisateur utilisateur) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement ps = cnx.prepareStatement(UPDATEWITHOUTPASSWORD);
+						
+			ps.setString(1, utilisateur.getPseudo());
+			ps.setString(2, utilisateur.getNom());
+			ps.setString(3, utilisateur.getPrenom());
+			ps.setString(4, utilisateur.getEmail());
+			ps.setString(5, utilisateur.getTelephone());
+			ps.setString(6, utilisateur.getRue());
+			ps.setString(7, utilisateur.getCode_postal());
+			ps.setString(8, utilisateur.getVille());
+			ps.setInt(9, utilisateur.getNoUtilisateur());
+			
+			ps.executeUpdate();		
+			ps.close();
+			
+			cnx.commit();	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -56,24 +56,42 @@ public class UtilisateurBLL {
     	}
     	
     	//Vérifier mail
-    	if(!email.equals(actualUser.getEmail()) && dao.checkEmail(email)) {
+    	
+    	//Si c'est une modification et que le nouveau mail n'est pas le même que actuel et que le mail existe déjà
+    	if(actualUser != null && !email.equals(actualUser.getEmail()) && dao.checkEmail(email)) {
     		throw new InscriptionException("Cet email est déjà utilisé, veuillez changer.");
-    	}
+    	}else if(actualUser == null && dao.checkEmail(email)){
+    		throw new InscriptionException("Cet email est déjà utilisé, veuillez changer.");
+    	}  
     	
     	//Vérifier pseudo
-    	if(!pseudo.equals(actualUser.getPseudo()) && dao.checkPseudo(pseudo)) {
-    		throw new InscriptionException("Ce pseudo est déjà utilisé, veuillez changer.");
-    	}
     	
-    	if(actualMotDePasse == null) {
+    	//Si c'est une modification et que le nouveau pseudo n'est pas le même que actuel et que le pseudo existe déjà
+    	if(actualUser != null && !pseudo.equals(actualUser.getPseudo()) && dao.checkPseudo(pseudo)) {
+    		throw new InscriptionException("Ce pseudo est déjà utilisé, veuillez changer.");
+    	}else if(actualUser == null && dao.checkEmail(email)){
+    		throw new InscriptionException("Ce pseudo est déjà utilisé, veuillez changer.");
+    	} 
+
+    	//Si inscription
+    	if(actualMotDePasse == null) {    		
     		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, 100, false);
         	utilisateur = dao.insert(utilisateur);
         	return utilisateur;
+        //Sinon modification 
     	}else{
+    		System.out.println(motDePasse);
+    		if(motDePasse == null || motDePasse.equals("")) {
+    			motDePasse = actualUser.getMotDePasse();
+    			Utilisateur utilisateur = new Utilisateur(actualUser.getNoUtilisateur(), pseudo, nom, prenom, email, telephone, rue, codePostal, ville, null, actualUser.getCredit(), false);
+            	dao.updateWithoutPassword(utilisateur);
+            	return utilisateur;
+    		}else {
     		Utilisateur utilisateur = new Utilisateur(actualUser.getNoUtilisateur(), pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, actualUser.getCredit(), false);
         	dao.update(utilisateur);
         	return utilisateur;
     	}
+    }
     	
     }
 
