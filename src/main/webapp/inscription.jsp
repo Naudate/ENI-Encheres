@@ -94,11 +94,6 @@
 					</div>
 				</div>
 			</form>
-				<form action="inscription" method="post">
-
-
-				</form>
-			</div>
 		</div>
 	</div>
 	<%@ include file="./WEB-INF/fragments/importjs.html"%>

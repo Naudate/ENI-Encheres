@@ -13,7 +13,7 @@ import bo.Article;
 import bo.Categorie;
 import bo.Utilisateur;
 
-public class CategorieJdbcImpl implements CategorieDAO {
+public class CategorieDAOJdbcImpl implements CategorieDAO {
 	private static final String SELECTALL = "select * from categories;";
 
 	@Override

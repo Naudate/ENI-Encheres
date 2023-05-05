@@ -1,11 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,13 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Exception.InscriptionException;
 import bll.ArticleBLL;
 import bll.CategorieBLL;
 import bo.Article;
 import bo.Categorie;
 import bo.Utilisateur;
-import dal.DALException;
 
 
 @WebServlet("/articles")

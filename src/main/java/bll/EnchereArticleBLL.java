@@ -16,4 +16,15 @@ public class EnchereArticleBLL {
     public List<EnchereArticle> selectJoin() {
         return dao.selectJoin();
     }
+    
+    public List<EnchereArticle> selectJoinLike(String nom_articlelike) {
+        return dao.selectJoin();
+    }
+    public List<EnchereArticle> selectJoinCat(String categoriesql) {
+        return dao.selectJoin();
+    }
+    
+    public List<EnchereArticle> selectJoinCatLike(String categoriesql, String nom_articlelike) {
+        return dao.selectJoin();
+    }
 }
