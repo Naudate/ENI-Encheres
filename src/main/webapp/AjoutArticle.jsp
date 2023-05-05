@@ -22,7 +22,7 @@
 
 		<div class="row justify-content-center">
 			<div class="col-md-6">
-				<h1 class="mb-4">Nouvelle article</h1>
+				<h1 class="mb-4">Nouvelle vente</h1>
 				<form action="articles" method="post">
 					<div style="float: left; width: 50%;">
 						<label for="nom_article">Nom de l'article :</label> 
@@ -30,41 +30,41 @@
 						
 						<label for="description">Description:</label>						
 						<input type="text" name="description" id="description" required value="${description}"><br> 
-						
-						<label for="date_debut_enchere">Date du début de l'enchère:</label> 						
-						<input type="date" name="date_debut_enchere" id="date_debut_enchere" required value="${dateDebutEnchere}"><br> 
-						
-						<label for="date_fin_enchere">Date de la fin de l'enchère:</label> 
-						<input type="date" name="date_fin_enchere" id="date_fin_enchere" required value="${dateFinEnchere}"><br> 
-						
-						<label for="prix_initial">Prix Initial:</label> 
-						<input type="number" name="prix_initial" id="prix_initial" required><br>
-					
-						<label for="prix_vente">Prix de vente:</label> 
-						<input type="number" name="prix_vente" id="prix_vente" required><br>
-						
-						<!-- TODO CATEGORIE -->
-						
-						<label for="etat_vente">Etat de vente:</label>
-						<select name="etat_vente" id="etat_vente">
- 						<option value="RT">RT</option>
-  						<option value="VD">VD</option>
-  						<option value="EC">EC</option>
- 						<option value="CR">CR</option>
-						</select>			
+						<label for="listCategorie">Catégorie:</label>
+	
+						<select name="listCategorie" id="listCategorie">
+						 <c:forEach var="value" items="${listCategorie}">  
+						  <option value="${value.libelle}" id="listCategorie">${value.libelle}</option>
+						</c:forEach>
+						 </select><br>
 						<!-- TODO UPLOAD IMAGE 
 						<label for="image">Image de présentation:</label> 
 						<input type="image" name="image" id="image" required><br> -->
 										
-						
+						<label for="prix_initial">Mise à prix:</label> 
+						<input type="number" name="prix_initial" id="prix_initial" required><br>
 					
+					
+						<label for="date_debut_enchere">Début de l'enchère:</label> 						
+						<input type="date" name="date_debut_enchere" id="date_debut_enchere" required value="${dateDebutEnchere}"><br> 
+						
+						<label for="date_fin_enchere">Fin de l'enchère:</label> 
+						<input type="date" name="date_fin_enchere" id="date_fin_enchere" required value="${dateFinEnchere}"><br> 		
+					
+					
+						<h1 class="mb-4">Retrait</h1>
+						<label for="rue">Rue :</label> 
+						<input type="text" name="rue" id="rue" required><br> 
+						<label for="code_postal">Code postal :</label> 
+						<input type="text" name="code_postal" id="code_postal" required><br>
+						<label for="ville">Ville :</label>
+						<input type="text" name="ville" id="ville" required><br> 					
 					</div>
-
 					
 
 					<div style="clear: both;"></div>
 
-					<input class="btn btn-outline-dark" type="submit" value="Créer"> 
+					<input class="btn btn-outline-dark" type="submit" value="Enregistrer"> 
 					<a class="btn btn-outline-dark"  href="accueil">Annuler</a>
 				</form>
 			</div>
