@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import Exception.DetailArticleException;
 import bll.ArticleBLL;
 import bo.Article;
+import bo.Utilisateur;
 
 
 @WebServlet("/detailArticle/*")
@@ -25,8 +26,7 @@ public class DetailArticleServlet extends HttpServlet {
 		articleBLL = new ArticleBLL();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-						
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {						
 		//Récupération de l'id
 		try {
 			String pathInfo = request.getPathInfo();		
@@ -52,8 +52,39 @@ public class DetailArticleServlet extends HttpServlet {
 			System.out.println(e.getMessage());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
 			dispatcher.forward(request, response);
+		}		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		try {
+			String pathInfo = request.getPathInfo();		
+			String[] pathParts = pathInfo.split("/");
+			int idArticle = Integer.parseInt(pathParts[1]);
+			int proposition = Integer.parseInt(request.getParameter("proposition"));
+
+			Article article = articleBLL.selectById(idArticle);				
+			
+			if(article == null) {
+				throw new DetailArticleException("Cet article n'existe pas");
+			}
+			
+			Utilisateur util = (Utilisateur) request.getSession().getAttribute("connected");
+			
+			articleBLL.checkProposition(article, proposition, util);	
+			request.getRequestDispatcher("/accueil").forward(request, response);
+
+		}catch(NumberFormatException nbEx) {
+			request.setAttribute("messageError", "L'id dans l'url n'est pas un nombre. Veuillez ne pas jouer avec l'url");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
+			dispatcher.forward(request, response);
+		}catch(DetailArticleException dee) {
+			request.setAttribute("messageError", dee.getMessage());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
+			dispatcher.forward(request, response);		
 		}
-		
+				
 	}
 
 }

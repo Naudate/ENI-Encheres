@@ -21,12 +21,12 @@
 									profil</a></li>
 						</ul>
 						<div class="navbar-item">
-							<a class="nav-link" href="deconnexion">Se d&eacute;connecter</a>
+							<a class="nav-link" href="<%=request.getContextPath()%>/deconnexion">Se d&eacute;connecter</a>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="navbar-item ms-auto">
-							<a class="nav-link" href="connexion">S'inscrire - Se
+							<a class="nav-link" href="<%=request.getContextPath()%>/connexion">S'inscrire - Se
 								connecter</a>
 						</div>
 					</c:otherwise>
