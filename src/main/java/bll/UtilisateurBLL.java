@@ -65,11 +65,10 @@ public class UtilisateurBLL {
     	}  
     	
     	//Vérifier pseudo
-    	
     	//Si c'est une modification et que le nouveau pseudo n'est pas le même que actuel et que le pseudo existe déjà
     	if(actualUser != null && !pseudo.equals(actualUser.getPseudo()) && dao.checkPseudo(pseudo)) {
     		throw new InscriptionException("Ce pseudo est déjà utilisé, veuillez changer.");
-    	}else if(actualUser == null && dao.checkEmail(email)){
+    	}else if(actualUser == null && dao.checkPseudo(pseudo)){
     		throw new InscriptionException("Ce pseudo est déjà utilisé, veuillez changer.");
     	} 
 
