@@ -9,6 +9,7 @@ public abstract class DAOFactory {
     private static EnchereArticleDAO enchereArticleDAO;
     private static CategorieDAO categorieDAO;
     private static EnchereDAO enchereDAO;
+    private static RetraitsDAO retraitsDAO;
 
 	public static ArticleDAO getArticleDAO() {
 		if (articleDAO == null) {
@@ -43,6 +44,12 @@ public abstract class DAOFactory {
 		}
     	return enchereDAO;
 
+    }
+    public static RetraitsDAO getRetraitsDAO() {
+		if (retraitsDAO == null) {
+			retraitsDAO = new RetraitsDAOJdbcImpl();
+		}
+    	return retraitsDAO;
     }
 }
 

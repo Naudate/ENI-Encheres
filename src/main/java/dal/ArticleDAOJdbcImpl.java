@@ -32,7 +32,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     		+ "inner join utilisateurs u on u.no_utilisateur = av.no_utilisateur\r\n"
     		+ "left join encheres en on av.no_article = en.no_article\r\n"
     		+ "where av.no_article = ?;";
-
+    public int idArticle;
     @Override
     public List<Article> selectAll() {
         List<Article> listeArticles= new ArrayList<Article>();
@@ -49,15 +49,13 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
             	Date dateFinEnchere = rs.getDate("date_fin_enchere");
                 int prixInitial = rs.getInt("prix_initial");
                 int prixVente = rs.getInt("prix_vente");
-                Utilisateur utilisateur = new Utilisateur();
                 Categorie categorie = new Categorie();
                 String etatVente = rs.getString("etat_vente");
                 String image = rs.getString("image");
                 
                 LocalDate date1 = dateDebutEnchere.toLocalDate();
-                
                 LocalDate date2 = dateFinEnchere.toLocalDate();
-                Article article = new Article(nomArticle,description,date1,date2,prixInitial,prixVente,utilisateur,categorie,etatVente,image,null,null);
+                Article article = new Article(nomArticle,description,date1,date2,prixInitial,prixVente,null,categorie,etatVente,image,null,null);
                 
                 listeArticles.add(article);}
             
@@ -164,15 +162,15 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			  ps.setDate(4, Date.valueOf(article.getDateFinEnchere()));
 			  ps.setInt(5, article.getPrixInitial());
 			  ps.setInt(6, article.getPrixVente());
-			  ps.setInt(7,/*article.getNoUtilisateur().getNoUtilisateur()*/1);
-			  ps.setInt(8, /*article.getNoCategorie().getNoCategorie()*/1);
-			  ps.setString(9,"EC");
+			  ps.setInt(7,article.getUtilisateur().getNoUtilisateur());
+			  ps.setInt(8, article.getCategorie().getNoCategorie());
+			  ps.setString(9,"CR");
 			  ps.setString(10, article.getImage());
 			  
 			  ps.executeUpdate();
 			  ResultSet keys = ps.getGeneratedKeys();
 			  if(keys.next()) {
-				  int idArticle = keys.getInt(1);
+				  idArticle = keys.getInt(1);
 				  article.setNoArticle(idArticle);
 			  }
 	    }
