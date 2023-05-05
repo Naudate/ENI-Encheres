@@ -33,7 +33,7 @@ public abstract class DAOFactory {
 
     public static CategorieDAO getCategorieDAO() {
 		if (categorieDAO == null) {
-			categorieDAO = new CategorieJdbcImpl();
+			categorieDAO = new CategorieDAOJdbcImpl();
 		}
     	return categorieDAO;
     }

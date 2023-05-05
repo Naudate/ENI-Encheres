@@ -8,7 +8,6 @@
     <filter-name>FiltreConnexion</filter-name>
     <filter-class>filtres.FiltreConnexion</filter-class>
   </filter>
-
   <filter-mapping>
     <filter-name>FiltreConnexion</filter-name>
     <url-pattern>/*</url-pattern>
