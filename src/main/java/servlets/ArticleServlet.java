@@ -40,13 +40,15 @@ public class ArticleServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("connected");
 		List<Article> allArticle = articleBll.selectAll();
 		List<Categorie> listCategorie = categorieBll.selectAll();
 		Article allArticle2 = null;
 		request.setAttribute("listePanier", allArticle);
 		request.setAttribute("listCategorie", listCategorie);
-		System.out.println(listCategorie);
-
+		request.setAttribute("rueText", user.getRue());
+		request.setAttribute("villeText", user.getVille());
+		request.setAttribute("codeText", user.getCode_postal());
 		
 		request.getRequestDispatcher("AjoutArticle.jsp").forward(request, response);
 	}
@@ -64,8 +66,8 @@ public class ArticleServlet extends HttpServlet {
         //String image = request.getParameter("image");
         //Récupération de tous les champs Retraits
         String rue = request.getParameter("rue");
-    	String codePostal = request.getParameter("code_postal");
-    	String ville = request.getParameter("ville");
+        String codePostal = request.getParameter("ville");
+        String ville = request.getParameter("code_postal");
         
         
         try {

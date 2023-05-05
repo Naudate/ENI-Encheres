@@ -54,11 +54,11 @@
 					
 						<h1 class="mb-4">Retrait</h1>
 						<label for="rue">Rue :</label> 
-						<input type="text" name="rue" id="rue" required><br> 
+						<input type="text" name="rue" id="rue" value ="${rueText}" required><br> 
 						<label for="code_postal">Code postal :</label> 
-						<input type="text" name="code_postal" id="code_postal" required><br>
+						<input type="text" name="code_postal" id="code_postal" value ="${villeText}" required><br>
 						<label for="ville">Ville :</label>
-						<input type="text" name="ville" id="ville" required><br> 					
+						<input type="text" name="ville" id="ville" value ="${codeText}" required><br> 					
 					</div>
 					
 
