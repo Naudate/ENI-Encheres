@@ -19,7 +19,11 @@ public interface UtilisateurDAO {
 
     Utilisateur selectById(int id);
 
-    void delete(int id);
+    boolean delete(int id);
 
     void update(Utilisateur utilisateur);
+
+	Utilisateur removeCredit(Utilisateur util, int proposition);
+
+	void addCredit(Utilisateur util, int offre);
 }

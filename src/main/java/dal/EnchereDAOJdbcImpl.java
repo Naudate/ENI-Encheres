@@ -17,9 +17,16 @@ import bo.Article;
  */
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
+	private UtilisateurDAO daoUtilisateur;
+	
+	private static final String DELETE = "DELETE from encheres where no_article = ?;";
 	private static final String SELECTENCHERE = "select * from encheres en where en.no_article = ?;";
 	private static final String INSERT = "insert into encheres(no_utilisateur, no_article, date_enchere, montant_enchere) values(?, ?, ?, ?);";
 	private static final String UPDATE = "update encheres set no_utilisateur = ?, date_enchere = ?, montant_enchere = ? where no_article = ?";
+	
+	public EnchereDAOJdbcImpl() {
+		daoUtilisateur = DAOFactory.getUtilisateurDAO();
+	} 
 
 	@Override
 	public Enchere getEnchereByArticle(Article article) {
@@ -35,8 +42,10 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
             if(rs.next()) {    
             	//Enchere
                 Date dateEnchere = rs.getDate("date_enchere");
-                int montant = rs.getInt("montant_enchere");               
-                enchere = new Enchere(dateEnchere, montant, null, article);
+                int montant = rs.getInt("montant_enchere");     
+                int noUtil = rs.getInt("no_utilisateur");     
+                Utilisateur util = daoUtilisateur.selectById(noUtil);
+                enchere = new Enchere(dateEnchere, montant, util, article);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,7 +66,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	         ps.setDate(3, dateEnchere);
 	         ps.setInt(4, montantEnchere);
 	         
-	         ResultSet rs = ps.executeQuery();
+	         ps.executeUpdate();	
+			ps.close();
+			cnx.commit();
 
 		}catch(SQLException e) {
             e.printStackTrace();
@@ -77,11 +88,26 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	         ps.setInt(3, montantEnchere);
 	         ps.setInt(4, article.getNoArticle());
 	         
-	         ResultSet rs = ps.executeQuery();
+	         ps.executeUpdate();	
+			ps.close();
+			cnx.commit();
 
 		}catch(SQLException e) {
            e.printStackTrace();
        }
 	}
+	
+	@Override
+    public void delete(int id) {
+    	/// TODO Auto-generated method stub
+		 try (Connection cnx = ConnectionProvider.getConnection();) { 
+			  PreparedStatement ps = cnx.prepareStatement(DELETE);
+			  ps.setInt(1, id);		 
+			  ps.executeUpdate();		
+	    }
+	    catch(Exception e){ 
+	      e.printStackTrace();
+	    }
+    }
 	
 }

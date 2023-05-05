@@ -16,4 +16,6 @@ public interface EnchereDAO {
 	public void createEnchere(Article article, Utilisateur util, int montantEnchere);
 	
 	public void updateEnchere(Article article, Utilisateur util, int montantEnchere);
+
+	public void delete(int noArticle);
 }
