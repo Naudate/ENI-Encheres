@@ -26,4 +26,6 @@ public interface UtilisateurDAO {
 	Utilisateur removeCredit(Utilisateur util, int proposition);
 
 	void addCredit(Utilisateur util, int offre);
+
+	void updateWithoutPassword(Utilisateur utilisateur);
 }

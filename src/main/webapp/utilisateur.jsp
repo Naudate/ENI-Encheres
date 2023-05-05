@@ -121,7 +121,7 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 										class="form-control" name="newMotDePasse"
 										aria-label="newMotDePasse" aria-describedby="newMotDePasse"
 										placeholder="Nouveau mot de passe"
-										required>
+										>
 								</div>
 							</div>
 							<div class="col-4 mt-3">
@@ -130,7 +130,7 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 										class="bi bi-check2-all"></i></span> <input type="password"
 										class="form-control" name="confirmation"
 										aria-label="confirmation" aria-describedby="confirmation"
-										placeholder="Confirmation" required>
+										placeholder="Confirmation">
 								</div>
 							</div>
 						</div>
