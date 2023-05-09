@@ -181,6 +181,7 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 						</div>
 						<div class="col-3 d-grid mt-3">
 							<a class="btn btn-danger"
+								onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');"
 								href="<%=request.getContextPath()%>/deleteUser">Supprimer</a>
 						</div>
 					</div>

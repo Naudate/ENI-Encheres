@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Exception.UtilisateurException;
 import bll.UtilisateurBLL;
 import bo.Utilisateur;
 
@@ -26,7 +27,13 @@ public class DeleteUserServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		Utilisateur util = (Utilisateur) request.getSession().getAttribute("connected");
+
 		try {
+			
+			if(util.isAdministrateur()) {
+				throw new UtilisateurException("Pas possible de supprimer un compte admin");
+			}
+			
 			if(utilisateurBLL.delete(util)) {
 				request.getSession().setAttribute("connected", null);
 				request.setAttribute("messageSuccess", "Compte supprimé avec succès");
@@ -38,8 +45,15 @@ public class DeleteUserServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			
+		}
+		catch(UtilisateurException ue) {
+			request.setAttribute("messageError", ue.getMessage());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
+			dispatcher.forward(request, response);
 		}catch(Exception e) {
-			
+			request.setAttribute("messageError", e.getMessage());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
+			dispatcher.forward(request, response);
 		}
 	}
 

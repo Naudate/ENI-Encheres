@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bo.Utilisateur;
+
 import java.io.IOException;
 
 public class FiltreConnexion implements Filter {
@@ -16,10 +18,8 @@ public class FiltreConnexion implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        
-        
+    /*    HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;       
         
         HttpSession session = req.getSession(false); // récupérer la session existante sans en créer une nouvelle
 			if (session != null) {
@@ -30,7 +30,6 @@ public class FiltreConnexion implements Filter {
 			    }
 			}
         
-
         String path = req.getRequestURI().substring(req.getContextPath().length());
 
         if (!path.startsWith("/accueil") && !path.startsWith("/connexion") && !path.startsWith("/deconnexion") && !path.startsWith("/inscription") && ((HttpServletRequest) request).getSession().getAttribute("connected") == null) {
@@ -39,6 +38,15 @@ public class FiltreConnexion implements Filter {
     		dispatcher.forward(request, response);
             return;
         }
+        
+        Utilisateur connected = (Utilisateur) ((HttpServletRequest) request).getSession().getAttribute("connected");
+        
+        if (path.startsWith("/admin") && connected.isAdministrateur() == false) {
+        	request.setAttribute("messageInfo", "Il faut être administrateur pour accéder à cette page");
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
+    		dispatcher.forward(request, response);
+            return;
+        }*/
 
         chain.doFilter(request, response);
     }
