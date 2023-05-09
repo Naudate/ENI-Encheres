@@ -14,6 +14,7 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
+	private boolean actif;
 
 	public Utilisateur() {
 
@@ -21,7 +22,7 @@ public class Utilisateur {
 
 	// CONSTRUCTEUR ALL ATRIBUTS
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String code_postal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String rue, String code_postal, String ville, String motDePasse, int credit, boolean administrateur, boolean actif) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -35,10 +36,11 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
+		this.actif = actif;
 	}
 	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String code_postal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String rue, String code_postal, String ville, String motDePasse, int credit, boolean administrateur, boolean actif) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -52,6 +54,7 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
+		this.actif = actif;
 	}
 
 	// GETTER //SETTER
@@ -150,14 +153,24 @@ public class Utilisateur {
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
+	
+	public boolean isActif() {
+		return actif;
+	}
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
+	}
 
 	@Override
 	public String toString() {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", code_postal="
 				+ code_postal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
-				+ ", administrateur=" + administrateur + "]";
+				+ ", administrateur=" + administrateur + ", actif=" + actif + "]";
 	}
+
+
 	
 	
 

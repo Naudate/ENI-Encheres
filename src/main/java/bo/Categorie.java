@@ -17,6 +17,10 @@ public class Categorie {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Categorie(String libelle) {
+		this.libelle = libelle;
+	}
+
 
 	//GETTER //SETTER
 	public int getNoCategorie() {

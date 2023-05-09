@@ -104,8 +104,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				String motDePasse = rs.getString("mot_de_passe");
 				int credit = rs.getInt("credit");
 				boolean isAdministrateur = rs.getBoolean("administrateur");
+				boolean isActif = rs.getBoolean("actif");
 
-            	Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rueUtil, codePostalUtil, villeUtil, motDePasse, credit, isAdministrateur);
+            	Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rueUtil, codePostalUtil, villeUtil, motDePasse, credit, isAdministrateur, isActif);
             	
             	//Récupération des infos de catégorie
             	int noCategorie = rs.getInt("no_categorie");
@@ -223,8 +224,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				String motDePasse = rs.getString("mot_de_passe");
 				int credit = rs.getInt("credit");
 				boolean isAdministrateur = rs.getBoolean("administrateur");
+				boolean isActif = rs.getBoolean("actif");
 
-				util = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, isAdministrateur);
+				util = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, isAdministrateur, isActif);
             }
         	
         } catch (SQLException e) {

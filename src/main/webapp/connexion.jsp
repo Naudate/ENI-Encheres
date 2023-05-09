@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%
+boolean remember = (boolean) request.getAttribute("remember");  
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,6 +27,11 @@
                     <div class="form-group">
                         <label for="password">Mot de passe :</label>
                         <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="remember">Se souvenir de moi :</label>
+                        ${System.out.println(remember)}
+                        <input type="checkbox" id="remember" name="remember" <%if(remember == true) {%>checked<%}%>>
                     </div>
                     <div class="d-grid mt-3 gap-2">
                         <button type="submit" class="btn btn-primary">Se connecter</button>
