@@ -15,4 +15,6 @@ public interface CategorieDAO {
 	void delete(int idCategorie);
 
 	List<Article> allArticleByCateg(int idCategorie);
+
+	void update(Integer idCateg, String libelle);
 }

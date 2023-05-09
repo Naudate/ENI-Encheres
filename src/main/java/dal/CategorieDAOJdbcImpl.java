@@ -19,6 +19,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	private static final String CHECKVALUEEXIST = "select * from categories where libelle = ?;";
 	private static final String INSERT = "insert into categories(libelle) values(?);";
 	private static final String DELETE = "delete from categories where no_categorie = ?;";
+	private static final String UPDATE = "update categories set libelle = ? where no_categorie = ?;";
 	private static final String SELECTARTICLEBUCATEGORIE = "select *, en.no_utilisateur as encherisseur from ARTICLES_VENDUS av\r\n"
 			+ "inner join CATEGORIES cat on cat.no_categorie = av.no_categorie\r\n"
 			+ "left join ENCHERES en on av.no_article = en.no_article\r\n"
@@ -161,5 +162,25 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
                 e.printStackTrace();
             }
         return listeArticles;
+	}
+
+	@Override
+	public void update(Integer idCateg, String libelle) {
+		  try (Connection cnx = ConnectionProvider.getConnection();) {
+
+            PreparedStatement ps = cnx.prepareStatement(UPDATE);
+            
+            ps.setString(1, libelle);
+            ps.setInt(2, idCateg);
+
+            ps.executeUpdate();
+            
+			ps.close();
+
+			cnx.commit();
+            
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }		
 	}
 }
