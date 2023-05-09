@@ -134,12 +134,19 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 								</div>
 							</div>
 						</div>
+						
+						<div class="row justify-content-center">
+							<div class="col-4 mt-3">
+								<p class="text-center">Crédit : ${util.credit}</p>
+							</div>							
+						</div>
+						
 						<div class="row justify-content-center">
 							<div class="col-3 d-grid mt-3">
 								<input class="btn btn-primary" type="submit" value="Valider Modification"
 									id="submit">
 							</div>							
-						</div>
+						</div>						
 					</form>
 
 
@@ -148,8 +155,9 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 		</c:when>
 		<c:otherwise>
 			<div class="container">
-				<div class="row">
-					<div class="col-md-8">
+				<div class="row justify-content-center">
+					<div class="col-md-8 text-center">
+					</br>
 						<p>Pseudo : ${util.pseudo}</p>
 						<p>Nom : ${util.nom}</p>
 						<p>Prénom : ${util.prenom}</p>
@@ -161,12 +169,12 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 					</div>
 				</div>
 			</div>
-			<div></div>
-			<div></div>
 			<c:choose>
 				<c:when
 					test="${util.noUtilisateur==sessionScope.connected.noUtilisateur}">
-					<div class="row justify-content-center">
+					
+					<div class="row justify-content-center text-center">
+					<p>Crédit : ${util.credit}</p>
 						<div class="col-3 d-grid mt-3">
 							<a class="btn btn-primary"
 								href="<%=request.getContextPath()%>/user/me">Modifier</a>
