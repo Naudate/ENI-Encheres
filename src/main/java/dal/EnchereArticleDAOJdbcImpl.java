@@ -11,7 +11,7 @@ import java.util.List;
 import bo.EnchereArticle;
 
 public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
-	private static final String SELECTJOINALL ="select a.no_article,"
+	private static final String SELECTJOINALL = "select a.no_article,"
 													+ "a.nom_article,"
 													+ "e.montant_enchere,"
 													+ "a.prix_initial,"
@@ -35,7 +35,7 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 													+ "inner join UTILISATEURS u on a.no_utilisateur = u.no_utilisateur "
 													+ "inner join CATEGORIES c on a.no_categorie=c.no_categorie "
 												+ "WHERE a.etat_vente = 'EC' AND c.libelle = ?";
-	private static final String SELECTJOINLIKE ="select a.no_article,"
+	private static final String SELECTJOINLIKE = "select a.no_article,"
 													+ "a.nom_article,"
 													+ "e.montant_enchere,"
 													+ "a.prix_initial,"
@@ -59,6 +59,19 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 														+ "inner join UTILISATEURS u on a.no_utilisateur = u.no_utilisateur "
 														+ "inner join CATEGORIES c on a.no_categorie=c.no_categorie "
 													+ "WHERE a.etat_vente = 'EC' and c.libelle = ? AND a.nom_article like ? ";
+	private static final String SELECTJOINUSER = "select c.libelle,"
+														+ "a.no_article,"
+														+ "a.nom_article,"
+														+ "e.montant_enchere,"
+														+ "a.prix_initial,"
+														+ "a.date_fin_enchere,"
+														+ "a.etat_vente,"
+														+ "u.pseudo "
+													+ "from ARTICLES_VENDUS a "
+														+ "left join ENCHERES e on a.no_article = e.no_article "
+														+ "inner join UTILISATEURS u on a.no_utilisateur = u.no_utilisateur "
+														+ "inner join CATEGORIES c on a.no_categorie=c.no_categorie "
+													+ "where u.pseudo = ?";
 
 	
 	@Override
@@ -148,6 +161,7 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 		}
 		return list;
 	}
+	
 	@Override
 	public List<EnchereArticle> selectJoinCatLike(String categoriesql, String nom_articlelike){
 		List<EnchereArticle> list = new ArrayList<EnchereArticle>();
@@ -181,4 +195,38 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 		}
 		return list;
 	}
+
+	
+	@Override
+	public List<EnchereArticle> selectJoinByUser(String user) {
+		List<EnchereArticle> list = new ArrayList<EnchereArticle>();
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			cnx.setAutoCommit(false);
+			PreparedStatement ps;
+
+			ps = cnx.prepareStatement(SELECTJOINUSER);
+			ps.setString(1, user);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String categorie = rs.getString("libelle");
+				Integer no_article = rs.getInt("no_article");
+				String nom_article = rs.getString("nom_article");
+				Integer prix_initial = rs.getInt("prix_initial");
+				Date date_fin_enchere = rs.getDate("date_fin_enchere");
+				String etat_vente = rs.getString("etat_vente");
+				String pseudo = rs.getString("pseudo");
+				Integer montant_enchere = rs.getInt("montant_enchere");
+				
+				EnchereArticle ea = new EnchereArticle(categorie,no_article,nom_article, prix_initial, date_fin_enchere, etat_vente, pseudo, montant_enchere);
+				
+				list.add(ea);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	
 }

@@ -62,7 +62,7 @@
 											<div class="row">
 												<div class="col-6">
 													<div class="form-check">
-														<input class="form-check-input" type="radio" name="mestrucs" id="mesachats">
+														<input class="form-check-input" type="radio" name="mestrucs" id="mesachats" value="mesachats">
 														<label class="form-check-label" for="mesachats">
 															Achats
 														</label>
@@ -70,7 +70,7 @@
 												</div>
 												<div class="col-6">
 													<div class="form-check">
-														<input class="form-check-input" type="radio" name="mestrucs" id="mesventes">
+														<input class="form-check-input" type="radio" name="mestrucs" id="mesventes" value="mesventes">
 														<label class="form-check-label" for="mesventes">
 															Ventes
 														</label>
@@ -78,19 +78,19 @@
 												</div>
 												<div class="col-6">
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesachatsouverts">
+														<input class="form-input" type="checkbox" value="" id="mesachatsouverts" name="mesachatsouverts" disabled>
 														<label class="form-check-label" for="mesachatsouverts">
 															ench&egrave;res ouvertes
 														</label>
 													</div>
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesachatsencheres">
+														<input class="form-input" type="checkbox" value="" id="mesachatsencheres" name="mesachatsencheres" disabled>
 														<label class="form-check-label" for="mesachatsencheres">
 															mes ench&egrave;res 
 														</label>
 													</div>
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesachatsencheresremporte">
+														<input class="form-input" type="checkbox" value="" id="mesachatsencheresremporte" disabled>
 														<label class="form-check-label" for="mesachatsencheresremporte">
 															ench&egrave;res remport&eacute;es
 														</label>
@@ -98,19 +98,19 @@
 												</div>
 												<div class="col-6">
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesventesencours">
+														<input class="form-input" type="checkbox" value="" id="mesventesencours" disabled>
 														<label class="form-check-label" for="mesventesencours">
 															mes ventes en cours
 														</label>
 													</div>
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesventesnondebutees">
+														<input class="form-input" type="checkbox" value="" id="mesventesnondebutees" disabled>
 														<label class="form-check-label" for="mesventesnondebutees">
 															ventes non débutées
 														</label>
 													</div>
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesventesterminees">
+														<input class="form-input" type="checkbox" value="" id="mesventesterminees" disabled>
 														<label class="form-check-label" for="mesventesterminees">
 															ventes termin&eacute;es
 														</label>
