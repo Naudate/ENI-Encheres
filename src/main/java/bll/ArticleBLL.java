@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import Exception.DetailArticleException;
+import Exception.InscriptionException;
 import bo.Article;
 import bo.Enchere;
 import bo.Utilisateur;
@@ -36,6 +37,15 @@ public class ArticleBLL {
     public Article selectById(int idArticle) {
         return dao.selectById(idArticle);
     }
+    public boolean delete(Article article) throws InscriptionException {
+    	if( !"CR".equals(article.getEtatVente())) {
+    		throw new InscriptionException("La vente a commencé" + article.getEtatVente());
+    	}else {
+    			//Supprimer l'article	
+    			daoEnchere.delete(article.getNoArticle());
+    			return dao.delete(article.getNoArticle());
+    			}
+    	}
     
     public void checkProposition(Article article, int proposition, Utilisateur util) throws DetailArticleException {
    	
