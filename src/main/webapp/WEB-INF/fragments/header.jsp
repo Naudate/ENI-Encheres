@@ -2,7 +2,9 @@
 <header>
 	<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/ENI-Encheres/accueil">ENI-Ench&egrave;res</a>
+			<a class="navbar-brand" href="/ENI-Encheres/accueil">
+				<img src="<%=request.getContextPath()%>/images/logo.png" alt="logo" width="45" height="32" class="d-inline-block align-text-top">
+				ENI-Ench&egrave;res</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbar"
 				aria-controls="navbar" aria-expanded="false"

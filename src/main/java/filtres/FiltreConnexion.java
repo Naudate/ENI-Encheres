@@ -19,7 +19,7 @@ public class FiltreConnexion implements Filter {
 
         String path = req.getRequestURI().substring(req.getContextPath().length());
 
-        if (!path.startsWith("/accueil") && !path.startsWith("/connexion") && !path.startsWith("/deconnexion") && !path.startsWith("/inscription") && ((HttpServletRequest) request).getSession().getAttribute("connected") == null) {
+        if (!path.startsWith("/accueil") && !path.startsWith("/connexion") && !path.startsWith("/deconnexion") && !path.startsWith("/inscription") && !path.startsWith("/images") && ((HttpServletRequest) request).getSession().getAttribute("connected") == null) {
         	request.setAttribute("messageInfo", "Connectez-vous à votre compte pour avoir accès aux enchères");
     		RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
     		dispatcher.forward(request, response);
