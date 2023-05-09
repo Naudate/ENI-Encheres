@@ -42,10 +42,8 @@ public class AdminCategorieServlet extends HttpServlet {
 		
 		try {					
 			String categorie = (String) request.getParameter("categorie");
-			System.out.println("categ = "+categorie);
 			if(categorie != null && !"".equals(categorie)) {
 				categorieBLL.insert(categorie);
-				System.out.println("success");
 				request.setAttribute("messageSuccess", "Catégorie créée avec succès.");				
 			}
 			doGet(request, response);
