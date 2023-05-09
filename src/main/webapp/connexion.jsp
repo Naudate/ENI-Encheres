@@ -30,7 +30,6 @@ boolean remember = (boolean) request.getAttribute("remember");
                     </div>
                     <div class="form-group">
                         <label for="remember">Se souvenir de moi :</label>
-                        ${System.out.println(remember)}
                         <input type="checkbox" id="remember" name="remember" <%if(remember == true) {%>checked<%}%>>
                     </div>
                     <div class="d-grid mt-3 gap-2">

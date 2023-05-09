@@ -31,22 +31,22 @@
 											placeholder="${categorie.libelle}" required>
 									</div>
 									<div
-										class="row d-flex align-self-center justify-content-center">
-										<div class="col-6 align-self-center justify-content-center">
+										class="row d-flex ">
+										<div class="col-6 ">
 											<div class="text-end ">
 												<button class="btn btn-primary h-100 w-auto align-self-center" type="submit"
 													id="submit">
-													<i class="bi bi-brush fs-3"></i>
+													<i class="bi bi-brush fs-6"></i>
 												</button>
 											</div>
 										</div>
-										<div class="col-6 align-self-center justify-content-center">
-											<div class="text-end align-self-center">
+										<div class="col-6 ">
+											<div class="">
 												<a
 													href="<%=request.getContextPath()%>/admin/deleteCategorie/${categorie.noCategorie}"
 													class="btn btn-danger h-100 w-auto align-self-center"
 													onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ? Cela va supprimer tout les articles liés à la catégorie !');">
-													<i class="bi bi-x fs-3"></i>
+													<i class="bi bi-x fs-6"></i>
 												</a>
 											</div>
 										</div>

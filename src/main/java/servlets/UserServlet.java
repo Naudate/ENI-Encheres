@@ -67,7 +67,6 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Récupération de tous les champs
-		System.out.println("recup");
 				String pseudo = request.getParameter("pseudo");
 				String nom = request.getParameter("nom");
 				String prenom = request.getParameter("prenom");
