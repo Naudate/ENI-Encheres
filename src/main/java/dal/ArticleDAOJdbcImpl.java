@@ -151,7 +151,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
     	/// TODO Auto-generated method stub
 		 try (Connection cnx = ConnectionProvider.getConnection();) { 
 			  PreparedStatement ps = cnx.prepareStatement(DELETE);
@@ -161,6 +161,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	    catch(Exception e){ 
 	      e.printStackTrace();
 	    }
+		return false;
     }
 
     @Override

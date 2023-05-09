@@ -59,6 +59,10 @@ public class Article {
 		this.enchere = enchere;
 	}
 
+	public Article(int noArticle) {
+		this.setNoArticle(noArticle);
+	}
+
 	// GETTERs/SETTERs
 	public int getNoArticle() {
 		return noArticle;

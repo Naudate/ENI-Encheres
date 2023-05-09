@@ -12,6 +12,8 @@ int montantMin = (int) article.getPrixInitial() +1;
 if(article.getEnchere().getMontant() != 0){
 	montantMin = article.getEnchere().getMontant() + 1;
 }
+int userId = article.getUtilisateur().getNoUtilisateur();
+Utilisateur util = (Utilisateur) request.getAttribute("util");
 %>
 
 <!DOCTYPE html>
@@ -49,11 +51,21 @@ if(article.getEnchere().getMontant() != 0){
 				<label for="proposition">Ma proposition :</label> 
 				<input type="number" name="proposition" id="proposition" required value="<%= montantMin %>" min="<%= montantMin %>">
 				<input class="btn btn-outline-dark" type="submit" value="Enchérir"> 
-				</form>		
+				</form>	
+				<c:choose>
+				  <c:when
+					test="${article.utilisateur.noUtilisateur==sessionScope.connected.noUtilisateur}">
+					<div class="col-3 d-grid mt-3">
+							<a class="btn btn-danger"
+							href="<%=request.getContextPath()%>/deleteArticle/${article.noArticle}">
+							Supprimer
+							</a>
+					</div>	
+				  </c:when>
+				</c:choose>
 			</div>
 		</div>
 	</div>
-
 	<%@ include file="./WEB-INF/fragments/importjs.html"%>
 </body>
 </html>

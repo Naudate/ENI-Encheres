@@ -11,8 +11,7 @@ public interface ArticleDAO {
 	
     List<Article> selectAll();
     Article selectById(int id);
-
-    void delete(int id);
+    public boolean delete(int id);
 
     void update(Article enchere);
 
