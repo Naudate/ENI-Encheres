@@ -57,6 +57,68 @@
 											</c:otherwise>
 										</c:choose>
 									</div>
+									<c:if test="${connected!=null}">
+										<div class="mt-3">
+											<div class="row">
+												<div class="col-6">
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="mestrucs" id="mesachats">
+														<label class="form-check-label" for="mesachats">
+															Achats
+														</label>
+													</div>
+												</div>
+												<div class="col-6">
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="mestrucs" id="mesventes">
+														<label class="form-check-label" for="mesventes">
+															Ventes
+														</label>
+													</div>
+												</div>
+												<div class="col-6">
+													<div class="form-check">
+														<input class="form-input" type="checkbox" value="" id="mesachatsouverts">
+														<label class="form-check-label" for="mesachatsouverts">
+															ench&egrave;res ouvertes
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-input" type="checkbox" value="" id="mesachatsencheres">
+														<label class="form-check-label" for="mesachatsencheres">
+															mes ench&egrave;res 
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-input" type="checkbox" value="" id="mesachatsencheresremporte">
+														<label class="form-check-label" for="mesachatsencheresremporte">
+															ench&egrave;res remport&eacute;es
+														</label>
+													</div>
+												</div>
+												<div class="col-6">
+													<div class="form-check">
+														<input class="form-input" type="checkbox" value="" id="mesventesencours">
+														<label class="form-check-label" for="mesventesencours">
+															mes ventes en cours
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-input" type="checkbox" value="" id="mesventesnondebutees">
+														<label class="form-check-label" for="mesventesnondebutees">
+															ventes non débutées
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-input" type="checkbox" value="" id="mesventesterminees">
+														<label class="form-check-label" for="mesventesterminees">
+															ventes termin&eacute;es
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</c:if>
 									<div class="d-grid mt-3">
 										<button class="btn btn-primary" type="submit">Rechercher</button>
 									</div>
@@ -108,5 +170,32 @@
 		</div>
 	</div>
 	<%@ include file="./WEB-INF/fragments/importjs.html"%>
+	<script>
+		function handleRadioClick() {
+			  var mesAchatsRadio = document.getElementById("mesachats");
+			  var mesVentesRadio = document.getElementById("mesventes");
+			  console.log(mesAchatsRadio);
+			  console.log(mesVentesRadio);
+			  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+			  console.log(checkboxes);
+	
+			  for (var i = 0; i < checkboxes.length; i++) {
+			    var checkbox = checkboxes[i];
+			    if (mesAchatsRadio.checked && checkbox.id.includes("mesventes") || mesVentesRadio.checked && checkbox.id.includes("mesachats")) {
+			      checkbox.disabled = true;
+			      console.log(checkbox + "true");
+			    } else{
+			    	checkbox.disabled = false;
+			    	console.log(checkbox + "false");
+			    }
+			  }
+			}
+	
+			// Attach the function to the "click" event of the radio buttons
+			var radioButtons = document.querySelectorAll('input[type="radio"]');
+			for (var i = 0; i < radioButtons.length; i++) {
+			  radioButtons[i].addEventListener("click", handleRadioClick);
+		}
+	</script>
 </body>
 </html>

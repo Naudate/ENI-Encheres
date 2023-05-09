@@ -34,6 +34,7 @@ public class AccueilServlet extends HttpServlet {
 		System.out.println(categorie);
 		String textArticle = (String) request.getParameter("textArticle");
 		System.out.println("'" + textArticle+ "'");
+		if(request.getSession().getAttribute("connected") != null)
 		if(categorie != null || textArticle != null) {
 			if(categorie == "" || categorie == null) {
 				listeEnchereArticle = enchereArticleBLL.selectJoinLike(textArticle);
