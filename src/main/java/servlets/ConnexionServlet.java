@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 
 import bll.UtilisateurBLL;
 import bo.Utilisateur;
@@ -24,6 +25,22 @@ public class ConnexionServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String pseudo = null;
+		boolean remember = false;
+		
+		Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("userRemember".equals(cookie.getName())) {
+                	pseudo = cookie.getValue();
+                	remember = true;
+                }
+            }
+        }
+        request.setAttribute("pseudo", pseudo);
+        request.setAttribute("remember", remember);
+		
 		request.getRequestDispatcher("/connexion.jsp").forward(request, response);
 	}
 	
@@ -31,6 +48,24 @@ public class ConnexionServlet extends HttpServlet {
 		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
+		String remember = request.getParameter("remember");
+				
+		if("on".equals(remember)) {
+			Cookie cookie = new Cookie("userRemember", pseudo);
+	        cookie.setMaxAge(Integer.MAX_VALUE);
+	        response.addCookie(cookie);
+		}else{
+			Cookie[] cookies = request.getCookies();
+	        if (cookies != null) {
+	            for (Cookie cookie : cookies) {
+	                if ("userRemember".equals(cookie.getName())) {
+	                	cookie.setMaxAge(0);
+	                    response.addCookie(cookie);
+	                    break;
+	                }
+	            }
+	        }
+		}
 
 		Utilisateur util = utilisateurBLL.verifCompte(pseudo, password);
 				

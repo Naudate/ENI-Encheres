@@ -157,8 +157,6 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 
 			ps = cnx.prepareStatement(SELECTJOINCATLIKE);
 			ps.setString(1, categoriesql);
-			System.out.println(categoriesql);
-			System.out.println(nom_articlelike);
 			ps.setString(2, "%" + nom_articlelike + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {

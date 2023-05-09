@@ -31,30 +31,24 @@ public class AccueilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<EnchereArticle> listeEnchereArticle;
 		String categorie = (String) request.getParameter("selectCategory");
-		System.out.println(categorie);
 		String textArticle = (String) request.getParameter("textArticle");
-		System.out.println("'" + textArticle+ "'");
 		if(categorie != null || textArticle != null) {
 			if(categorie == "" || categorie == null) {
 				listeEnchereArticle = enchereArticleBLL.selectJoinLike(textArticle);
-				System.out.println("like" + listeEnchereArticle);
 				request.setAttribute("textArticle", textArticle);
 			}
 			else if(textArticle == "" || textArticle == null) {
 				listeEnchereArticle = enchereArticleBLL.selectJoinCat(categorie);
-				System.out.println("cat" + listeEnchereArticle);
 				request.setAttribute("categorie", categorie);
 			}
 			else {
 				listeEnchereArticle = enchereArticleBLL.selectJoinCatLike(categorie, textArticle);
-				System.out.println("catlike" + listeEnchereArticle);
 				request.setAttribute("textArticle", textArticle);
 				request.setAttribute("categorie", categorie);
 			}
 		}
 		else {
 			listeEnchereArticle = enchereArticleBLL.selectJoin();
-			System.out.println("classic" + listeEnchereArticle);
 		}
 		List<Categorie> listeCategorie = categorieBLL.selectAll();
 		request.setAttribute("listeEnchereArticle", listeEnchereArticle);
