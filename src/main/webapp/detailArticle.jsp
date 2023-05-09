@@ -37,14 +37,14 @@ if(article.getEnchere().getMontant() != 0){
 						<p>Meilleure offre : Pas d'offre pour le moment</p>
 					</c:when>
 					<c:otherwise>
-						<p>Meilleure offre : ${article.enchere.montant} pts par ${article.enchere.utilisateur.pseudo}</p>
+						<p>Meilleure offre : ${article.enchere.montant} pts par <a href="<%=request.getContextPath()%>/user/${article.enchere.utilisateur.noUtilisateur}">${article.enchere.utilisateur.pseudo}</a></p>
 					</c:otherwise>
 				</c:choose>
 				<p>Mise à prix : ${article.prixInitial} points</p>
 				<p>Fin de l'enchère : ${article.dateFinEnchere}</p>
 				<p>Retrait : ${article.retrait.rue} <br/> 
 				${article.retrait.codePostal} ${article.retrait.ville}</p>
-				<p>Vendeur : ${article.utilisateur.pseudo}</p>	
+				<p>Vendeur : <a href="<%=request.getContextPath()%>/user/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a></p>	
 				<form method="post" action="<%=request.getContextPath()%>/detailArticle/${article.noArticle}">
 				<label for="proposition">Ma proposition :</label> 
 				<input type="number" name="proposition" id="proposition" required value="<%= montantMin %>" min="<%= montantMin %>">

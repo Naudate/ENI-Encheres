@@ -3,6 +3,7 @@ package bo;
 import java.sql.Date;
 
 public class EnchereArticle {
+	private String categorie;
 	private Integer no_article;
 	private String nom_article;
 	private Integer prix_initial;
@@ -13,6 +14,18 @@ public class EnchereArticle {
 	
 	public EnchereArticle() { 
 		
+	}
+	
+	public EnchereArticle(String categorie, Integer no_article, String nom_article, Integer prix_initial,
+			Date date_fin_enchere, String etat_vente, String pseudo, Integer montant_enchere) {
+		this.categorie = categorie;
+		this.no_article = no_article;
+		this.nom_article = nom_article;
+		this.prix_initial = prix_initial;
+		this.date_fin_enchere = date_fin_enchere;
+		this.etat_vente = etat_vente;
+		this.pseudo = pseudo;
+		this.montant_enchere = montant_enchere;
 	}
 
 	public EnchereArticle(Integer no_article,String nom_article, Integer prix_initial, Date date_fin_enchere, String etat_vente,
@@ -80,6 +93,14 @@ public class EnchereArticle {
 
 	public void setNo_article(Integer no_article) {
 		this.no_article = no_article;
+	}
+
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
 	}
 	
 	

@@ -3,6 +3,8 @@ package filtres;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 public class FiltreConnexion implements Filter {
@@ -16,6 +18,18 @@ public class FiltreConnexion implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        
+        
+        
+        HttpSession session = req.getSession(false); // récupérer la session existante sans en créer une nouvelle
+			if (session != null) {
+			    long lastAccessedTime = session.getLastAccessedTime();
+			    long currentTime = System.currentTimeMillis();
+			    if (currentTime - lastAccessedTime > 300000) { // 5 minutes en millisecondes
+			    	req.getSession().setAttribute("connected", null); // invalider la session pour déconnecter l'utilisateur
+			    }
+			}
+        
 
         String path = req.getRequestURI().substring(req.getContextPath().length());
 

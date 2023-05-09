@@ -1,4 +1,3 @@
-
 <header>
 	<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
@@ -15,9 +14,9 @@
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link" href="#">Ench&egrave;res</a>
 							</li>
-							<li class="nav-item"><a class="nav-link" href="articles">Vendre
+							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/articles">Vendre
 									un article</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Mon
+							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user/${sessionScope.connected.noUtilisateur}">Mon
 									profil</a></li>
 						</ul>
 						<div class="navbar-item">
