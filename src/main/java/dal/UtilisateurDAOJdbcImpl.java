@@ -21,7 +21,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECTBYPSEUDO = "select * from utilisateurs where pseudo = ?;";
 	private static final String SELECTBYEMAIL = "select * from utilisateurs where email = ?;";
 	private static final String SELECTBYID = "select * from utilisateurs where no_utilisateur = ?;";
-	private static final String INSERT = "insert into utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	private static final String SELECTALL = "select * from utilisateurs;";
+	private static final String CHANGEACTIF = "update utilisateurs set actif = ? where no_utilisateur = ?;";
+	private static final String INSERT = "insert into utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, actif) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1);";
 	private static final String DELETE = "delete from utilisateurs where no_utilisateur = ?;";
 	private static final String UPDATECREDIT = "update utilisateurs set credit = ? where no_utilisateur = ?;";
 	private static final String UPDATE = "update UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? where no_utilisateur = ?;";
@@ -51,9 +53,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				String ville = rs.getString("ville");
 				int credit = rs.getInt("credit");
 				boolean administrateur = rs.getBoolean("administrateur");
+				boolean isActif = rs.getBoolean("actif");
 
 				util = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville,
-						null, credit, administrateur);
+						null, credit, administrateur, isActif);
 			}
 
 		} catch (SQLException e) {
@@ -149,9 +152,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				String ville = rs.getString("ville");
 				int credit = rs.getInt("credit");
 				boolean administrateur = rs.getBoolean("administrateur");
+				boolean isActif = rs.getBoolean("actif");
 
 				util = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, null, credit,
-						administrateur);
+						administrateur, isActif);
 			}
 
 		} catch (SQLException e) {
@@ -270,6 +274,67 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			cnx.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<Utilisateur> selectAll() {
+		List<Utilisateur> listUtil = new ArrayList<>();
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement ps = cnx.prepareStatement(SELECTALL);
+
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()) {
+				int noUtilisateur = rs.getInt("no_utilisateur");
+				String pseudo = rs.getString("pseudo");
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				String email = rs.getString("email");
+				String telephone = rs.getString("telephone");
+				String rue = rs.getString("rue");
+				String code_postal = rs.getString("code_postal");
+				String ville = rs.getString("ville");
+				int credit = rs.getInt("credit");
+				boolean administrateur = rs.getBoolean("administrateur");
+				boolean isActif = rs.getBoolean("actif");
+
+				Utilisateur util = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, null, credit,administrateur, isActif);
+				listUtil.add(util);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return listUtil;
+	}
+
+	@Override
+	public boolean changeActif(Utilisateur utilisateur) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+
+			PreparedStatement ps = cnx.prepareStatement(CHANGEACTIF);
+			
+			if(utilisateur.isActif() == true) {
+				ps.setInt(1, 0);
+			}else {
+				ps.setInt(1, 1);
+			}			
+
+			ps.setInt(2, utilisateur.getNoUtilisateur());
+
+			ps.executeUpdate();
+			ps.close();
+			cnx.commit();
+
+			utilisateur.setActif(!utilisateur.isActif());
+			
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 }

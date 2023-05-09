@@ -54,24 +54,34 @@ public class ConnexionServlet extends HttpServlet {
 			Cookie cookie = new Cookie("userRemember", pseudo);
 	        cookie.setMaxAge(Integer.MAX_VALUE);
 	        response.addCookie(cookie);
+	        request.setAttribute("remember", true);
 		}else{
+			request.setAttribute("remember", false);
 			Cookie[] cookies = request.getCookies();
 	        if (cookies != null) {
 	            for (Cookie cookie : cookies) {
 	                if ("userRemember".equals(cookie.getName())) {
 	                	cookie.setMaxAge(0);
 	                    response.addCookie(cookie);
+	                    request.setAttribute("remember", true);
 	                    break;
 	                }
 	            }
 	        }
 		}
 
-		Utilisateur util = utilisateurBLL.verifCompte(pseudo, password);
+		Utilisateur util = utilisateurBLL.verifCompte(pseudo, password);	
 				
 		if(util != null) {
-			request.getSession().setAttribute("connected", util);
-			response.sendRedirect("accueil");
+			if(!util.isActif()) {
+				request.getSession().setAttribute("connected", null);
+				request.setAttribute("pseudo", pseudo);
+				request.setAttribute("messageError", "Votre compte est désactivé");
+				request.getRequestDispatcher("/connexion.jsp").forward(request, response);
+			}else {
+				request.getSession().setAttribute("connected", util);
+				response.sendRedirect("accueil");
+			}			
 		}else {
 			request.getSession().setAttribute("connected", null);
 			request.setAttribute("pseudo", pseudo);

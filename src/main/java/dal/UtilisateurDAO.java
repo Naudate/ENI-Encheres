@@ -28,4 +28,8 @@ public interface UtilisateurDAO {
 	void addCredit(Utilisateur util, int offre);
 
 	void updateWithoutPassword(Utilisateur utilisateur);
+
+	List<Utilisateur> selectAll();
+
+	boolean changeActif(Utilisateur utilisateur);
 }

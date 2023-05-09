@@ -74,7 +74,7 @@ public class UtilisateurBLL {
 
     	//Si inscription
     	if(actualMotDePasse == null) {    		
-    		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, 100, false);
+    		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, 100, false, true);
         	utilisateur = dao.insert(utilisateur);
         	return utilisateur;
         //Sinon modification 
@@ -82,11 +82,11 @@ public class UtilisateurBLL {
     		System.out.println(motDePasse);
     		if(motDePasse == null || motDePasse.equals("")) {
     			motDePasse = actualUser.getMotDePasse();
-    			Utilisateur utilisateur = new Utilisateur(actualUser.getNoUtilisateur(), pseudo, nom, prenom, email, telephone, rue, codePostal, ville, null, actualUser.getCredit(), false);
+    			Utilisateur utilisateur = new Utilisateur(actualUser.getNoUtilisateur(), pseudo, nom, prenom, email, telephone, rue, codePostal, ville, null, actualUser.getCredit(), false, actualUser.isActif());
             	dao.updateWithoutPassword(utilisateur);
             	return utilisateur;
     		}else {
-    		Utilisateur utilisateur = new Utilisateur(actualUser.getNoUtilisateur(), pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, actualUser.getCredit(), false);
+    		Utilisateur utilisateur = new Utilisateur(actualUser.getNoUtilisateur(), pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, actualUser.getCredit(), false, actualUser.isActif());
         	dao.update(utilisateur);
         	return utilisateur;
     	}
@@ -105,11 +105,21 @@ public class UtilisateurBLL {
 		for (Article article : articles) {	
 			int offre = article.getEnchere().getMontant();
 			Utilisateur utilACrediter = article.getEnchere().getUtilisateur();
-			dao.addCredit(utilACrediter, offre);
+			if(article.getEtatVente().equals("EC")) {
+				dao.addCredit(utilACrediter, offre);
+			}			
 			enchereDao.delete(article.getNoArticle());
 			articleDao.delete(article.getNoArticle());
 		}
 		//Supprimer le comptes et vérifier que les article et les enchères disparaissent		
 		return dao.delete(util.getNoUtilisateur());
+	}
+	
+	public List<Utilisateur> getAll() {		
+		return dao.selectAll();
+	}
+
+	public boolean changeActif(Utilisateur util) {
+		return dao.changeActif(util);
 	}
 }
