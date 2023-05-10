@@ -31,6 +31,9 @@ public class CategorieBLL {
     }
 	
 	public void insert(String libelle) throws CategorieException {	
+		if(libelle.length() > 30) {
+			throw new CategorieException("Le nom est trop long, il ne doit pas dépasser 30 caractères");
+		}
 		if(dao.selectByLibelle(libelle) != null) {
 			throw new CategorieException("Une catégorie existe déjà avec ce libelle");
 		}				
@@ -51,4 +54,12 @@ public class CategorieBLL {
 		dao.delete(idCategorie);
 		return true;
     }
+
+	public boolean update(Integer idCateg, String categorie) throws CategorieException {
+		if(dao.selectByLibelle(categorie) != null) {
+			throw new CategorieException("Une catégorie existe déjà avec ce libelle");
+		}
+		dao.update(idCateg, categorie);
+		return true;
+	}
 }

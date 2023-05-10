@@ -19,8 +19,8 @@ import bll.CategorieBLL;
 import bll.UtilisateurBLL;
 import bo.Utilisateur;
 
-@WebServlet("/admin/deleteCategorie/*")
-public class AdminDeleteCategorieServlet extends HttpServlet {
+@WebServlet("/admin/updateCategorie/*")
+public class AdminUpdateCategorieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CategorieBLL categorieBLL;
 	
@@ -29,19 +29,22 @@ public class AdminDeleteCategorieServlet extends HttpServlet {
 		categorieBLL = new CategorieBLL();
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			
 			String pathInfo = request.getPathInfo();		
 			String[] pathParts = pathInfo.split("/");
 			String id = pathParts[1];	
 			
-			Integer idCateg = Integer.parseInt(id);
-						
-			if(categorieBLL.delete(idCateg)) {				
-				request.setAttribute("messageSuccess", "Catégorie supprimé avec succès");
+			Integer idCateg = Integer.parseInt(id);			
+			
+			String categorie = request.getParameter("categorie-"+idCateg);
+					
+			if(categorieBLL.update(idCateg, categorie)) {				
+				request.setAttribute("messageSuccess", "Catégorie modifiée avec succès");
 				response.sendRedirect(request.getContextPath()+ "/admin/categories");
 			}else {
-				request.setAttribute("messageError", "Erreur lors de la suppression");
+				request.setAttribute("messageError", "Erreur lors de la modification");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/categories");
 				dispatcher.forward(request, response);
 			}
@@ -49,8 +52,8 @@ public class AdminDeleteCategorieServlet extends HttpServlet {
 			request.setAttribute("messageError", "L'url ne correspond pas");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/categories");
 			dispatcher.forward(request, response);
-		}catch(CategorieException ce) {
-			request.setAttribute("messageError", ce.getMessage());
+		} catch (CategorieException e) {			
+			request.setAttribute("messageError", e.getMessage());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/categories");
 			dispatcher.forward(request, response);
 		}

@@ -79,7 +79,6 @@ public class UtilisateurBLL {
         	return utilisateur;
         //Sinon modification 
     	}else{
-    		System.out.println(motDePasse);
     		if(motDePasse == null || motDePasse.equals("")) {
     			motDePasse = actualUser.getMotDePasse();
     			Utilisateur utilisateur = new Utilisateur(actualUser.getNoUtilisateur(), pseudo, nom, prenom, email, telephone, rue, codePostal, ville, null, actualUser.getCredit(), false, actualUser.isActif());

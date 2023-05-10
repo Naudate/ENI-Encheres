@@ -49,7 +49,6 @@ public class DetailArticleServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
 			dispatcher.forward(request, response);		
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/accueil");
 			dispatcher.forward(request, response);
 		}		

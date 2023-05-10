@@ -18,19 +18,41 @@
 				<div class="col-md-3">
 					<div class="card mb-4">
 						<div class="card-body">
-							<div class="row">
-								<div class="col-6">
-									<h6 class="card-title">${categorie.libelle}</h6>
-								</div>
-								<div class="col-6">
-									<div class="text-end">
-										<a href="<%=request.getContextPath()%>/admin/deleteCategorie/${categorie.noCategorie}"
-											class="card-text badge text-bg-danger"
-											onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ? Cela va supprimer tout les articles liés à la catégorie !');">
-											<i class="bi bi-x bi-4x"></i>
-										</a>
+							<div class="row align-items-center">
+								<form class="align-items-center"
+									action="<%=request.getContextPath()%>/admin/updateCategorie/${categorie.noCategorie}"
+									method="post">
+									<div class="col-12 p-0 m-0">
+										<input type="text" class="form-control card-title"
+											name="categorie-${categorie.noCategorie}"
+											aria-label="${categorie.libelle}"
+											aria-describedby="${categorie.libelle}"
+											value="${categorie.libelle}"
+											placeholder="${categorie.libelle}" required>
 									</div>
-								</div>
+									<div
+										class="row d-flex ">
+										<div class="col-6 ">
+											<div class="text-end ">
+												<button class="btn btn-primary h-100 w-auto align-self-center" type="submit"
+													id="submit">
+													<i class="bi bi-brush fs-6"></i>
+												</button>
+											</div>
+										</div>
+										<div class="col-6 ">
+											<div class="">
+												<a
+													href="<%=request.getContextPath()%>/admin/deleteCategorie/${categorie.noCategorie}"
+													class="btn btn-danger h-100 w-auto align-self-center"
+													onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ? Cela va supprimer tout les articles liés à la catégorie !');">
+													<i class="bi bi-x fs-6"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</form>
+
 							</div>
 						</div>
 					</div>
