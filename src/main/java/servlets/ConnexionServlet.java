@@ -73,15 +73,8 @@ public class ConnexionServlet extends HttpServlet {
 		Utilisateur util = utilisateurBLL.verifCompte(pseudo, password);	
 				
 		if(util != null) {
-			if(!util.isActif()) {
-				request.getSession().setAttribute("connected", null);
-				request.setAttribute("pseudo", pseudo);
-				request.setAttribute("messageError", "Votre compte est désactivé");
-				request.getRequestDispatcher("/connexion.jsp").forward(request, response);
-			}else {
-				request.getSession().setAttribute("connected", util);
-				response.sendRedirect("accueil");
-			}			
+			request.getSession().setAttribute("connected", util);
+			response.sendRedirect("accueil");					
 		}else {
 			request.getSession().setAttribute("connected", null);
 			request.setAttribute("pseudo", pseudo);

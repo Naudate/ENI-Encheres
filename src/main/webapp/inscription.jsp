@@ -19,7 +19,7 @@
 					<div class="col-4 mt-3">
 						<div class="input-group">
 							<span class="input-group-text" id="pseudo"><i class="bi bi-person-circle"></i></span>
-							<input type="text" class="form-control" name="pseudo" aria-label="Pseudo" aria-describedby="Pseudo" value="${pseudo}" placeholder="Pseudo" required>
+							<input type="text" pattern="[a-zA-Z]*" class="form-control" name="pseudo" aria-label="Pseudo" aria-describedby="Pseudo" value="${pseudo}" placeholder="Pseudo" required>
 						</div>	
 					</div>
 					<div class="col-4 mt-3">

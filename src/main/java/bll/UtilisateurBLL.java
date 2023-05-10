@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import bo.Article;
+import bo.Enchere;
 import bo.Utilisateur;
 import dal.UtilisateurDAO;
 import dal.ArticleDAO;
@@ -30,7 +31,12 @@ public class UtilisateurBLL {
     	//Vérification des données avant d'insérer les données
     	if(pseudo == null || nom == null || prenom == null || email == null || telephone == null || rue == null || codePostal == null || ville == null || motDePasse == null || motDePasseConfirme == null) {
     		throw new InscriptionException("Un des champs est vide");
-    	}    	
+    	} 
+    	
+    	//Vérifier téléphone
+    	if(!pseudo.matches("[a-zA-Z]*")) {
+    		throw new InscriptionException("Le pseudo doit être au format Alphanumérique.");
+    	}
     	
     	//Vérifier téléphone
     	if(telephone.length() != 10 || !(telephone.matches("[0-9]{10}"))) {
@@ -110,6 +116,8 @@ public class UtilisateurBLL {
 			enchereDao.delete(article.getNoArticle());
 			articleDao.delete(article.getNoArticle());
 		}
+		//Supprimer toutes les enchères de l'utilisateurs
+		enchereDao.deleteByUser(util);
 		//Supprimer le comptes et vérifier que les article et les enchères disparaissent		
 		return dao.delete(util.getNoUtilisateur());
 	}
@@ -119,6 +127,25 @@ public class UtilisateurBLL {
 	}
 
 	public boolean changeActif(Utilisateur util) {
+		if(util.isActif()) {
+			System.out.println("test entrée désactivation");
+			//Récupérer tout les article en vente de l'utilisateur
+			List<Article> articles = articleDao.getArticleFromUtil(util);
+			//Re-créditer les utilisateurs
+			for (Article article : articles) {	
+				int offre = article.getEnchere().getMontant();
+				Utilisateur utilACrediter = article.getEnchere().getUtilisateur();
+				if(article.getEtatVente().equals("EC")) {
+					dao.addCredit(utilACrediter, offre);
+				}			
+				enchereDao.delete(article.getNoArticle());
+				articleDao.delete(article.getNoArticle());
+			}
+						
+			//Supprimer toutes les enchères de l'utilisateurs
+			enchereDao.deleteByUser(util);
+		}
+				
 		return dao.changeActif(util);
 	}
 }
