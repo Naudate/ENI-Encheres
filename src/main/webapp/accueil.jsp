@@ -78,19 +78,19 @@
 												</div>
 												<div class="col-6">
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesachatsouverts" name="mesachatsouverts" disabled>
+														<input class="form-input" type="checkbox" id="mesachatsouverts" name="mesachatsouverts" disabled>
 														<label class="form-check-label" for="mesachatsouverts">
 															ench&egrave;res ouvertes
 														</label>
 													</div>
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesachatsencheres" name="mesachatsencheres" disabled>
+														<input class="form-input" type="checkbox" id="mesachatsencheres" name="mesachatsencheres" disabled>
 														<label class="form-check-label" for="mesachatsencheres">
 															mes ench&egrave;res 
 														</label>
 													</div>
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesachatsencheresremporte" disabled>
+														<input class="form-input" type="checkbox" id="mesachatsencheresremporte" name="mesachatsencheresremporte" disabled>
 														<label class="form-check-label" for="mesachatsencheresremporte">
 															ench&egrave;res remport&eacute;es
 														</label>
@@ -98,19 +98,19 @@
 												</div>
 												<div class="col-6">
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesventesencours" disabled>
+														<input class="form-input" type="checkbox" id="mesventesencours" name="mesventesencours" disabled>
 														<label class="form-check-label" for="mesventesencours">
 															mes ventes en cours
 														</label>
 													</div>
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesventesnondebutees" disabled>
+														<input class="form-input" type="checkbox" id="mesventesnondebutees" name="mesventesnondebutees" disabled>
 														<label class="form-check-label" for="mesventesnondebutees">
 															ventes non débutées
 														</label>
 													</div>
 													<div class="form-check">
-														<input class="form-input" type="checkbox" value="" id="mesventesterminees" disabled>
+														<input class="form-input" type="checkbox" id="mesventesterminees" name="mesventesterminees" disabled>
 														<label class="form-check-label" for="mesventesterminees">
 															ventes termin&eacute;es
 														</label>

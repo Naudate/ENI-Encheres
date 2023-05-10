@@ -34,7 +34,7 @@ public class AccueilServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<EnchereArticle> listeEnchereArticle = null;
+		List<EnchereArticle> listeEnchereArticle = new ArrayList<EnchereArticle>();
 		String categorie = (String) request.getParameter("selectCategory");
 		System.out.println(categorie);
 		String textArticle = (String) request.getParameter("textArticle");
@@ -42,49 +42,63 @@ public class AccueilServlet extends HttpServlet {
 		if(request.getSession().getAttribute("connected") != null) {
 			Utilisateur user = (Utilisateur) request.getSession().getAttribute("connected");
 			System.out.println(user.getPseudo() + "user");
-			String mesachats = request.getParameter("mesachats");
-			String mesventes= request.getParameter("mesventes");
-			boolean mesachatsouverts = request.getParameter("mesachatsouverts") != null;
-			boolean mesachatsencheres = request.getParameter("mesachatsencheres") != null;
-			boolean mesachatsencheresremporte = request.getParameter("mesachatsencheresremporte") != null;
-			boolean mesventesencours = request.getParameter("mesventesencours") != null;
-			boolean mesventesnondebutees = request.getParameter("mesventesnondebutees") != null;
-			boolean mesventesterminees = request.getParameter("mesventesterminees") != null;
-			if(mesachats != null) {
-				
-			}
-			
-			if(mesventes != null) {
-				List<EnchereArticle> listeEnchereArticleEncours = null;
-				List<EnchereArticle> listeEnchereArticledebutees = null;
-				List<EnchereArticle> listeEnchereArticleterminees = null;
-				List<EnchereArticle> listeEnchereArticleByUser = enchereArticleBLL.selectJoinByUser(user.getPseudo());
-				System.out.println(listeEnchereArticleByUser);
-				
-				if(mesventesencours) {
-					listeEnchereArticleEncours = listeEnchereArticleByUser.stream()
-													.filter(t -> t.getEtat_vente().contains("EC"))
-													.collect(Collectors.toList());
-					listeEnchereArticle.addAll(listeEnchereArticleEncours);
+			String mestrucs = request.getParameter("mestrucs");
+			System.out.println(mestrucs + "att");
+			String mesachatsouverts = request.getParameter("mesachatsouverts");
+			String mesachatsencheres = request.getParameter("mesachatsencheres");
+			String mesachatsencheresremporte = request.getParameter("mesachatsencheresremporte");
+			String mesventesencours = request.getParameter("mesventesencours");
+			String mesventesnondebutees = request.getParameter("mesventesnondebutees");
+			String mesventesterminees = request.getParameter("mesventesterminees");
+			if(mestrucs != null) {
+				if(mestrucs.equals("mesachats")) {
+					if(mesachatsouverts != null) {
+						listeEnchereArticle = enchereArticleBLL.selectJoin();
+					}
+					
+					if(mesachatsencheres != null) {
+
+					}
+					
+					
+					if(mesachatsencheresremporte != null) {
+						
+					}
+					
 				}
 				
-				if(mesventesnondebutees) {
-					listeEnchereArticleEncours = listeEnchereArticleByUser.stream()
-							.filter(t -> t.getEtat_vente().contains("CR"))
-							.collect(Collectors.toList());
-					listeEnchereArticle.addAll(listeEnchereArticledebutees);
+				if(mestrucs.equals("mesventes")) {
+					List<EnchereArticle> listeEnchereArticleEncours = new ArrayList<EnchereArticle>();
+					List<EnchereArticle> listeEnchereArticledebutees = new ArrayList<EnchereArticle>();
+					List<EnchereArticle> listeEnchereArticleterminees = new ArrayList<EnchereArticle>();
+					List<EnchereArticle> listeEnchereArticleByUser = enchereArticleBLL.selectJoinByUser(user.getPseudo());
+					System.out.println(listeEnchereArticleByUser + "select");
+					
+					if(mesventesencours != null) {
+						listeEnchereArticleEncours = listeEnchereArticleByUser.stream()
+														.filter(t -> t.getEtat_vente().contains("EC"))
+														.collect(Collectors.toList());
+						listeEnchereArticle.addAll(listeEnchereArticleEncours);
+					}
+					
+					if(mesventesnondebutees != null) {
+						listeEnchereArticledebutees = listeEnchereArticleByUser.stream()
+								.filter(t -> t.getEtat_vente().contains("CR"))
+								.collect(Collectors.toList());
+						listeEnchereArticle.addAll(listeEnchereArticledebutees);
+					}
+					
+					if(mesventesterminees != null) {
+						listeEnchereArticleterminees = listeEnchereArticleByUser.stream()
+								.filter(t -> t.getEtat_vente().contains("VD"))
+								.collect(Collectors.toList());				
+						listeEnchereArticle.addAll(listeEnchereArticleterminees);
+					}
 				}
-				
-				if(mesventesterminees) {
-					listeEnchereArticleEncours = listeEnchereArticleByUser.stream()
-							.filter(t -> t.getEtat_vente().contains("VD"))
-							.collect(Collectors.toList());				
-					listeEnchereArticle.addAll(listeEnchereArticleterminees);
-				}
-			}
-			
+			}			
 			else {
 				listeEnchereArticle = enchereArticleBLL.selectJoin();
+				System.out.println(listeEnchereArticle + "hello there");
 				if(categorie != null || textArticle != null) {
 					if(categorie == "" || categorie == null) {
 						listeEnchereArticle = listeEnchereArticle.stream()
@@ -111,6 +125,7 @@ public class AccueilServlet extends HttpServlet {
 			}
 			
 		} else {
+			System.out.println(listeEnchereArticle + "f$+*cking obi wan kenobi init ?");
 			if(categorie != null || textArticle != null) {
 				if(categorie == "" || categorie == null) {
 					listeEnchereArticle = enchereArticleBLL.selectJoinLike(textArticle);
@@ -134,6 +149,7 @@ public class AccueilServlet extends HttpServlet {
 				System.out.println("classic" + listeEnchereArticle);
 			}
 		}
+		System.out.println(listeEnchereArticle + "im your f$*^cking mother hins hins init ?");
 		List<Categorie> listeCategorie = categorieBLL.selectAll();
 		request.setAttribute("listeEnchereArticle", listeEnchereArticle);
 		request.setAttribute("listeCategorie", listeCategorie);
