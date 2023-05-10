@@ -43,10 +43,9 @@ public class InsciptionServlet extends HttpServlet {
 		String motDePasseConfirme = request.getParameter("motDePasseConfirme");
 	
 		try {
-			Utilisateur util = utilisateurBLL.inscription(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, motDePasseConfirme);
+			Utilisateur util = utilisateurBLL.inscription(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, null, motDePasse, motDePasseConfirme, null);
 			request.getSession().setAttribute("connected", util);
 		} catch (InscriptionException e) {
-			System.out.println("passage");
 			e.printStackTrace();
 			//Attribution des valeur pour pouvoir les remmetre dans le formulaire d'inscription
 			request.setAttribute("pseudo", pseudo);

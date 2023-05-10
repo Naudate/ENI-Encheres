@@ -14,10 +14,10 @@ public class Article {
 	private Utilisateur utilisateur;
 	private Categorie categorie;
 	private String etatVente;
-	private String image;
 	private Retraits retrait;
 	//Mettre List quand passage en mode historique
 	private Enchere enchere;
+	private Image image;
 
 	public Article() {
 	}
@@ -25,7 +25,7 @@ public class Article {
 	// CONSTRUCTEUR AVEC TOUT LES ATTRIBUTS
 	public Article(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
 			int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie, String etatVente,
-			String image, Retraits retrait, Enchere enchere) {
+			Retraits retrait, Enchere enchere, Image image) {
 		super();
 		this.setNoArticle(noArticle);
 		this.nomArticle = nomArticle;
@@ -42,8 +42,7 @@ public class Article {
 		this.enchere = enchere;
 	}
 	public Article(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie, String etatVente,
-			String image, Retraits retrait, Enchere enchere) {
+			int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie, String etatVente, Retraits retrait, Enchere enchere, Image image) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -57,6 +56,10 @@ public class Article {
 		this.image = image;
 		this.retrait = retrait;
 		this.enchere = enchere;
+	}
+
+	public Article(int noArticle) {
+		this.setNoArticle(noArticle);
 	}
 
 	// GETTERs/SETTERs
@@ -140,11 +143,11 @@ public class Article {
 		this.etatVente = etatVente;
 	}
 
-	public String getImage() {
+	public Image getImage() {
 		return image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(Image image) {
 		this.image = image;
 	}
 
@@ -154,7 +157,7 @@ public class Article {
 		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
 				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + utilisateur + ", noCategorie="
-				+ categorie + ", etatVente=" + etatVente + ", image=" + image + "]";
+				+ categorie + ", etatVente=" + etatVente + ", image=" + image.toString() + "]";
 	}
 	
 
