@@ -157,7 +157,7 @@ public class Article {
 		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
 				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + utilisateur + ", noCategorie="
-				+ categorie + ", etatVente=" + etatVente + ", image=" + image.toString() + "]";
+				+ categorie + ", etatVente=" + etatVente + "]";
 	}
 	
 
