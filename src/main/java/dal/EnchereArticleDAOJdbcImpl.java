@@ -137,7 +137,7 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 		}
 		return list;
 	}
-
+	
 	@Override
 	public List<EnchereArticle> selectJoinCatLike(String categoriesql, String nom_articlelike) {
 		List<EnchereArticle> list = new ArrayList<EnchereArticle>();
@@ -171,4 +171,39 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 		}
 		return list;
 	}
+
+	
+	@Override
+	public List<EnchereArticle> selectJoinByUser(String user) {
+		List<EnchereArticle> list = new ArrayList<EnchereArticle>();
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			cnx.setAutoCommit(false);
+			PreparedStatement ps;
+
+			ps = cnx.prepareStatement(SELECTJOINUSER);
+			ps.setString(1, user);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String categorie = rs.getString("libelle");
+				Integer no_article = rs.getInt("no_article");
+				String nom_article = rs.getString("nom_article");
+				Integer prix_initial = rs.getInt("prix_initial");
+				Date date_fin_enchere = rs.getDate("date_fin_enchere");
+				String etat_vente = rs.getString("etat_vente");
+				String pseudo = rs.getString("pseudo");
+				Integer montant_enchere = rs.getInt("montant_enchere");
+				Image image = new Image(rs.getString("picture"), null);
+				
+				EnchereArticle ea = new EnchereArticle(categorie,no_article,nom_article, prix_initial, date_fin_enchere, etat_vente, pseudo, montant_enchere, image);
+				
+				list.add(ea);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	
 }
