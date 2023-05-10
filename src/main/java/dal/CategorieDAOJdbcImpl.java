@@ -144,8 +144,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
             	Date dateFinEnchere = rs.getDate("date_fin_enchere");
                 int prixInitial = rs.getInt("prix_initial");
                 int prixVente = rs.getInt("prix_vente");
-                String etatVente = rs.getString("etat_vente");
-                String image = rs.getString("image");                
+                String etatVente = rs.getString("etat_vente");            
                 LocalDate date1 = dateDebutEnchere.toLocalDate();                
                 LocalDate date2 = dateFinEnchere.toLocalDate();
                 //Récupération info enchere
@@ -153,7 +152,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
                 Utilisateur encherisseur = utilisateurDao.selectById(rs.getInt("encherisseur"));
                 Enchere enchere = new Enchere(null, montant, encherisseur, null);                
                 //Création article
-                Article article = new Article(noArticle, nomArticle,description,date1,date2,prixInitial,prixVente,null,null,etatVente,image, null, enchere);
+                Article article = new Article(noArticle, nomArticle,description,date1,date2,prixInitial,prixVente,null,null,etatVente, null, enchere, null);
                 enchere.setArticle(article);
                 
                 listeArticles.add(article);}

@@ -28,7 +28,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     private static final String SELECTBYUSER= "select *, en.no_utilisateur as encherisseur from ARTICLES_VENDUS av\r\n"
     		+ "inner join ENCHERES en on en.no_article = av.no_article\r\n"
     		+ "where av.no_utilisateur = ?;";
-    private static final String INSERT = "INSERT INTO articles_vendus VALUES( ?,?,?,?,?,?,?,?,?,?)";
+    private static final String INSERT = "INSERT INTO articles_vendus( nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, no_utilisateur, no_categorie,etat_vente, image) VALUES( ?,?,?,?,?,?,?,?,?, null)";
     private static final String SELECTUTILBYARTICLEFROMENCHERE = "select u.* from encheres en inner join utilisateurs u on en.no_utilisateur = u.no_utilisateur where en.no_article = ?;";
     private static final String SELECTDETAILARTICLE = "select *, u.no_utilisateur as noUtilPrincipal, u.rue as utilRue, u.ville as utilVille, u.code_postal as utilCodePostal,\r\n"
     		+ "r.no_article as retraitNoArticle, r.rue as retraitRue, r.code_postal as retraitCodePostal, r.ville as retraitVille\r\n"
@@ -38,6 +38,16 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     		+ "inner join utilisateurs u on u.no_utilisateur = av.no_utilisateur\r\n"
     		+ "left join encheres en on av.no_article = en.no_article\r\n"
     		+ "where av.no_article = ?;";
+    
+    /*			  ps.setString(1,article.getNomArticle());
+			  ps.setString(2,article.getDescription());
+			  ps.setDate(3, Date.valueOf(article.getdateDebutEnchere()));
+			  ps.setDate(4, Date.valueOf(article.getDateFinEnchere()));
+			  ps.setInt(5, article.getPrixInitial());
+			  ps.setInt(6, article.getPrixVente());
+			  ps.setInt(7,article.getUtilisateur().getNoUtilisateur());
+			  ps.setInt(8, article.getCategorie().getNoCategorie());
+			  ps.setString(9,"CR");*/
 
     
   public ArticleDAOJdbcImpl() {
@@ -62,11 +72,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
                 int prixVente = rs.getInt("prix_vente");
                 Categorie categorie = new Categorie();
                 String etatVente = rs.getString("etat_vente");
-                String image = rs.getString("image");
                 
                 LocalDate date1 = dateDebutEnchere.toLocalDate();
                 LocalDate date2 = dateFinEnchere.toLocalDate();
-                Article article = new Article(nomArticle,description,date1,date2,prixInitial,prixVente,null,categorie,etatVente,image,null,null);
+                Article article = new Article(nomArticle,description,date1,date2,prixInitial,prixVente,null,categorie,etatVente,null,null, null);
                 
                 listeArticles.add(article);}
             
@@ -138,9 +147,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				int prixInitial = rs.getInt("prix_initial");
 				int prixVente = rs.getInt("prix_vente");
 				String etatVente = rs.getString("etat_vente");
-				String image = rs.getString("image");
 				            	
-                 article = new Article(idArticle, nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, utilisateur, categorie ,etatVente, image, retrait, enchere);
+                 article = new Article(idArticle, nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, utilisateur, categorie ,etatVente, retrait, enchere, null);
                 retrait.setarticle(article);  
                 enchere.setArticle(article);
             }
@@ -185,7 +193,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			  ps.setInt(7,article.getUtilisateur().getNoUtilisateur());
 			  ps.setInt(8, article.getCategorie().getNoCategorie());
 			  ps.setString(9,"CR");
-			  ps.setString(10, article.getImage());
 			  
 			  ps.executeUpdate();
 			  ResultSet keys = ps.getGeneratedKeys();
@@ -256,8 +263,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
             	Date dateFinEnchere = rs.getDate("date_fin_enchere");
                 int prixInitial = rs.getInt("prix_initial");
                 int prixVente = rs.getInt("prix_vente");
-                String etatVente = rs.getString("etat_vente");
-                String image = rs.getString("image");                
+                String etatVente = rs.getString("etat_vente");      
                 LocalDate date1 = dateDebutEnchere.toLocalDate();                
                 LocalDate date2 = dateFinEnchere.toLocalDate();
                 //Récupération info enchere
@@ -265,7 +271,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
                 Utilisateur encherisseur = daoUtilisateur.selectById(rs.getInt("encherisseur"));
                 Enchere enchere = new Enchere(null, montant, encherisseur, null);                
                 //Création article
-                Article article = new Article(noArticle, nomArticle,description,date1,date2,prixInitial,prixVente,util,null,etatVente,image, null, enchere);
+                Article article = new Article(noArticle, nomArticle,description,date1,date2,prixInitial,prixVente,util,null,etatVente, null, enchere, null);
                 enchere.setArticle(article);
                 
                 listeArticles.add(article);}

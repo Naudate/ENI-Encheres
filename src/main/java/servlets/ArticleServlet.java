@@ -1,27 +1,38 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import bll.ArticleBLL;
 import bll.CategorieBLL;
 import bll.RetraitsBLL;
 import bo.Article;
 import bo.Categorie;
+import bo.Image;
 import bo.Retraits;
 import bo.Utilisateur;
+import dal.ImageDAOJdbc;
 
 
 @WebServlet("/articles")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 10, // 10MB
+maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class ArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public static final String SAVE_DIRECTORY = "uploads";
+	
 	ArticleBLL articleBll;
 	RetraitsBLL retraitBll;
 	CategorieBLL categorieBll;
@@ -61,10 +72,9 @@ public class ArticleServlet extends HttpServlet {
         //Récupération de tous les champs Retraits
         String rue = request.getParameter("rue");
         String codePostal = request.getParameter("ville");
-        String ville = request.getParameter("code_postal");
+        String ville = request.getParameter("code_postal");        
         
-        
-        try {
+        try {       	
 			  //convert String to LocalDate
 			  LocalDate date1 = LocalDate.parse(dateDebutEnchere);
 			  LocalDate date2 = LocalDate.parse(dateFinEnchere);
@@ -76,12 +86,97 @@ public class ArticleServlet extends HttpServlet {
 			  //Insertion Retraits
 			  Retraits retraitsInsert = new Retraits(article,rue,codePostal,ville);
 			  Retraits retraits = retraitBll.insert(retraitsInsert);
+			  
+			  //Ajout de l'image
+		  	Image image= null;
+	        
+	        // Gets absolute path to root directory of web app.
+	        String appPath = request.getServletContext().getRealPath("");
+	        
+	        // Gets image informations
+	        Part part = request.getPart("pictureFile");
+	        
+	        //Save image File and get fileName
+	        String fileName = saveFile(appPath, part);
+      
+	        // save Image in database
+	        image = new Image(fileName, article);
+	        ImageDAOJdbc daoImage = new ImageDAOJdbc();
+	        image = daoImage.insert(image);
+
+	        //Ajout des assocaition
+	        article.setRetrait(retraits);
+	        article.setImage(image);
+
+			  
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		response.sendRedirect("accueil");
 	}
+	
+	/**
+	 * Sauvegarder le fichier image
+	 * @param appPath
+	 * @param part
+	 * @return
+	 * @throws IOException
+	 */
+	private String saveFile(String appPath, Part part) throws IOException {
+        appPath = appPath.replace('\\', '/');
+ 
+        // The directory to save uploaded file
+        String fullSavePath = null;
+        if (appPath.endsWith("/")) {
+            fullSavePath = appPath + SAVE_DIRECTORY;
+        } else {
+            fullSavePath = appPath + "/" + SAVE_DIRECTORY;
+        }
+      
+        
+        // Creates the save directory if it does not exists
+        File fileSaveDir = new File(fullSavePath);
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdir();
+        }
 
+        String filePath=null;
+
+        String fileName = extractFileName(part);
+        String[] fn = fileName.split("(\\.)");
+        fileName = fn[0];
+        String ext = fn[(fn.length-1)];
+        if(!ext.isEmpty()) {
+        	//generate a unique file name
+        	UUID uuid = UUID.randomUUID();
+        	fileName = fileName + "_" + uuid.toString() + "." + ext ;
+        	if (fileName != null && fileName.length() > 0) {
+        		filePath = fullSavePath + File.separator + fileName;
+        		// Write to file
+        		part.write(filePath);
+        	}
+        }
+        return fileName;
+	}
+	
+	/**
+	 * extraire le nom du fichier provenant du client
+	 * @param part
+	 * @return
+	 */
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                String clientFileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
+                clientFileName = clientFileName.replace("\\", "/");
+                int i = clientFileName.lastIndexOf('/');
+                return clientFileName.substring(i + 1);
+            }
+        }
+        return null;
+    }
 
 }
