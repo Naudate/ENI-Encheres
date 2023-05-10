@@ -50,23 +50,30 @@ public class ArticleBLL {
     public void checkProposition(Article article, int proposition, Utilisateur util) throws DetailArticleException {
    	
     	Enchere enchere = daoEnchere.getEnchereByArticle(article);
-    	if(enchere == null) {
+    	if(proposition > util.getCredit()) {
+			String messageErreur = String.format("Il n'est pas possible de faire une proposition supérieur à votre nombre de crédit qui est de %d", util.getCredit());
+			throw new DetailArticleException(messageErreur);
+		}
+    	//Si pas d'enchère la créée
+    	if(enchere == null) {    		
     		daoEnchere.createEnchere(article, util,proposition);
     		daoUtilisateur.removeCredit(util, proposition);
     	}else {
-    		if(proposition > util.getCredit()) {
-    			String messageErreur = String.format("Il n'est pas possible de faire une proposition supérieur à votre nombre de crédit qui est de %d", util.getCredit());
-    			throw new DetailArticleException(messageErreur);
-    		}
-    		if(proposition > enchere.getMontant()) {    			
+
+    		//Vérifier que la proposition est supérieur au montant actuel
+    		if(proposition > enchere.getMontant()) { 
+    			//Si oui supprimer les crédit de l'utilisateur
     			util = daoUtilisateur.removeCredit(util, proposition);
     			Utilisateur utilisateurPrec = enchere.getUtilisateur();
     			if(util.getNoUtilisateur() == utilisateurPrec.getNoUtilisateur()) {
     				utilisateurPrec = util;
     			}
-    			int offre = enchere.getMontant();    			
+    			int offre = enchere.getMontant();    	
+        		//recréditer l'ancien utilisateur
     			daoUtilisateur.addCredit(utilisateurPrec, offre);
-    			daoEnchere.updateEnchere(article, util, proposition);
+    			//Mettre à jour l'enchère
+    			//daoEnchere.updateEnchere(article, util, proposition);
+    			daoEnchere.createEnchere(article, util,proposition);
     		}else {
     			throw new DetailArticleException("Il n'est pas possible de faire une proposition inférieur à la meilleure offre");
     		}

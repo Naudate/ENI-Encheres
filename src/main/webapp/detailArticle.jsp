@@ -9,7 +9,7 @@
 <%
 Article article = (Article) request.getAttribute("article");
 int montantMin = (int) article.getPrixInitial() +1;
-if(article.getEnchere().getMontant() != 0){
+if(article.getEnchere() != null && article.getEnchere().getMontant() != 0){
 	montantMin = article.getEnchere().getMontant() + 1;
 }
 int userId = article.getUtilisateur().getNoUtilisateur();
@@ -47,7 +47,7 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 				<p><b>Description : </b>${article.description}</p>
 				<p><b>Catégorie :</b> ${article.categorie.libelle}</p>				
 				<c:choose>
-					<c:when test="${article.enchere.montant==0}">
+					<c:when test="${article.enchere == null || article.enchere.montant==0}">
 						<p><b>Meilleure offre :</b> Pas d'offre pour le moment</p>
 					</c:when>
 					<c:otherwise>

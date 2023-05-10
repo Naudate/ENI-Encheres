@@ -20,7 +20,14 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private UtilisateurDAO daoUtilisateur;
 	
 	private static final String DELETE = "DELETE from encheres where no_article = ?;";
-	private static final String SELECTENCHERE = "select * from encheres en where en.no_article = ?;";
+	private static final String SELECTENCHERE = "SELECT *\r\n"
+			+ "FROM encheres\r\n"
+			+ "WHERE no_article = ? \r\n"
+			+ "AND montant_enchere = (\r\n"
+			+ "  SELECT MAX(montant_enchere)\r\n"
+			+ "  FROM encheres\r\n"
+			+ "  WHERE no_article = ?\r\n"
+			+ ")";
 	private static final String INSERT = "insert into encheres(no_utilisateur, no_article, date_enchere, montant_enchere) values(?, ?, ?, ?);";
 	private static final String UPDATE = "update encheres set no_utilisateur = ?, date_enchere = ?, montant_enchere = ? where no_article = ?";
 	
@@ -34,8 +41,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
         try (Connection cnx = ConnectionProvider.getConnection();) {
 
             PreparedStatement ps = cnx.prepareStatement(SELECTENCHERE);
-            
             ps.setInt(1, article.getNoArticle());
+            ps.setInt(2, article.getNoArticle());
 
             ResultSet rs = ps.executeQuery();
 
