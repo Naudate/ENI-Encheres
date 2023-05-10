@@ -75,11 +75,13 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 														+ "a.prix_initial,"
 														+ "a.date_fin_enchere,"
 														+ "a.etat_vente,"
-														+ "u.pseudo "
+														+ "u.pseudo,"
+														+ "images.picture "
 													+ "from ARTICLES_VENDUS a "
 														+ "left join ENCHERES e on a.no_article = e.no_article "
 														+ "inner join UTILISATEURS u on a.no_utilisateur = u.no_utilisateur "
 														+ "inner join CATEGORIES c on a.no_categorie=c.no_categorie "
+														+ "left join images on images.no_article = a.no_article "
 													+ "where u.pseudo = ?";
 
 	
@@ -226,8 +228,9 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 				String etat_vente = rs.getString("etat_vente");
 				String pseudo = rs.getString("pseudo");
 				Integer montant_enchere = rs.getInt("montant_enchere");
+				Image image = new Image(rs.getString("picture"), null);
 				
-				EnchereArticle ea = new EnchereArticle(categorie,no_article,nom_article, prix_initial, date_fin_enchere, etat_vente, pseudo, montant_enchere);
+				EnchereArticle ea = new EnchereArticle(categorie,no_article,nom_article, prix_initial, date_fin_enchere, etat_vente, pseudo, montant_enchere, image);
 				
 				list.add(ea);
 			}

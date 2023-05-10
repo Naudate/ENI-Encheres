@@ -51,9 +51,11 @@ public class AccueilServlet extends HttpServlet {
 			String mesventesnondebutees = request.getParameter("mesventesnondebutees");
 			String mesventesterminees = request.getParameter("mesventesterminees");
 			if(mestrucs != null) {
+				request.setAttribute("mestrucs", mestrucs);
 				if(mestrucs.equals("mesachats")) {
 					if(mesachatsouverts != null) {
 						listeEnchereArticle = enchereArticleBLL.selectJoin();
+						request.setAttribute("mesachatsouverts", mesachatsouverts);
 					}
 					
 					if(mesachatsencheres != null) {
@@ -79,6 +81,7 @@ public class AccueilServlet extends HttpServlet {
 														.filter(t -> t.getEtat_vente().contains("EC"))
 														.collect(Collectors.toList());
 						listeEnchereArticle.addAll(listeEnchereArticleEncours);
+						request.setAttribute("mesventesencours", mesventesencours);
 					}
 					
 					if(mesventesnondebutees != null) {
@@ -86,6 +89,7 @@ public class AccueilServlet extends HttpServlet {
 								.filter(t -> t.getEtat_vente().contains("CR"))
 								.collect(Collectors.toList());
 						listeEnchereArticle.addAll(listeEnchereArticledebutees);
+						request.setAttribute("mesventesnondebutees", mesventesnondebutees);
 					}
 					
 					if(mesventesterminees != null) {
@@ -93,6 +97,7 @@ public class AccueilServlet extends HttpServlet {
 								.filter(t -> t.getEtat_vente().contains("VD"))
 								.collect(Collectors.toList());				
 						listeEnchereArticle.addAll(listeEnchereArticleterminees);
+						request.setAttribute("mesventesterminees", mesventesterminees);
 					}
 				}
 			}			
