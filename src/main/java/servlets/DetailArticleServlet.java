@@ -64,6 +64,13 @@ public class DetailArticleServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		try {
+			
+			Utilisateur util = (Utilisateur) request.getSession().getAttribute("connected");
+			
+			if(!util.isActif()) {
+				throw new DetailArticleException("Votre compte est désactivé. Vous ne pouvez pas faire d'enchère");	
+			}
+			
 			String pathInfo = request.getPathInfo();		
 			String[] pathParts = pathInfo.split("/");
 			int idArticle = Integer.parseInt(pathParts[1]);
@@ -75,7 +82,7 @@ public class DetailArticleServlet extends HttpServlet {
 				throw new DetailArticleException("Cet article n'existe pas");
 			}
 			
-			Utilisateur util = (Utilisateur) request.getSession().getAttribute("connected");
+			
 			
 			articleBLL.checkProposition(article, proposition, util);	
 			request.getRequestDispatcher("/accueil").forward(request, response);

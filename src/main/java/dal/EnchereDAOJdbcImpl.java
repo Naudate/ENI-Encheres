@@ -20,6 +20,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private UtilisateurDAO daoUtilisateur;
 	
 	private static final String DELETE = "DELETE from encheres where no_article = ?;";
+	private static final String DELETEBYUSER = "DELETE from encheres where no_utilisateur = ?;";
 	private static final String SELECTENCHERE = "SELECT *\r\n"
 			+ "FROM encheres\r\n"
 			+ "WHERE no_article = ? \r\n"
@@ -106,7 +107,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	@Override
     public void delete(int id) {
-    	/// TODO Auto-generated method stub
+    	// TODO Auto-generated method stub
 		 try (Connection cnx = ConnectionProvider.getConnection();) { 
 			  PreparedStatement ps = cnx.prepareStatement(DELETE);
 			  ps.setInt(1, id);		 
@@ -116,5 +117,18 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	      e.printStackTrace();
 	    }
     }
+
+	@Override
+	public void deleteByUser(Utilisateur util) {
+		// TODO Auto-generated method stub
+		 try (Connection cnx = ConnectionProvider.getConnection();) { 
+			  PreparedStatement ps = cnx.prepareStatement(DELETEBYUSER);
+			  ps.setInt(1, util.getNoUtilisateur());		 
+			  ps.executeUpdate();		
+	    }
+	    catch(Exception e){ 
+	      e.printStackTrace();
+	    }
+	}
 	
 }

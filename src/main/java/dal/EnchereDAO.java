@@ -18,4 +18,6 @@ public interface EnchereDAO {
 	public void updateEnchere(Article article, Utilisateur util, int montantEnchere);
 
 	public void delete(int noArticle);
+
+	public void deleteByUser(Utilisateur util);
 }

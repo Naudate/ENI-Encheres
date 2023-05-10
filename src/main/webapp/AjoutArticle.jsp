@@ -52,7 +52,7 @@
 					</div>
 					<div class="form-group">
 						<label for="prix_initial">Mise à prix:</label> <input
-							type="number" class="form-control" name="prix_initial"
+							type="number" class="form-control" name="prix_initial" value="${prixInitial}"
 							id="prix_initial" required>
 					</div>
         			<div class="form-group">
