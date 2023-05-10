@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import Exception.DetailArticleException;
 import bll.ArticleBLL;
 import bo.Article;
+import bo.Image;
 import bo.Utilisateur;
+import dal.ImageDAOJdbc;
 
 
 @WebServlet("/detailArticle/*")
@@ -36,6 +38,11 @@ public class DetailArticleServlet extends HttpServlet {
 			if(article == null) {
 				throw new DetailArticleException("Cet article n'existe pas");
 			}
+			ImageDAOJdbc daoImage = new ImageDAOJdbc();
+
+			Image image = daoImage.selectby(article.getNoArticle());
+			article.setImage(image);	
+	
 			request.setAttribute("article", article);			
 			request.getRequestDispatcher("/detailArticle.jsp").forward(request, response);	
 			

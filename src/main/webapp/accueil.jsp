@@ -33,7 +33,7 @@
 										<c:choose>
 											<c:when test="${categorie != null }">
 												<option value="${categorie}" selected>${categorie}</option>
-												<option value="" >Cat&eacute;gorie</option>
+												<option value="">Cat&eacute;gorie</option>
 											</c:when>
 											<c:otherwise>
 												<option selected disabled>Cat&eacute;gorie</option>
@@ -72,12 +72,21 @@
 						<div class="col-3 mt-3">
 							<a class="card text-decoration-none"
 								href="<%=request.getContextPath()%>/detailArticle/${EA.no_article}">
-								<svg class="bd-placeholder-img card-img-top" width="100%"
-									height="180" xmlns="http://www.w3.org/2000/svg" role="img"
-									aria-label="Placeholder: Image cap"
-									preserveAspectRatio="xMidYMid slice" focusable="false">
+								<c:choose>
+									<c:when test="${EA.image.picture != null}">
+										<img class="card-img-top"
+											src="${pageContext.request.contextPath}/uploads/${EA.image.picture}"
+											alt="${EA.image.picture}" width="auto" height="200" />
+									</c:when>
+									<c:otherwise>
+										<svg class="bd-placeholder-img card-img-top" width="100%"
+											height="200" xmlns="http://www.w3.org/2000/svg" role="img"
+											aria-label="Placeholder: Image cap"
+											preserveAspectRatio="xMidYMid slice" focusable="false">
 									<title>Placeholder</title><rect width="100%" height="100%"
-										fill="#868e96" /></svg>
+												fill="#868e96" /></svg>
+									</c:otherwise>
+								</c:choose>
 								<div class="card-body">
 									<h5 class="card-title">${EA.nom_article}</h5>
 									<c:choose>

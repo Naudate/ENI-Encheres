@@ -11,13 +11,14 @@ public class EnchereArticle {
 	private String etat_vente;
 	private String pseudo;
 	private Integer montant_enchere;
+	private Image image;
 	
 	public EnchereArticle() { 
 		
 	}
 	
 	public EnchereArticle(String categorie, Integer no_article, String nom_article, Integer prix_initial,
-			Date date_fin_enchere, String etat_vente, String pseudo, Integer montant_enchere) {
+			Date date_fin_enchere, String etat_vente, String pseudo, Integer montant_enchere, Image image) {
 		this.categorie = categorie;
 		this.no_article = no_article;
 		this.nom_article = nom_article;
@@ -26,10 +27,11 @@ public class EnchereArticle {
 		this.etat_vente = etat_vente;
 		this.pseudo = pseudo;
 		this.montant_enchere = montant_enchere;
+		this.image = image;
 	}
 
 	public EnchereArticle(Integer no_article,String nom_article, Integer prix_initial, Date date_fin_enchere, String etat_vente,
-			String pseudo, Integer montant_enchere) {
+			String pseudo, Integer montant_enchere, Image image) {
 		this.setNo_article(no_article);
 		this.nom_article = nom_article;
 		this.prix_initial = prix_initial;
@@ -37,6 +39,7 @@ public class EnchereArticle {
 		this.etat_vente = etat_vente;
 		this.pseudo = pseudo;
 		this.montant_enchere = montant_enchere;
+		this.image = image;
 	}
 
 	public String getNom_article() {
@@ -102,7 +105,14 @@ public class EnchereArticle {
 	public void setCategorie(String categorie) {
 		this.categorie = categorie;
 	}
-	
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
 	
 	
 }
