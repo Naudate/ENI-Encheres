@@ -39,11 +39,10 @@ public class DetailArticleServlet extends HttpServlet {
 				throw new DetailArticleException("Cet article n'existe pas");
 			}
 			ImageDAOJdbc daoImage = new ImageDAOJdbc();
-
 			Image image = daoImage.selectby(article.getNoArticle());
 			article.setImage(image);	
 	
-			request.setAttribute("article", article);			
+			request.setAttribute("article", article);	
 			request.getRequestDispatcher("/detailArticle.jsp").forward(request, response);	
 			
 		}catch(NumberFormatException nbEx) {
