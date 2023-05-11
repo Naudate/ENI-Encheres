@@ -66,7 +66,7 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 				</form>	
 				<c:choose>
 				  <c:when
-					test="${article.utilisateur.noUtilisateur==sessionScope.connected.noUtilisateur}">
+					test="${article.utilisateur.noUtilisateur==sessionScope.connected.noUtilisateur && article.etatVente=='CR'}">
 					<div class="col-3 d-grid mt-4">
 							<a class="btn btn-danger"
 							href="<%=request.getContextPath()%>/deleteArticle/${article.noArticle}">
