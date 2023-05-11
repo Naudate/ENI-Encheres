@@ -250,13 +250,22 @@
 									</c:otherwise>
 								</c:choose>
 								<div class="card-body">
-									<h5 class="card-title">${EA.nom_article}</h5>
+									<div class="row">
+										<div class="col-6">
+											<h5 class="card-title">${EA.nom_article}</h5>
+										</div>
+										<div class="col-6">
+											<div class="text-end">
+												<span class="card-text badge text-bg-light">${EA.categorie}</span>
+											</div>
+										</div>
+									</div>
 									<c:choose>
 										<c:when test="${EA.montant_enchere > EA.prix_initial}">
-											<p class="card-text">Prix : ${EA.montant_enchere }&euro;</p>
+											<p class="card-text">Prix : ${EA.montant_enchere }&#128142;</p>
 										</c:when>
 										<c:otherwise>
-											<p class="card-text">Prix : ${EA.prix_initial }&euro;</p>
+											<p class="card-text">Prix : ${EA.prix_initial }&#128142;</p>
 										</c:otherwise>
 									</c:choose>
 									<p class="card-text">Fin de l'ench&egrave;re :

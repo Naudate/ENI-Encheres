@@ -19,7 +19,7 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 		<c:when test="${me==true}">
 			<div class="container">
 				<div class="row">
-					<h1>Mon profil</h1>
+					<h1 class="text-center">Mon profil</h1>
 					<form action="<%=request.getContextPath()%>/user/me" method="post">
 						<div class="row justify-content-center">
 							<div class="col-4 mt-3">
@@ -156,16 +156,22 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 		<c:otherwise>
 			<div class="container">
 				<div class="row justify-content-center">
-					<div class="col-md-8 text-center">
-					</br>
-						<p>Pseudo : ${util.pseudo}</p>
-						<p>Nom : ${util.nom}</p>
-						<p>Prénom : ${util.prenom}</p>
-						<p>Email : ${util.email}</p>
-						<p>Téléphone : ${util.telephone}</p>
-						<p>Rue : ${util.rue}</p>
-						<p>Code postal : ${util.code_postal}</p>
-						<p>Ville : ${util.ville}</p>
+					<div class="col-lg-6 col-md-6">
+						<div class="card">
+							<h5 class="card-header"><i class="bi bi-person-circle me-3"></i>Mon Profil</h5>
+							<div class="card-body">
+								<h5 class="card-title"> Informations personnelles</h5>
+								<p class="card-text">Pseudo : ${util.pseudo}</p>
+								<p class="card-text">Nom : ${util.nom}</p>
+								<p class="card-text">Prénom : ${util.prenom}</p>
+								<p class="card-text">Email : ${util.email}</p>
+								<p class="card-text">Téléphone : ${util.telephone}</p>
+								<h5 class="card-title">Adresse</h5>
+								<p class="card-text">Rue : ${util.rue}</p>
+								<p class="card-text">Code postal : ${util.code_postal}</p>
+								<p class="card-text">Ville : ${util.ville}</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -174,12 +180,11 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 					test="${util.noUtilisateur==sessionScope.connected.noUtilisateur}">
 					
 					<div class="row justify-content-center text-center">
-					<p>Crédit : ${util.credit}</p>
-						<div class="col-3 d-grid mt-3">
+						<div class="col-lg-3 col-md-12 d-grid mt-3">
 							<a class="btn btn-primary"
 								href="<%=request.getContextPath()%>/user/me">Modifier</a>
 						</div>
-						<div class="col-3 d-grid mt-3">
+						<div class="col-lg-3 col-md-12 d-grid mt-3">
 							<a class="btn btn-danger"
 								onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');"
 								href="<%=request.getContextPath()%>/deleteUser">Supprimer</a>
