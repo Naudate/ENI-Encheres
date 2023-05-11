@@ -11,4 +11,6 @@ public interface EnchereArticleDAO {
 	List<EnchereArticle> selectJoinLike(String nom_articlelike);
 	List<EnchereArticle> selectJoinCatLike(String categoriesql, String nom_articlelike);
 	List<EnchereArticle> selectJoinByUser (String user);
+	List<EnchereArticle> selectJoinByUserEnchere(String user);
+	List<EnchereArticle> selectJoinByUserEnchereVD(String user);
 }
