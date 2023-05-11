@@ -50,6 +50,7 @@ public class AdminDisableUserServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}catch(NullPointerException npe) {
+			npe.printStackTrace();
 			request.setAttribute("messageError", "L'url ne correspond pas");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/allUser");
 			dispatcher.forward(request, response);

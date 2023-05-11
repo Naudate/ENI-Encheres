@@ -132,14 +132,13 @@ public class UtilisateurBLL {
 
 	public boolean changeActif(Utilisateur util) {
 		if(util.isActif()) {
-			System.out.println("test entrée désactivation");
 			//Récupérer tout les article en vente de l'utilisateur
 			List<Article> articles = articleDao.getArticleFromUtil(util);
 			//Re-créditer les utilisateurs
 			for (Article article : articles) {	
 				int offre = article.getEnchere().getMontant();
 				Utilisateur utilACrediter = article.getEnchere().getUtilisateur();
-				if(article.getEtatVente().equals("EC")) {
+				if(article.getEtatVente().equals("EC") && article.getEnchere().getUtilisateur() != null) {
 					dao.addCredit(utilACrediter, offre);
 				}			
 				enchereDao.delete(article.getNoArticle());

@@ -26,7 +26,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     private static final String SELECTALL = "select * from articles_vendus;";
     private static final String DELETE = "delete from articles_vendus where no_article = ?;";
     private static final String SELECTBYUSER= "select *, en.no_utilisateur as encherisseur from ARTICLES_VENDUS av\r\n"
-    		+ "inner join ENCHERES en on en.no_article = av.no_article\r\n"
+    		+ "left join ENCHERES en on en.no_article = av.no_article\r\n"
     		+ "where av.no_utilisateur = ?;";
     private static final String INSERT = "INSERT INTO articles_vendus( nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, no_utilisateur, no_categorie,etat_vente, image) VALUES( ?,?,?,?,?,?,?,?,?, null)";
     private static final String SELECTUTILBYARTICLEFROMENCHERE = "select u.* from encheres en inner join utilisateurs u on en.no_utilisateur = u.no_utilisateur where en.no_article = ?;";
@@ -41,16 +41,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
     private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article = ? ,description = ?,date_debut_enchere = ?,date_fin_enchere = ?,prix_initial = ?,categorie = ?;";
     
-    /*			  ps.setString(1,article.getNomArticle());
-			  ps.setString(2,article.getDescription());
-			  ps.setDate(3, Date.valueOf(article.getdateDebutEnchere()));
-			  ps.setDate(4, Date.valueOf(article.getDateFinEnchere()));
-			  ps.setInt(5, article.getPrixInitial());
-			  ps.setInt(6, article.getPrixVente());
-			  ps.setInt(7,article.getUtilisateur().getNoUtilisateur());
-			  ps.setInt(8, article.getCategorie().getNoCategorie());
-			  ps.setString(9,"CR");*/
-
     
   public ArticleDAOJdbcImpl() {
 		daoUtilisateur = DAOFactory.getUtilisateurDAO();
