@@ -27,4 +27,8 @@ public class EnchereArticleBLL {
     public List<EnchereArticle> selectJoinCatLike(String categoriesql, String nom_articlelike) {
         return dao.selectJoinCatLike(categoriesql, nom_articlelike);
     }
+    
+    public List<EnchereArticle> selectJoinByUser(String user){
+    	return dao.selectJoinByUser(user);
+    }
 }
