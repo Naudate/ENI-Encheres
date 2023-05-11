@@ -3,7 +3,13 @@
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/ENI-Encheres/accueil">
 				<img src="<%=request.getContextPath()%>/images/logo.png" alt="logo" width="45" height="32" class="d-inline-block align-text-top">
-				ENI-Ench&egrave;res</a>
+				ENIBay
+			</a>
+			<c:if test="${connected!=null}">
+				<span class="badge rounded-pill bg-danger" title="vos crédits">
+					Crédits: ${connected.credit} &#128142;
+				</span>
+			</c:if>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbar"
 				aria-controls="navbar" aria-expanded="false"
@@ -14,8 +20,6 @@
 				<c:choose>
 					<c:when test="${connected!=null}">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">Ench&egrave;res</a>
-							</li>
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/articles">Vendre un
 									article</a></li>

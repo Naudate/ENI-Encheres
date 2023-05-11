@@ -6,9 +6,6 @@
 <head>
 <%@ include file="./WEB-INF/fragments/importhead.html"%>
 <title>Ajout d'article</title>
-<!-- Link Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 	<%@ include file="./WEB-INF/fragments/header.jsp"%>
@@ -90,10 +87,14 @@
 							required>
 					</div>
 
-					<div style="clear: both;"></div>
-					<br> <input class="btn btn-outline-dark" type="submit"
-						value="Enregistrer"> <a class="btn btn-outline-dark"
+					<div class="col-12 d-grid mt-3">
+						<input class="btn btn-primary" type="submit"
+						value="Enregistrer"> 
+					</div> 
+					<div class="col-12 d-grid mt-3">
+						<a class="btn btn-secondary"
 						href="accueil">Annuler</a>
+					</div>				
 				</form>
 			</div>
 		</div>
