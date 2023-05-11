@@ -16,4 +16,5 @@ public interface ArticleDAO {
     void update(Article enchere);
 
 	public List<Article> getArticleFromUtil(Utilisateur tilisateur);
+
 }
