@@ -86,6 +86,8 @@ public class AccueilServlet extends HttpServlet {
 					List<EnchereArticle> listeEnchereArticleterminees = new ArrayList<EnchereArticle>();
 					List<EnchereArticle> listeEnchereArticleByUser = enchereArticleBLL
 							.selectJoinByUser(user.getPseudo());
+					
+					System.out.println(listeEnchereArticleByUser);
 
 					if (mesventesencours != null) {
 						listeEnchereArticleEncours = listeEnchereArticleByUser.stream()
