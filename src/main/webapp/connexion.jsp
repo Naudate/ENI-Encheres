@@ -28,9 +28,12 @@ boolean remember = (boolean) request.getAttribute("remember");
                         <label for="password">Mot de passe :</label>
                         <input type="password" id="password" name="password" class="form-control" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex justify-content-between">
+                    <div>
                         <label for="remember">Se souvenir de moi :</label>
                         <input type="checkbox" id="remember" name="remember" <%if(remember == true) {%>checked<%}%>>
+                        </div>
+                        <a class="float-right" href="motDePasseOublie">Mot de passe oublié</a>
                     </div>
                     <div class="d-grid mt-3 gap-2">
                         <button type="submit" class="btn btn-primary">Se connecter</button>

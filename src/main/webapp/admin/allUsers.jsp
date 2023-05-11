@@ -56,7 +56,7 @@
 						<td>${utilisateur.prenom}</td>
 						<td>${utilisateur.email}</td>
 						<td>${utilisateur.telephone}</td>
-						<td>${utilisateur.rue}${utilisateur.code_postal}
+						<td>${utilisateur.rue}, </br>${utilisateur.code_postal},
 							${utilisateur.ville}</td>
 						<td>${utilisateur.credit}</td>
 						<td>${utilisateur.administrateur}</td>

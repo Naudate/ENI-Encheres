@@ -27,6 +27,10 @@ public class UtilisateurBLL {
         return dao.verifCompte(pseudo, password);
     }
     
+    public boolean verifEmail(String email) {
+        return dao.checkEmail(email);
+    }
+    
     public Utilisateur inscription(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String actualMotDePasse, String motDePasse, String motDePasseConfirme, Utilisateur actualUser) throws InscriptionException {
     	//Vérification des données avant d'insérer les données
     	if(pseudo == null || nom == null || prenom == null || email == null || telephone == null || rue == null || codePostal == null || ville == null || motDePasse == null || motDePasseConfirme == null) {
@@ -147,5 +151,9 @@ public class UtilisateurBLL {
 		}
 				
 		return dao.changeActif(util);
+	}
+
+	public void updatePasswordByEmail(String email, String password) {
+		dao.updatePasswordByEmail(email, password);
 	}
 }

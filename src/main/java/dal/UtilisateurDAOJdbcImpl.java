@@ -26,6 +26,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String INSERT = "insert into utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, actif) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1);";
 	private static final String DELETE = "delete from utilisateurs where no_utilisateur = ?;";
 	private static final String UPDATECREDIT = "update utilisateurs set credit = ? where no_utilisateur = ?;";
+	private static final String UPDATEPASSWORDBYEMAIL = "update utilisateurs set mot_de_passe = ? where email = ?;";
 	private static final String UPDATE = "update UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? where no_utilisateur = ?;";
 	private static final String UPDATEWITHOUTPASSWORD = "update UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ? where no_utilisateur = ?;";
 
@@ -337,4 +338,24 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			return false;
 		}
 	}
+	
+	@Override
+	public void updatePasswordByEmail(String email, String password) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+
+			PreparedStatement ps = cnx.prepareStatement(UPDATEPASSWORDBYEMAIL);
+		
+			ps.setString(1, password);
+			ps.setString(2, email);
+
+			ps.executeUpdate();
+			ps.close();
+			cnx.commit();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<%@ include file="./WEB-INF/fragments/header.jsp"%>
-	<div class="container">
+	<div class="container mt-4">
 		<div class="row">
 			<div class="col-12 text-center">
 				<h2>Liste des ench&egrave;res</h2>
