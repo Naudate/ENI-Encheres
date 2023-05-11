@@ -28,7 +28,7 @@
 							<div class="accordion-body">
 								<form action="accueil" method="get" id="filtre">
 									<select class="form-select" name="selectCategory"
-										id="selectCategory" aria-label="Selection de catï¿½gories"
+										id="selectCategory" aria-label="Selection de cat?gories"
 										form="filtre">
 										<c:choose>
 											<c:when test="${categorie != null }">
@@ -60,7 +60,7 @@
 									<c:if test="${connected!=null}">
 										<div class="mt-3">
 											<div class="row">
-												<div class="col-6">
+												<div class="col-sm-12 col-md-6">
 													<div class="form-check">
 														<c:choose>
 															<c:when test="${mestrucs == 'mesachats'}">
@@ -74,25 +74,8 @@
 															Achats
 														</label>
 													</div>
-												</div>
-												<div class="col-6">
-													<div class="form-check">
-														<c:choose>
-															<c:when test="${mestrucs == 'mesventes'}">
-																<input class="form-check-input" type="radio" name="mestrucs" id="mesventes" value="mesventes" checked>
-															</c:when>
-															<c:otherwise>
-																<input class="form-check-input" type="radio" name="mestrucs" id="mesventes" value="mesventes">
-															</c:otherwise>
-														</c:choose>
-														<label class="form-check-label" for="mesventes">
-															Ventes
-														</label>
-													</div>
-												</div>
-												<c:choose>
-													<c:when test="${mestrucs == 'mesachats'}">
-														<div class="col-6">
+													<c:choose>
+														<c:when test="${mestrucs == 'mesachats'}">
 															<div class="form-check">
 																<c:choose>
 																	<c:when test="${mesachatsouverts != null}">
@@ -132,10 +115,8 @@
 																	ench&egrave;res remport&eacute;es
 																</label>
 															</div>
-														</div>
-													</c:when>
-													<c:otherwise>
-														<div class="col-6">
+														</c:when>
+														<c:otherwise>
 															<div class="form-check">
 																<input class="form-input" type="checkbox" id="mesachatsouverts" name="mesachatsouverts" disabled>
 																<label class="form-check-label" for="mesachatsouverts">
@@ -154,76 +135,87 @@
 																	ench&egrave;res remport&eacute;es
 																</label>
 															</div>
-														</div>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
+														</c:otherwise>
+													</c:choose>
+												</div>
+												<div class="col-sm-12 col-md-6">
+													<div class="form-check">
+														<c:choose>
+															<c:when test="${mestrucs == 'mesventes'}">
+																<input class="form-check-input" type="radio" name="mestrucs" id="mesventes" value="mesventes" checked>
+															</c:when>
+															<c:otherwise>
+																<input class="form-check-input" type="radio" name="mestrucs" id="mesventes" value="mesventes">
+															</c:otherwise>
+														</c:choose>
+														<label class="form-check-label" for="mesventes">
+															Ventes
+														</label>
+													</div>
+													<c:choose>
 													<c:when test="${mestrucs == 'mesventes'}">
-														<div class="col-6">
-															<div class="form-check">
-																<c:choose>
-																	<c:when test="${mesventesencours != null}">
-																		<input class="form-input" type="checkbox" id="mesventesencours" name="mesventesencours" checked>
-																	</c:when>
-																	<c:otherwise>
-																		<input class="form-input" type="checkbox" id="mesventesencours" name="mesventesencours" >
-																	</c:otherwise>
-																</c:choose>
-																<label class="form-check-label" for="mesventesencours">
-																	mes ventes en cours
-																</label>
-															</div>
-															<div class="form-check">
-																<c:choose>
-																	<c:when test="${mesventesnondebutees != null}">
-																		<input class="form-input" type="checkbox" id="mesventesnondebutees" name="mesventesnondebutees" checked>
-																	</c:when>
-																	<c:otherwise>
-																		<input class="form-input" type="checkbox" id="mesventesnondebutees" name="mesventesnondebutees" >
-																	</c:otherwise>
-																</c:choose>
-																<label class="form-check-label" for="mesventesnondebutees">
-																	ventes non débutées
-																</label>
-															</div>
-															<div class="form-check">
-																<c:choose>
-																	<c:when test="${mesventesterminees != null}">
-																		<input class="form-input" type="checkbox" id="mesventesterminees" name="mesventesterminees" checked>
-																	</c:when>
-																	<c:otherwise>
-																		<input class="form-input" type="checkbox" id="mesventesterminees" name="mesventesterminees" >
-																	</c:otherwise>
-																</c:choose>																
-																<label class="form-check-label" for="mesventesterminees">
-																	ventes termin&eacute;es
-																</label>
-															</div>
+														<div class="form-check">
+															<c:choose>
+																<c:when test="${mesventesencours != null}">
+																	<input class="form-input" type="checkbox" id="mesventesencours" name="mesventesencours" checked>
+																</c:when>
+																<c:otherwise>
+																	<input class="form-input" type="checkbox" id="mesventesencours" name="mesventesencours" >
+																</c:otherwise>
+															</c:choose>
+															<label class="form-check-label" for="mesventesencours">
+																mes ventes en cours
+															</label>
+														</div>
+														<div class="form-check">
+															<c:choose>
+																<c:when test="${mesventesnondebutees != null}">
+																	<input class="form-input" type="checkbox" id="mesventesnondebutees" name="mesventesnondebutees" checked>
+																</c:when>
+																<c:otherwise>
+																	<input class="form-input" type="checkbox" id="mesventesnondebutees" name="mesventesnondebutees" >
+																</c:otherwise>
+															</c:choose>
+															<label class="form-check-label" for="mesventesnondebutees">
+																ventes non débutées
+															</label>
+														</div>
+														<div class="form-check">
+															<c:choose>
+																<c:when test="${mesventesterminees != null}">
+																	<input class="form-input" type="checkbox" id="mesventesterminees" name="mesventesterminees" checked>
+																</c:when>
+																<c:otherwise>
+																	<input class="form-input" type="checkbox" id="mesventesterminees" name="mesventesterminees" >
+																</c:otherwise>
+															</c:choose>																
+															<label class="form-check-label" for="mesventesterminees">
+																ventes termin&eacute;es
+															</label>
 														</div>
 													</c:when>
 													<c:otherwise>
-														<div class="col-6">
-															<div class="form-check">
-																<input class="form-input" type="checkbox" id="mesventesencours" name="mesventesencours" disabled>
-																<label class="form-check-label" for="mesventesencours">
-																	mes ventes en cours
-																</label>
-															</div>
-															<div class="form-check">
-																<input class="form-input" type="checkbox" id="mesventesnondebutees" name="mesventesnondebutees" disabled>
-																<label class="form-check-label" for="mesventesnondebutees">
-																	ventes non débutées
-																</label>
-															</div>
-															<div class="form-check">
-																<input class="form-input" type="checkbox" id="mesventesterminees" name="mesventesterminees" disabled>
-																<label class="form-check-label" for="mesventesterminees">
-																	ventes termin&eacute;es
-																</label>
-															</div>
+														<div class="form-check">
+															<input class="form-input" type="checkbox" id="mesventesencours" name="mesventesencours" disabled>
+															<label class="form-check-label" for="mesventesencours">
+																mes ventes en cours
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-input" type="checkbox" id="mesventesnondebutees" name="mesventesnondebutees" disabled>
+															<label class="form-check-label" for="mesventesnondebutees">
+																ventes non débutées
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-input" type="checkbox" id="mesventesterminees" name="mesventesterminees" disabled>
+															<label class="form-check-label" for="mesventesterminees">
+																ventes termin&eacute;es
+															</label>
 														</div>
 													</c:otherwise>
 												</c:choose>
+												</div>
 											</div>
 										</div>
 									</c:if>
@@ -239,7 +231,7 @@
 			<c:choose>
 				<c:when test="${listeEnchereArticle.size() > 0}">
 					<c:forEach var="EA" items="${listeEnchereArticle}">
-						<div class="col-3 mt-3">
+						<div class="col-lg-3 col-md-12 mt-3">
 							<a class="card text-decoration-none"
 								href="<%=request.getContextPath()%>/detailArticle/${EA.no_article}">
 								<c:choose>
