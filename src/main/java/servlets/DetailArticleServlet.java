@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import Exception.DetailArticleException;
 import bll.ArticleBLL;
 import bo.Article;
+import bo.Image;
 import bo.Utilisateur;
+import dal.ImageDAOJdbc;
 
 
 @WebServlet("/detailArticle/*")
@@ -36,7 +38,11 @@ public class DetailArticleServlet extends HttpServlet {
 			if(article == null) {
 				throw new DetailArticleException("Cet article n'existe pas");
 			}
-			request.setAttribute("article", article);			
+			ImageDAOJdbc daoImage = new ImageDAOJdbc();
+			Image image = daoImage.selectby(article.getNoArticle());
+			article.setImage(image);	
+	
+			request.setAttribute("article", article);	
 			request.getRequestDispatcher("/detailArticle.jsp").forward(request, response);	
 			
 		}catch(NumberFormatException nbEx) {
@@ -58,6 +64,13 @@ public class DetailArticleServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		try {
+			
+			Utilisateur util = (Utilisateur) request.getSession().getAttribute("connected");
+			
+			if(!util.isActif()) {
+				throw new DetailArticleException("Votre compte est désactivé. Vous ne pouvez pas faire d'enchère");	
+			}
+			
 			String pathInfo = request.getPathInfo();		
 			String[] pathParts = pathInfo.split("/");
 			int idArticle = Integer.parseInt(pathParts[1]);
@@ -69,7 +82,7 @@ public class DetailArticleServlet extends HttpServlet {
 				throw new DetailArticleException("Cet article n'existe pas");
 			}
 			
-			Utilisateur util = (Utilisateur) request.getSession().getAttribute("connected");
+			
 			
 			articleBLL.checkProposition(article, proposition, util);	
 			request.getRequestDispatcher("/accueil").forward(request, response);
