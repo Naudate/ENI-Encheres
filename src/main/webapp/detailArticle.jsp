@@ -58,12 +58,20 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 				<p>Fin de l'enchère : ${article.dateFinEnchere}</p>
 				<p>Retrait : ${article.retrait.rue} <br/> 
 				${article.retrait.codePostal} ${article.retrait.ville}</p>
-				<p>Vendeur : <a href="<%=request.getContextPath()%>/user/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a></p>	
-				<form method="post" action="<%=request.getContextPath()%>/detailArticle/${article.noArticle}">
-				<label for="proposition">Ma proposition :</label> 
-				<input type="number" name="proposition" id="proposition" required value="<%= montantMin %>" min="<%= montantMin %>">
-				<input class="btn btn-outline-dark" type="submit" value="Enchérir"> 
-				</form>	
+				<p>Vendeur : <a href="<%=request.getContextPath()%>/user/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a></p>
+				
+				
+				<c:choose>
+				  <c:when
+					test="${article.etatVente=='EC'}">									
+					<form method="post" action="<%=request.getContextPath()%>/detailArticle/${article.noArticle}">
+					<label for="proposition">Ma proposition :</label> 
+					<input type="number" name="proposition" id="proposition" required value="<%= montantMin %>" min="<%= montantMin %>">
+					<input class="btn btn-outline-dark" type="submit" value="Enchérir"> 
+					</form>	
+				  </c:when>
+				</c:choose>
+				
 				<c:choose>
 				  <c:when
 					test="${article.utilisateur.noUtilisateur==sessionScope.connected.noUtilisateur && article.etatVente=='CR'}">
