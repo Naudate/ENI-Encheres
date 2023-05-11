@@ -38,6 +38,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     		+ "inner join utilisateurs u on u.no_utilisateur = av.no_utilisateur\r\n"
     		+ "left join encheres en on av.no_article = en.no_article\r\n"
     		+ "where av.no_article = ?;";
+
+    private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article = ? ,description = ?,date_debut_enchere = ?,date_fin_enchere = ?,prix_initial = ?,categorie = ?;";
     
     /*			  ps.setString(1,article.getNomArticle());
 			  ps.setString(2,article.getDescription());
@@ -75,8 +77,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
                 
                 LocalDate date1 = dateDebutEnchere.toLocalDate();
                 LocalDate date2 = dateFinEnchere.toLocalDate();
-                Article article = new Article(nomArticle,description,date1,date2,prixInitial,prixVente,null,categorie,etatVente,null,null, null);
-                
+              //  Article article = new Article(nomArticle,description,date1,date2,prixInitial,prixVente,null,categorie,etatVente,null,null, null,null);
+                Article article = new Article();
                 listeArticles.add(article);}
             
             }catch (SQLException e) {
@@ -166,9 +168,20 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     }
 
     @Override
-    public void update(Article Article) {
-        // TODO Auto-generated method stub
-
+    public void update(Article article) {
+    	 try (Connection cnx = ConnectionProvider.getConnection();) { 
+			  PreparedStatement ps = cnx.prepareStatement(UPDATE);
+			  ps.setString(1,article.getNomArticle());
+			  ps.setString(2,article.getDescription());
+			  ps.setDate(3, Date.valueOf(article.getdateDebutEnchere()));
+			  ps.setDate(4, Date.valueOf(article.getDateFinEnchere()));
+			  ps.setInt(5, article.getPrixInitial());
+			  ps.setInt(6, article.getCategorie().getNoCategorie());			  
+			  ps.executeUpdate();
+			  ps.close();}
+    	 catch (SQLException e) {
+    		 e.printStackTrace();
+    	 }
     }
 
 

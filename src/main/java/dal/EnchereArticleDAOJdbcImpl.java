@@ -187,8 +187,14 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 		return list;
 	}
 
-	
 	@Override
+	public List<EnchereArticle> selectJoinByUser(String user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	/*@Override
 	public List<EnchereArticle> selectJoinByUser(String user) {
 		List<EnchereArticle> list = new ArrayList<EnchereArticle>();
 		try (Connection cnx = ConnectionProvider.getConnection();){
@@ -218,7 +224,7 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 			e.printStackTrace();
 		}
 		return list;
-	}
+	}*/
 
 	
 }
