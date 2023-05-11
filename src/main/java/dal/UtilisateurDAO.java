@@ -32,4 +32,6 @@ public interface UtilisateurDAO {
 	List<Utilisateur> selectAll();
 
 	boolean changeActif(Utilisateur utilisateur);
+
+	void updatePasswordByEmail(String email, String password);
 }
