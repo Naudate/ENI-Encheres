@@ -31,4 +31,12 @@ public class EnchereArticleBLL {
     public List<EnchereArticle> selectJoinByUser(String user){
     	return dao.selectJoinByUser(user);
     }
+    
+    public List<EnchereArticle> selectJoinByUserEnchere(String user){
+    	return dao.selectJoinByUserEnchere(user);
+    }
+    
+    public List<EnchereArticle> selectJoinByUserEnchereVD(String user){
+    	return dao.selectJoinByUserEnchereVD(user);
+    }
 }

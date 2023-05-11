@@ -59,6 +59,19 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 			+ "inner join CATEGORIES c on a.no_categorie=c.no_categorie "
 			+ "left join images on images.no_article = a.no_article "
 		+ "where u.pseudo = ?";
+	private static final String SELECTJOINENCHERE = "select distinct av.*, u.pseudo as encherisseur, en.date_enchere, i.picture,c.libelle, en.montant_enchere from ENCHERES en  \r\n"
+			+ "inner join ARTICLES_VENDUS av on av.no_article = en.no_article\r\n"
+			+ "left join IMAGES i on i.no_article = av.no_article\r\n"
+			+ "inner join UTILISATEURS u on u.no_utilisateur = en.no_utilisateur\r\n"
+			+ "inner join CATEGORIES c on av.no_categorie=c.no_categorie\r\n"
+			+ "where u.pseudo = ? and av.etat_vente = 'EC' ";
+	private static final String SELECTJOINENCHEREVD = "select distinct av.*, u.pseudo as encherisseur, en.date_enchere, i.picture,c.libelle, MAX(en.montant_enchere) as montant_enchere from ENCHERES en  \r\n"
+			+ "inner join ARTICLES_VENDUS av on av.no_article = en.no_article\r\n"
+			+ "left join IMAGES i on i.no_article = av.no_article\r\n"
+			+ "inner join UTILISATEURS u on u.no_utilisateur = en.no_utilisateur\r\n"
+			+ "inner join CATEGORIES c on av.no_categorie=c.no_categorie\r\n"
+			+ "where u.pseudo = ? and av.etat_vente = 'VD' \r\n"
+			+ "GROUP BY av.no_article, av.nom_article,av.description,av.date_debut_enchere,av.date_fin_enchere,av.image,av.prix_initial,av.prix_vente,av.no_utilisateur,av.no_categorie,av.etat_vente,u.pseudo,en.date_enchere,i.picture,c.libelle\r\n";
 
 	@Override
 	public List<EnchereArticle> selectJoin() {
@@ -225,6 +238,72 @@ public class EnchereArticleDAOJdbcImpl implements EnchereArticleDAO {
 		}
 		return list;
 	}*/
+
+	@Override
+	public List<EnchereArticle> selectJoinByUserEnchere(String user) {
+		List<EnchereArticle> list = new ArrayList<EnchereArticle>();
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			cnx.setAutoCommit(false);
+			PreparedStatement ps;
+
+			ps = cnx.prepareStatement(SELECTJOINENCHERE);
+			ps.setString(1, user);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String categorie = rs.getString("libelle");
+				Integer no_article = rs.getInt("no_article");
+				String nom_article = rs.getString("nom_article");
+				Integer prix_initial = rs.getInt("prix_initial");
+				Date date_fin_enchere = rs.getDate("date_fin_enchere");
+				String etat_vente = rs.getString("etat_vente");
+				String encherisseur = rs.getString("encherisseur");
+				Integer montant_enchere = rs.getInt("montant_enchere");
+				Image image = new Image(rs.getString("picture"), null);
+				Integer no_utilisateur = rs.getInt("no_utilisateur");
+				
+				EnchereArticle ea = new EnchereArticle(categorie,no_article,nom_article, prix_initial,date_fin_enchere,etat_vente,montant_enchere,image,no_utilisateur,encherisseur);
+				
+				list.add(ea);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<EnchereArticle> selectJoinByUserEnchereVD(String user) {
+		List<EnchereArticle> list = new ArrayList<EnchereArticle>();
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			cnx.setAutoCommit(false);
+			PreparedStatement ps;
+
+			ps = cnx.prepareStatement(SELECTJOINENCHEREVD);
+			ps.setString(1, user);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String categorie = rs.getString("libelle");
+				Integer no_article = rs.getInt("no_article");
+				String nom_article = rs.getString("nom_article");
+				Integer prix_initial = rs.getInt("prix_initial");
+				Date date_fin_enchere = rs.getDate("date_fin_enchere");
+				String etat_vente = rs.getString("etat_vente");
+				String encherisseur = rs.getString("encherisseur");
+				Integer montant_enchere = rs.getInt("montant_enchere");
+				Image image = new Image(rs.getString("picture"), null);
+				Integer no_utilisateur = rs.getInt("no_utilisateur");
+				
+				EnchereArticle ea = new EnchereArticle(categorie,no_article,nom_article, prix_initial,date_fin_enchere,etat_vente,montant_enchere,image,no_utilisateur,encherisseur);
+				
+				list.add(ea);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	
 }

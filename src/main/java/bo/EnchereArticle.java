@@ -12,6 +12,8 @@ public class EnchereArticle {
 	private String pseudo;
 	private Integer montant_enchere;
 	private Image image;
+	private Integer no_utilisateur;
+	private String encherisseur;
 	
 	public EnchereArticle() { 
 		
@@ -40,6 +42,23 @@ public class EnchereArticle {
 		this.pseudo = pseudo;
 		this.montant_enchere = montant_enchere;
 		this.image = image;
+	}
+	
+	
+
+	public EnchereArticle(String categorie, Integer no_article, String nom_article, Integer prix_initial,
+			Date date_fin_enchere, String etat_vente, Integer montant_enchere, Image image,
+			Integer no_utilisateur,String encherisseur) {
+		this.categorie = categorie;
+		this.no_article = no_article;
+		this.nom_article = nom_article;
+		this.prix_initial = prix_initial;
+		this.date_fin_enchere = date_fin_enchere;
+		this.etat_vente = etat_vente;
+		this.montant_enchere = montant_enchere;
+		this.image = image;
+		this.no_utilisateur = no_utilisateur;
+		this.encherisseur = encherisseur;
 	}
 
 	public String getNom_article() {
@@ -112,6 +131,30 @@ public class EnchereArticle {
 
 	public void setImage(Image image) {
 		this.image = image;
+	}
+
+	public Integer getNo_utilisateur() {
+		return no_utilisateur;
+	}
+
+	public void setNo_utilisateur(Integer no_utilisateur) {
+		this.no_utilisateur = no_utilisateur;
+	}
+
+	public String getEncherisseur() {
+		return encherisseur;
+	}
+
+	public void setEncherisseur(String encherisseur) {
+		this.encherisseur = encherisseur;
+	}
+
+	@Override
+	public String toString() {
+		return "EnchereArticle [categorie=" + categorie + ", no_article=" + no_article + ", nom_article=" + nom_article
+				+ ", prix_initial=" + prix_initial + ", date_fin_enchere=" + date_fin_enchere + ", etat_vente="
+				+ etat_vente + ", pseudo=" + pseudo + ", montant_enchere=" + montant_enchere + ", image=" + image
+				+ ", no_utilisateur=" + no_utilisateur + ", encherisseur=" + encherisseur + "]";
 	}
 	
 	
