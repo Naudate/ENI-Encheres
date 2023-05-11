@@ -51,10 +51,10 @@ Utilisateur util = (Utilisateur) request.getAttribute("util");
 						<p><b>Meilleure offre :</b> Pas d'offre pour le moment</p>
 					</c:when>
 					<c:otherwise>
-						<p><b>Meilleure offre :</b> ${article.enchere.montant} pts par <a href="<%=request.getContextPath()%>/user/${article.enchere.utilisateur.noUtilisateur}">${article.enchere.utilisateur.pseudo}</a></p>
+						<p><b>Meilleure offre :</b> ${article.enchere.montant} &#128142; par <a href="<%=request.getContextPath()%>/user/${article.enchere.utilisateur.noUtilisateur}">${article.enchere.utilisateur.pseudo}</a></p>
 					</c:otherwise>
 				</c:choose>
-				<p>Mise à prix : ${article.prixInitial} points</p>
+				<p>Mise à prix : ${article.prixInitial} &#128142;</p>
 				<p>Fin de l'enchère : ${article.dateFinEnchere}</p>
 				<p>Retrait : ${article.retrait.rue} <br/> 
 				${article.retrait.codePostal} ${article.retrait.ville}</p>
