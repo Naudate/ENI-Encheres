@@ -7,4 +7,4 @@ This projet was a 2 weeks challenge from ENI école informatique.
 
 ## Thanks
 
-By Lucie FRIBAULT, Sara MAHEO & Nathan JAOUEN
+Lucie FRIBAULT, Sara MAHEO & Nathan JAOUEN
