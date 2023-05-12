@@ -30,7 +30,7 @@
 
 	<div class="container mt-5">
 		<h1 class="text-center">Liste des Utilisateurs</h1>
-
+<div class="table-responsive-lg">
 		<table class="table table-striped text-center mt-5">
 			<thead>
 				<tr>
@@ -88,6 +88,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		</div>
 	</div>
 
 	<%@ include file="../WEB-INF/fragments/importjs.html"%>

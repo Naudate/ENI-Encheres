@@ -131,24 +131,28 @@ public class UtilisateurBLL {
 	}
 
 	public boolean changeActif(Utilisateur util) {
+		//Si c'est pour une désactivation du compte
 		if(util.isActif()) {
 			//Récupérer tout les article en vente de l'utilisateur
 			List<Article> articles = articleDao.getArticleFromUtil(util);
-			//Re-créditer les utilisateurs
+			//Pour chaque
 			for (Article article : articles) {	
-				int offre = article.getEnchere().getMontant();
-				Utilisateur utilACrediter = article.getEnchere().getUtilisateur();
-				if(article.getEtatVente().equals("EC") && article.getEnchere().getUtilisateur() != null) {
+				//Re-créditer les utilisateurs si l'article est en cours et qu'il y a un utilisateur a re-créditer
+				if(article.getEtatVente().equals("EC") && article.getEnchere().getUtilisateur() != null) {					
+					int offre = article.getEnchere().getMontant();
+					Utilisateur utilACrediter = article.getEnchere().getUtilisateur();				
 					dao.addCredit(utilACrediter, offre);
 				}			
+				//Suppression des enchères liées à l'article
 				enchereDao.delete(article.getNoArticle());
+				//Supprpession de l'article
 				articleDao.delete(article.getNoArticle());
 			}
 						
 			//Supprimer toutes les enchères de l'utilisateurs
 			enchereDao.deleteByUser(util);
 		}
-				
+		//Changer le status de l'utilisateur		
 		return dao.changeActif(util);
 	}
 
