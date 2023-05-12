@@ -20,48 +20,36 @@ We use MSSQL 2019
 ### Tomcat 🐈
 - [Tomcat 9.0.71](https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.71/)
 
-## Features 
-| **Itération** | **Importance** | **Catégorie** | **"ID"** | **nom** | **Description** |
+## Features ✨
+
+| **Iteration** | **Importance** | **Category** | **"ID"** | **Name** | **Description** |
 |---|---|---|---|---|---|
-| 1 | 2000 | Gestion des utilisateurs | 1001 | "Se connecter" | En tant qu'utilisateur, je peux me connecter sur la plateforme Enchères.org avec un login (adresse mail ou pseudo) et un mot de passe. |
-| 1 | 1900 | Gestion des utilisateurs | 1003 | S’inscrire | En tant qu’utilisateur, je peux m’inscrire sur la plateforme Enchères.org. Le pseudo doit être unique sur toute la plateforme, ainsi que l’email. Le pseudo n’accepte que des caractères alphanumériques. Si la création du profil est validée, l’utilisateur est dirigé vers la page d’accueil (liste des enchères). Un crédit initial de 100 points est alloué à la création du compte. |
-| 1 | 1800 | Navigation | 6002 | Page d’accueil | La page d’accueil du site est la page qui liste les enchères. Cette page doit être chargée automatiquement si aucune ressource n’est indiquée dans l’url (http://localhost:8080/encheres/) |
-| 1 | 1750 | Gestion des utilisateurs | 1009 | Se déconnecter | En tant qu’utilisateur connecté, je peux me déconnecter. Je suis alors ramené vers la page d’accueil en mode déconnecté. |
-| 1 | 1700 | Gestion des utilisateurs | 1006 | Afficher un profil | En tant qu’utilisateur, je peux afficher le profil d’un utilisateur. Le pseudo, nom, prénom, email, téléphone, rue, code postal, ville sont affichés. |
-| 1 | 1600 | Gestion des utilisateurs | 1007 | Modifier mon profil | En tant qu’utilisateur, je peux modifier mes informations de profil : Pseudo, Nom, prénom, email, téléphone, rue, code postal, ville, et mot de passe. |
-| 1 | 1500 | Gestion des utilisateurs | 1004 | Supprimer mon compte | En tant qu’utilisateur, je peux supprimer mon compte. Dans ce cas je suis déconnecté et retourné à la page d’accueil. |
-| 1 | 1400 | Gestion des enchères | 2001 | Vendre un article | En tant qu’utilisateur, je peux vendre un article sur la plateforme ENI-Enchères. Pour cela je donne les informations sur l’article vendu : nom, description et catégorie j’indique un prix de départ ( en points ), une date et une heure d’ouverture de l’enchère, une date et une heure de fin d’enchères et les modalités du retrait :  adresse (par défaut celle du vendeur). |
-| 1 | 1300 | Gestion des enchères | 2004 | Lister les enchères en mode déconnecté | En tant qu’utilisateur non connecté, je peux lister les enchères en cours. Je peux filtrer ma recherche par catégorie, et par nom d’article (l’article est affiché si il contient le critère saisi) – Pour consulter le détail des enchères, l’utilisateur doit se connecter. |
-| 1 | 1200 | Gestion des enchères | 2005 | Lister les enchères en mode connecté | En tant qu’utilisateur connecté, je peux lister les enchères en cours, les enchères auxquelles je participe, c’est à dire celles sur lesquelles j’ai fait au moins une offre, et mes enchères gagnées. Je peux aussi sélectionner mes ventes, non commencées, en-cours ou terminées |
-| 1 | 1100 | Gestion des enchères | 2006 | Faire une enchère | En tant qu’utilisateur, je peux faire une enchère sur un article si je propose un prix (en points) supérieur au tarif actuel et si mon compte de points ne devient pas négatif. Si l’enchère est possible, mon crédit de points est débité du montant proposé. Le meilleur enchérisseur précédent si il existe est re-crédité de son offre. |
-| 1 | 1000 | Gestion des enchères | 2007 | Remporter une vente | En tant qu’enchérisseur, je deviens acquéreur si au terme de l’enchère j’ai proposé l’enchère la plus haute. |
-| 1 | 950 | Navigation | 6003 | Lien logo Encheres | Un click sur le logo du site ramène l’utilisateur sur la page principale (page de recherche d’articles) si celui-ci est connecté. |
-| 1 | 900 | Gestion des enchères | 2009 | Afficher le détail d’une enchère | En tant qu’utilisateur, je peux afficher le détail d’une enchère. Les informations sur l’article vendu sont affichés ( nom, description, meilleure offre, mise à prix, début et fin de l’enchère, adresse de retrait, vendeur. En fonction de l’état de la vente, et du rôle de l’utilisateur (vendeur ou acheteur), l’utilisateur peux seulement consulter les information, enchérir, ou modifier la vente (si il est le vendeur et que l’enchère n’a pas débuté). |
-| 1 | 850 | Navigation | 6001 | Boutons rafraîchir et retour du navigateur | En tant qu’utilisateur, je peux rafraîchir la page courante ou revenir sur la page précédente en utilisant le bouton « back » du navigateur. |
-| 2 | 800 | Responsive Web Design | 5001 | Version mobile | Les fonctionnalités sont accessibles depuis un petit appareil de type smartphone connecté au web. Cf maquettes |
-| 2 | 750 | Sécurité | 8001 | Sessions utilisateur de 5mn | L’utilisateur doit être déconnecté automatiquement après 5 minutes d’inactivité |
-| 2 | 700 | Gestion des utilisateurs | 1002 | Se souvenir de moi | En tant qu'utilisateur, je peux choisir d'enregistrer mon login sur mon ordinateur pour ne pas avoir à le ressaisir à la connexion suivante. |
-| 2 | 675 | Gestion des enchères | 2002 | Modifier une vente | En tant que vendeur, je peux modifier les informations liées à ma vente tant que la date de début d’enchère n’est pas arrivée. |
-| 2 | 650 | Gestion des enchères | 2003 | Annuler une vente | En tant que vendeur d’un article, je peux annuler cette vente tant que la date de début d’enchère n’est pas arrivée |
-| 2 | 600 | Gestion des enchères | 2008 | Photo pour la vente | en tant que vendeur, je peux uploader une photo de l’article à vendre. Celle ci sera visible sur le détail de la vente. |
-| 2 | 500 | Administration | 3001 | Supprimer des comptes utilisateurs | En tant qu’administrateur, je peux supprimer des comptes utilisateurs. |
-| 2 | 450 | Administration | 3002 | Désactiver un compte utilisateur | En tant qu’administrateur, je peux désactiver un compte utilisateur. Toutes les ventes proposées par cet utilisateur sont alors annulées, toutes les enchères faites par cet utilisateur sont elles aussi annulées, l’utilisateur ne peut pas créer de nouvelles ventes ou faire de nouvelles enchères. |
-| 2 | 400 | Gestion des utilisateurs | 1005 | Mot de passe oublié | En tant qu'utilisateur, je peux faire une demande de ré-initialisation de mot de passe. La plateforme créé un lien vers un écran de saisie du nouveau mot de passe. (Ce lien sera envoyé par mail à l'utilisateur. L'envoi par mail n'est pas demandé) |
-| 3 | 350 | Gestion des enchères | 2010 | Pagination | Sur la page permettant de lister les enchères suivant des critères de recherche, j’affiche un nombre d’enchères maximum ( 6) et  j’accède  aux autres pages résultat par l’intermédiaire de liens numérotés. |
-| 3 | 300 | Multilingue | 9001 | Version anglaise | En tant qu’utilisateur, je peux choisir la langue utilisée sur la plateforme. J’ai le choix entre français et anglais. |
-| 3 | 250 | Journalisation | 7001 | Gestion des logs | En tant que développeur ou support informatique, j’ai accès à des fichiers de logs côté serveur me permettant d’avoir des informations détaillées sur les éventuelles erreurs en production, et des informations de tracing plus précises en phase de recette et de développement. |
-| 3 | 200 | Gestion des enchères | 2011 | Voir les enchérisseurs | En tant que vendeur, je peux voir la liste des enchérisseurs de mes ventes. Les enchérisseurs sont triés en fonction du montant de leur dernière enchère par ordre décroissant. |
-| 3 | 150 | Administration | 3003 | Gestion catégories | En tant qu’administrateur, je peux gérer, c’est à dire ajouter, supprimer, modifier les catégories d’articles. |
-| 3 | 100 | Notification par mail | 10001 | Notifier l’achat | A la date de fin d’enchère, un traitement batch calcule le prix de vente et notifie l’acheteur par mail. |
-| 3 | 50 | Gestion des utilisateurs | 1008 | Achat de crédits | En tant qu’utilisateur, je peux acheter des crédits. |
-
-
-
-
-
-
-
-
+| 1 | 2000 | User Management | 1001 | "Login" | As a user, I can log in to the Enchères.org platform with a login (email or username) and a password. |
+| 1 | 1900 | User Management | 1003 | "Sign up" | As a user, I can sign up for the Enchères.org platform. The username must be unique throughout the platform, as well as the email. The username only accepts alphanumeric characters. If the profile creation is validated, the user is directed to the homepage (list of auctions). An initial credit of 100 points is allocated upon account creation. |
+| 1 | 1800 | Navigation | 6002 | Homepage | The homepage of the site is the page that lists the auctions. This page should be automatically loaded if no resource is indicated in the url (http://localhost:8080/encheres/) |
+| 1 | 1750 | User Management | 1009 | "Log out" | As a logged-in user, I can log out. I am then returned to the homepage in logged-out mode. |
+| 1 | 1700 | User Management | 1006 | View a profile | As a user, I can view the profile of a user. The username, first name, last name, email, phone number, street, zip code, and city are displayed. |
+| 1 | 1600 | User Management | 1007 | "Edit my profile" | As a user, I can edit my profile information: Username, First name, Last name, Email, Phone number, Street, Zip code, City, and password. |
+| 1 | 1500 | User Management | 1004 | "Delete my account" | As a user, I can delete my account. In this case, I am logged out and returned to the homepage. |
+| 1 | 1400 | Auction Management | 2001 | "Sell an item" | As a user, I can sell an item on the ENI-Auctions platform. To do this, I provide information about the item being sold: name, description, and category. I specify a starting price (in points), an auction opening date and time, an auction closing date and time, and withdrawal arrangements (default to seller's address). |
+| 1 | 1300 | Auction Management | 2004 | "List ongoing auctions in disconnected mode" | As a non-connected user, I can list ongoing auctions. I can filter my search by category and item name (the item is displayed if it contains the entered criteria). To view auction details, the user must log in. |
+| 1 | 1200 | Auction Management | 2005 | "List ongoing auctions in connected mode" | As a connected user, I can list ongoing auctions, auctions in which I am participating (i.e. those on which I have made at least one bid), and my won auctions. I can also select my sales, not started, in progress, or completed. |
+| 1 | 1100 | Auction Management | 2006 | "Make a bid" | As a user, I can make a bid on an item if I propose a price (in points) higher than the current rate and if my points balance does not become negative. If the bid is possible, my points credit is debited for the proposed amount. The previous highest bidder, if any, is re-credited with their bid. |
+| 1 | 1000 | Auction Management | 2007 | "Win a sale" | As a bidder, I become the buyer if, at the end of the auction, I have proposed the highest bid. |
+| 1 | 950 | Navigation | 6003 | "Link to Encheres logo" | Clicking on the site logo brings the user back to the main page (item search page) if they are logged in. |
+| 1 | 900 | Auction management | 2009 | Display auction details | As a user, I can display the details of an auction. The information about the item being sold is displayed (name, description, highest offer, starting price, start and end of the auction, pick-up address, seller). Depending on the status of the sale and the role of the user (seller or buyer), the user can only view the information, bid, or modify the sale (if they are the seller and the auction has not yet started). |
+| 1 | 850 | Navigation | 6001 | Refresh and browser back buttons | As a user, I can refresh the current page or go back to the previous page using the browser's "back" button. |
+| 2 | 800 | Responsive Web Design | 5001 | Mobile version | The features are accessible from a small device such as a web-connected smartphone. See mockups. |
+| 2 | 750 | Security | 8001 | User sessions of 5 minutes | The user must be automatically logged out after 5 minutes of inactivity. |
+| 2 | 700 | User management | 1002 | Remember me | As a user, I can choose to save my login on my computer so that I do not have to re-enter it at the next login. |
+| 2 | 650 | Auction management | 2003 | Cancel a sale | As the seller of an item, I can cancel the sale as long as the auction start date has not been reached. |
+| 2 | 600 | Auction management | 2008 | Photo for the sale | As a seller, I can upload a photo of the item for sale. It will be visible on the sale detail page. |
+| 2 | 500 | Administration | 3001 | Delete user accounts | As an administrator, I can delete user accounts. |
+| 2 | 450 | Administration | 3002 | Deactivate a user account | As an administrator, I can deactivate a user account. All sales offered by this user are then cancelled, all bids made by this user are also cancelled, and the user cannot create new sales or make new bids. |
+| 2 | 400 | User management | 1005 | Forgot password | As a user, I can request a password reset. The platform creates a link to a screen for entering the new password. (This link will be sent by email to the user. Email sending is not requested.) |
+| 3 | 350 | Auction management | 2010 | Pagination | On the page for listing auctions according to search criteria, I display a maximum number of auctions (6) and access other result pages through numbered links. |
+| 3 | 150 | Administration | 3003 | Category management | As an administrator, I can manage, i.e. add, delete, and modify article categories. |
+| 3 | 100 | Email notification | 10001 | Notify purchase | On the end date of the auction, a batch process calculates the selling price and notifies the buyer by email. |
 
 ## Contributors 💜
 
