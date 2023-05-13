@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="/src/main/webapp/images/logo.png" width="70%">
+    <img src="/src/main/webapp/images/logo.png" width="40%">
 </p>
 
 # ENI-Encheres aka ENIBay
