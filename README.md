@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="/src/main/webapp/images/logo.png" width="70%">
+</p>
+
 # ENI-Encheres aka ENIBay
 
 ## Summary
