@@ -57,9 +57,9 @@ We use MSSQL 2019
 | 3 | 150 | Administration | 3003 | Category management | As an administrator, I can manage, i.e. add, delete, and modify article categories. |
 | 3 | 100 | Email notification | 10001 | Notify purchase | On the end date of the auction, a batch process calculates the selling price and notifies the buyer by email. |
 
-## Feature demonstration
+## Feature demonstration 👀
 
-### User
+### User 🙍
 ___
 #### login/logout
 <p align="center">
@@ -77,7 +77,7 @@ ___
 </p>
 
 
-### Home
+### Home 🏠
 ___
 #### filters
 <p align="center">
@@ -85,20 +85,20 @@ ___
 </p>
 
 
-### Articles
+### Articles 📰
 ___
 #### Create
 <p align="center">
     <img src="/img/creer.gif" width="70%">
 </p>
 
-### Auction
+### Auction 🔖
 <p align="center">
     <img src="/img/enchere.gif" width="70%">
 </p>
 
 
-### Admin
+### Admin ⚔
 ___
 <p align="center">
     <img src="/img/dofi.gif" width="70%">
@@ -106,3 +106,9 @@ ___
 
 
 ## Contributors 💜
+
+<p align="left">
+    <a href="https://github.com/Naudate/ENI-Encheres/graphs/contributors">
+        <img width="550" src="https://contrib.rocks/image?repo=Naudate/ENI-Encheres" />
+    </a>
+</p>
