@@ -59,43 +59,43 @@ We use MSSQL 2019
 
 ## Feature demonstration
 
-1. User
-    - login/logout
-        <p align="center">
-            <img src="/img/connexin-déconnxion.gif" width="70%">
-        </p>
+### User
+#### login/logout
+<p align="center">
+    <img src="/img/connexin-déconnxion.gif" width="70%">
+</p>
 
-    - modify profil
-        <p align="center">
-            <img src="/img/modif-compte.gif" width="70%">
-        </p>
+#### modify profil
+<p align="center">
+    <img src="/img/modif-compte.gif" width="70%">
+</p>
 
-    - rest password
-        <p align="center">
-            <img src="/img/mot-de-passe-oublié.gif" width="70%">
-        </p>
+#### rest password
+<p align="center">
+    <img src="/img/mot-de-passe-oublié.gif" width="70%">
+</p>
 
-2. Home
-    - filters
-        <p align="center">
-            <img src="/img/filtres.gif" width="70%">
-        </p>
+### Home
+#### filters
+<p align="center">
+    <img src="/img/filtres.gif" width="70%">
+</p>
 
-3. Articles
-    - Create
-        <p align="center">
-            <img src="/img/creer.gif" width="70%">
-        </p>
+### Articles
+#### Create
+<p align="center">
+    <img src="/img/creer.gif" width="70%">
+</p>
 
-4. Auction
-    <p align="center">
-        <img src="/img/enchere.gif" width="70%">
-    </p>
+### Auction
+<p align="center">
+    <img src="/img/enchere.gif" width="70%">
+</p>
 
-5. Admin
-    <p align="center">
-        <img src="/img/dofi.gif" width="70%">
-    </p>
+### Admin
+<p align="center">
+    <img src="/img/dofi.gif" width="70%">
+</p>
 
 
 ## Contributors 💜
