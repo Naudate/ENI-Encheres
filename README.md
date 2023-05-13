@@ -1,29 +1,35 @@
 # ENI-Encheres aka ENIBay
+
 ## Summary
 
->The association Les objets sont nos amis wishes to set up a web platform to allow the transfer of second hand objects without financial exchange. The value of the items will be determined by an auction system based on a number of points. The points are earned by selling objects, and can then be used to acquire other objects.
+> The association Les objets sont nos amis wishes to set up a web platform to allow the transfer of second hand objects without financial exchange. The value of the items will be determined by an auction system based on a number of points. The points are earned by selling objects, and can then be used to acquire other objects.
 
 ## Librairies 📖
 
 ### Java 🍵
-- [JDK-17.0.5](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-- [JAXB-API-2.2.8](https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api)
-- [Activation-1.1](https://mvnrepository.com/artifact/javax.xml.bind/activation)
-- [JAXB-impl-2.2.7](https://mvnrepository.com/artifact/javax.xml.bind/jaxb-impl)
-- [JAXB-core-2.2.7](https://mvnrepository.com/artifact/javax.xml.bind/jaxb-core)
-- [JSTL-1.2](https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl)
-- [Validation-api-1.1.0.Final](https://mvnrepository.com/artifact/javax.validation/validation-api)
+
+* [JDK-17.0.5](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+* [JAXB-API-2.2.8](https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api)
+* [Activation-1.1](https://mvnrepository.com/artifact/javax.xml.bind/activation)
+* [JAXB-impl-2.2.7](https://mvnrepository.com/artifact/javax.xml.bind/jaxb-impl)
+* [JAXB-core-2.2.7](https://mvnrepository.com/artifact/javax.xml.bind/jaxb-core)
+* [JSTL-1.2](https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl)
+* [Validation-api-1.1.0.Final](https://mvnrepository.com/artifact/javax.validation/validation-api)
 
 ### Database 📑
+
 We use MSSQL 2019
-- [Sqljdbc42](https://mvnrepository.com/artifact/com.microsoft.sqlserver/sqljdbc42)
+
+* [Sqljdbc42](https://mvnrepository.com/artifact/com.microsoft.sqlserver/sqljdbc42)
+
 ### Tomcat 🐈
-- [Tomcat 9.0.71](https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.71/)
+
+* [Tomcat 9.0.71](https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.71/)
 
 ## Features ✨
 
 | **Iteration** | **Importance** | **Category** | **ID** | **Name** | **Description** |
-|---|---|---|---|---|---|
+| --------- | ---------- | -------- | --- | ---- | ----------- |
 | 1 | 2000 | User Management | 1001 | Login | As a user, I can log in to the Enchères.org platform with a login (email or username) and a password. |
 | 1 | 1900 | User Management | 1003 | Sign up | As a user, I can sign up for the Enchères.org platform. The username must be unique throughout the platform, as well as the email. The username only accepts alphanumeric characters. If the profile creation is validated, the user is directed to the homepage (list of auctions). An initial credit of 100 points is allocated upon account creation. |
 | 1 | 1800 | Navigation | 6002 | Homepage | The homepage of the site is the page that lists the auctions. This page should be automatically loaded if no resource is indicated in the url (http://localhost:8080/encheres/) |
@@ -51,10 +57,22 @@ We use MSSQL 2019
 | 3 | 150 | Administration | 3003 | Category management | As an administrator, I can manage, i.e. add, delete, and modify article categories. |
 | 3 | 100 | Email notification | 10001 | Notify purchase | On the end date of the auction, a batch process calculates the selling price and notifies the buyer by email. |
 
-## Contributors 💜
+## Feature demonstration
 
-<p align="left">
-    <a href="https://github.com/Naudate/ENI-Encheres/graphs/contributors">
-        <img width="550" src="https://contrib.rocks/image?repo=Naudate/ENI-Encheres" />
-    </a>
-</p>
+### USER
+
+<img src="/img/connexin-déconnxion.gif">
+
+### HOME
+
+
+### ARTICLE
+
+
+### AUCTION
+
+
+### ADMIN
+
+
+## Contributors 💜
