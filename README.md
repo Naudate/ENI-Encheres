@@ -59,20 +59,43 @@ We use MSSQL 2019
 
 ## Feature demonstration
 
-### USER
+### User
+#### login/logout
+<p align="center">
+    <img src="/img/connexin-déconnxion.gif" width="70%">
+</p>
 
-<img src="/img/connexin-déconnxion.gif">
+#### modify profil
+<p align="center">
+    <img src="/img/modif-compte.gif" width="70%">
+</p>
 
-### HOME
+#### rest password
+<p align="center">
+    <img src="/img/mot-de-passe-oublié.gif" width="70%">
+</p>
 
+### Home
+#### filters
+<p align="center">
+    <img src="/img/filtres.gif" width="70%">
+</p>
 
-### ARTICLE
+### Articles
+#### Create
+<p align="center">
+    <img src="/img/creer.gif" width="70%">
+</p>
 
+### Auction
+<p align="center">
+    <img src="/img/enchere.gif" width="70%">
+</p>
 
-### AUCTION
-
-
-### ADMIN
+### Admin
+<p align="center">
+    <img src="/img/dofi.gif" width="70%">
+</p>
 
 
 ## Contributors 💜
