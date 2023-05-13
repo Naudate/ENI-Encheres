@@ -97,6 +97,7 @@ ___
 </p>
 
 ### Auction 🔖
+___
 <p align="center">
     <img src="/img/enchere.gif" width="70%">
 </p>
