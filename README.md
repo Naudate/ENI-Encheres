@@ -60,7 +60,7 @@ We use MSSQL 2019
 ## Feature demonstration
 
 ### User
----
+___
 #### login/logout
 <p align="center">
     <img src="/img/connexin-déconnxion.gif" width="70%">
@@ -78,7 +78,7 @@ We use MSSQL 2019
 
 
 ### Home
----
+___
 #### filters
 <p align="center">
     <img src="/img/filtres.gif" width="70%">
@@ -86,7 +86,7 @@ We use MSSQL 2019
 
 
 ### Articles
----
+___
 #### Create
 <p align="center">
     <img src="/img/creer.gif" width="70%">
@@ -99,7 +99,7 @@ We use MSSQL 2019
 
 
 ### Admin
----
+___
 <p align="center">
     <img src="/img/dofi.gif" width="70%">
 </p>
